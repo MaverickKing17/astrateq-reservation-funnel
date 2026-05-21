@@ -33,94 +33,94 @@
 
 /* 
 =========================================================
-MICROSOFT SURFACE PLATINUM THEME OVERRIDES (LIGHT MODEL)
+PREMIUM DEEP NAVY BLUE SYSTEM THEME OVERRIDES
 =========================================================
-Lighter background (100% non-white), premium readability, 
-Microsoft Fluent brand aesthetics.
+Rich Navy background, premium off-whites for readability,
+vibrant blue/cyan accents, and Microsoft Windows style fonts.
 */
 
-/* Core Background (Matt Platinum) */
+/* Core Background (Deep Premium Navy Blue) */
 #funnel-container,
 #funnel-container .bg-\[\#050505\],
 #funnel-container nav.bg-\[\#050505\]\/85 {
-  background-color: #E6ECF1 !important;
-  color: #111C24 !important;
+  background-color: #0A192F !important;
+  color: #F1F5F9 !important;
 }
 
-/* Secondary Background (Slightly deeper slate for contrasting sections) */
+/* Secondary Background (Slightly deeper navy for structural contrast) */
 #funnel-container .bg-\[\#090909\],
 #funnel-container section.bg-gradient-to-b.from-\[\#050505\].to-\[\#090909\] {
-  background-color: #DAE1E8 !important;
+  background-color: #071120 !important;
   background-image: none !important;
 }
 
-/* Card and Panel Backgrounds (Slightly lighter premium silver/gray, completely non-white) */
+/* Card and Panel Backgrounds (Lighter slate-navy to stand out on screen) */
 #funnel-container .bg-\[\#0c0c0c\],
 #funnel-container .bg-\[\#0a0a0a\],
 #funnel-container .bg-\[\#141414\],
 #funnel-container #canadian-compliance-banner {
-  background-color: #F0F3F6 !important;
+  background-color: #172A45 !important;
 }
 
 #funnel-container .bg-\[\#030303\] {
-  background-color: #CCD3DC !important; /* Footer subtle depth */
+  background-color: #050D18 !important; /* Footer subtle depth */
 }
 
-/* Glass panel wrappers overrides with light transparency */
+/* Glass panel wrappers overrides with deep light-transparency borders */
 #funnel-container .bg-white\/2 {
-  background-color: rgba(17, 28, 36, 0.05) !important;
+  background-color: rgba(255, 255, 255, 0.03) !important;
 }
 #funnel-container .bg-white\/3 {
-  background-color: rgba(17, 28, 36, 0.07) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
 }
 #funnel-container .bg-white\/5 {
-  background-color: rgba(17, 28, 36, 0.1) !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
 }
 
 /* Checkout Modal Custom Styling */
 #funnel-container .bg-\[\#0c0c0c\]#checkout-modal {
-  background-color: #F8FAFC !important;
+  background-color: #0F1E36 !important;
 }
 
-/* Text elements color conversion (charcoal black for supreme contrast) */
+/* Text elements color conversion (off-whites for supreme contrast on navy) */
 #funnel-container .text-white {
-  color: #111C24 !important;
+  color: #FFFFFF !important;
 }
 #funnel-container .text-white\/80 {
-  color: rgba(17, 28, 36, 0.85) !important;
+  color: rgba(241, 245, 249, 0.85) !important;
 }
 #funnel-container .text-white\/70 {
-  color: rgba(17, 28, 36, 0.72) !important;
+  color: rgba(241, 245, 249, 0.72) !important;
 }
 #funnel-container .text-white\/60 {
-  color: rgba(17, 28, 36, 0.62) !important;
+  color: rgba(241, 245, 249, 0.62) !important;
 }
 #funnel-container .text-white\/50 {
-  color: rgba(17, 28, 36, 0.5) !important;
+  color: rgba(241, 245, 249, 0.5) !important;
 }
 #funnel-container .text-white\/40 {
-  color: rgba(17, 28, 36, 0.38) !important;
+  color: rgba(241, 245, 249, 0.38) !important;
 }
 #funnel-container .text-white\/30 {
-  color: rgba(17, 28, 36, 0.28) !important;
+  color: rgba(241, 245, 249, 0.28) !important;
 }
 #funnel-container .text-white\/20 {
-  color: rgba(17, 28, 36, 0.2) !important;
+  color: rgba(241, 245, 249, 0.2) !important;
 }
 
-/* Neon Cyan => Microsoft Fluent Blue (#0067B8) for readability and trust */
+/* Azure/Cyan for premium readability and neon highlight */
 #funnel-container .text-\[\#00D4FF\] {
-  color: #0067B8 !important;
+  color: #38BDF8 !important; /* Sky light blue hover */
 }
 #funnel-container .bg-\[\#00D4FF\] {
-  background-color: #0067B8 !important;
-  color: #FFFFFF !important; /* Forces white text on buttons so it's readable */
+  background-color: #0078D4 !important; /* Microsoft Windows Blue color */
+  color: #FFFFFF !important;
 }
 #funnel-container .hover\:bg-cyan-400:hover {
-  background-color: #005A9E !important;
+  background-color: #106EBE !important; /* Slightly lighter Windows hover blue */
 }
 #funnel-container .stroke-\[\#00D4FF\] {
-  stroke: #0067B8 !important;
+  stroke: #38BDF8 !important;
 }
 
 /* Keep button / CTA span texts crisp white on blue */
@@ -132,47 +132,47 @@ Microsoft Fluent brand aesthetics.
 }
 
 #funnel-container .text-[#050505] {
-  color: #FFFFFF !important;
+  color: #111C24 !important;
 }
 
 /* Interactive Accordion Custom Overrides */
 #funnel-container .border-white\/10 {
-  border-color: rgba(17, 28, 36, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
 }
 #funnel-container .border-white\/5 {
-  border-color: rgba(17, 28, 36, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 #funnel-container .text-cyan-400 {
-  color: #0067B8 !important;
+  color: #38BDF8 !important;
 }
 #funnel-container .bg-cyan-400 {
-  background-color: #0067B8 !important;
+  background-color: #0078D4 !important;
 }
 
 /* Input elements readable placeholders */
 #funnel-container input,
 #funnel-container textarea {
-  color: #111C24 !important;
-  background-color: rgba(17, 28, 36, 0.05) !important;
-  border-color: rgba(17, 28, 36, 0.2) !important;
+  color: #FFFFFF !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
 }
 #funnel-container input::placeholder {
-  color: rgba(17, 28, 36, 0.45) !important;
+  color: rgba(241, 245, 249, 0.4) !important;
 }
 
-/* Fix Logo to be charcoal-black on light background */
+/* Unset filters to make the logo and product renders crisp and natural */
 #funnel-container #top-logo-img {
-  filter: brightness(0) opacity(0.9) !important;
+  filter: none !important;
 }
 
 /* Linear backdrops invert for image visibility */
 #funnel-container .from-\[\#050505\]\/60 {
-  --tw-gradient-from: rgba(230, 236, 241, 0.6) var(--tw-gradient-from-position) !important;
+  --tw-gradient-from: rgba(10, 25, 47, 0.6) var(--tw-gradient-from-position) !important;
 }
 
 #funnel-container .bg-black\/80 {
-  background-color: rgba(17, 28, 36, 0.75) !important;
+  background-color: rgba(5, 13, 24, 0.85) !important;
 }
 
 
