@@ -918,7 +918,7 @@ export default function ReservationPage() {
               </motion.button>
               
               {/* Mandatory refund snippet explicitly near CTA */}
-              <p className="text-[11px] font-mono text-white/50 flex items-center space-x-1.5 pt-1.5 pl-1.5 select-none">
+              <p className="text-[11px] font-mono text-white/70 flex items-center space-x-1.5 pt-1.5 pl-1.5 select-none">
                 <Check className="w-3.5 h-3.5 text-[#00D4FF] stroke-[3]" />
                 <span>{t.heroRefundSnippet}</span>
               </p>
@@ -932,7 +932,7 @@ export default function ReservationPage() {
                 </div>
                 <div>
                   <h4 className="text-sm font-semibold text-white">{t.trustRefundTitle}</h4>
-                  <p className="text-xs text-white/50 leading-relaxed">{t.trustRefundDesc}</p>
+                  <p className="text-xs text-white/70 leading-relaxed">{t.trustRefundDesc}</p>
                 </div>
               </div>
 
@@ -942,7 +942,7 @@ export default function ReservationPage() {
                 </div>
                 <div>
                   <h4 className="text-sm font-semibold text-white">{t.trustDataTitle}</h4>
-                  <p className="text-xs text-white/50 leading-relaxed">{t.trustDataDesc}</p>
+                  <p className="text-xs text-white/70 leading-relaxed">{t.trustDataDesc}</p>
                 </div>
               </div>
             </div>
@@ -1470,16 +1470,16 @@ export default function ReservationPage() {
                       
                       {/* Price Section with Estimated Final Value Crossed Out */}
                       <div className="pt-2 pb-2 relative flex flex-col">
-                        <div className="flex items-center gap-1.5 mb-2 text-xs font-mono tracking-widest text-white/45">
+                        <div className="flex items-center gap-1.5 mb-2 text-xs font-mono tracking-widest text-white/75">
                           <span>{lang === "en" ? "EST. RETAIL:" : "VALEUR ESTIMÉE :"}</span>
                           <span className="line-through">${estValue} CAD</span>
                         </div>
                         <div className="flex items-baseline">
-                          <span className="text-[11px] font-mono uppercase bg-white/5 border border-white/8 px-1.5 py-0.5 rounded text-white/50 inline-block align-middle mr-2 mt-0.5">DEP.</span>
+                          <span className="text-[11px] font-mono uppercase bg-white/5 border border-white/8 px-1.5 py-0.5 rounded text-white/70 inline-block align-middle mr-2 mt-0.5">DEP.</span>
                           <span className="text-5xl lg:text-6xl font-display font-black text-white tracking-tighter align-middle" id={`price-label-${tier.id}`}>
                             ${tier.deposit}
                           </span>
-                          <span className="text-sm font-mono text-white/45 ml-2 uppercase tracking-wider">CAD</span>
+                          <span className="text-sm font-mono text-white/75 ml-2 uppercase tracking-wider">CAD</span>
                         </div>
                       </div>
 
@@ -1540,7 +1540,7 @@ export default function ReservationPage() {
                       </motion.button>
                       
                       {/* Mandatory refund guarantee under every single pricing CTA */}
-                      <p className="text-xs font-mono text-center text-white/40 uppercase tracking-widest leading-none font-bold">
+                      <p className="text-xs font-mono text-center text-white/70 uppercase tracking-widest leading-none font-bold">
                         {lang === "en" ? "✓ 100% Refundable Deposit" : "✓ Dépôt 100% remboursable"}
                       </p>
                     </div>
@@ -1551,7 +1551,7 @@ export default function ReservationPage() {
           </div>
 
           <div className="text-center mt-12">
-            <p className="text-xs text-white/50 font-mono select-none">
+            <p className="text-xs text-white/70 font-mono select-none">
               ⚠️ {t.pricingGuarantee}
             </p>
           </div>
@@ -1587,7 +1587,7 @@ export default function ReservationPage() {
             <div className="flex items-center space-x-3.5 bg-white/2 p-3.5 rounded-xl border border-white/5">
               <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></div>
               <div>
-                <span className="text-[9px] font-mono text-white/40 block uppercase tracking-wider">{lang === "en" ? "FEDERAL REGISTRY" : "REGISTRE FÉDÉRAL"}</span>
+                <span className="text-[9px] font-mono text-white/70 block uppercase tracking-wider">{lang === "en" ? "FEDERAL REGISTRY" : "REGISTRE FÉDÉRAL"}</span>
                 <span className="text-xs font-semibold text-white font-mono">{t.certTransportCanada}</span>
               </div>
             </div>
@@ -1595,7 +1595,7 @@ export default function ReservationPage() {
             <div className="flex items-center space-x-3.5 bg-white/2 p-3.5 rounded-xl border border-white/5">
               <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></div>
               <div>
-                <span className="text-[9px] font-mono text-white/40 block uppercase tracking-wider">{lang === "en" ? "RADIO SPECTRUM" : "SPECTRUM RADIO"}</span>
+                <span className="text-[9px] font-mono text-white/70 block uppercase tracking-wider">{lang === "en" ? "RADIO SPECTRUM" : "SPECTRUM RADIO"}</span>
                 <span className="text-xs font-semibold text-white font-mono">{t.certIsed}</span>
               </div>
             </div>
@@ -1603,7 +1603,7 @@ export default function ReservationPage() {
             <div className="flex items-center space-x-3.5 bg-white/2 p-3.5 rounded-xl border border-white/5">
               <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></div>
               <div>
-                <span className="text-[9px] font-mono text-white/40 block uppercase tracking-wider">{lang === "en" ? "FUNCTIONAL SAFETY" : "SÉCURITÉ FONCTIONNELLE"}</span>
+                <span className="text-[9px] font-mono text-white/70 block uppercase tracking-wider">{lang === "en" ? "FUNCTIONAL SAFETY" : "SÉCURITÉ FONCTIONNELLE"}</span>
                 <span className="text-xs font-semibold text-white font-mono">{t.certIso}</span>
               </div>
             </div>
@@ -1617,7 +1617,7 @@ export default function ReservationPage() {
             <h2 className="text-3xl font-display font-extrabold tracking-tight text-white" id="faq-heading-text">
               {t.faqHeading}
             </h2>
-            <p className="text-xs sm:text-sm text-white/50 leading-relaxed">
+            <p className="text-xs sm:text-sm text-white/70 leading-relaxed">
               {t.faqSub}
             </p>
             
@@ -1833,7 +1833,7 @@ export default function ReservationPage() {
       </section>
 
       {/* Footer copyright, billing context and legal attribution */}
-      <footer className="border-t border-white/10 bg-[#030303] py-16 text-xs text-white/40 relative z-10 select-none">
+      <footer className="border-t border-white/10 bg-[#030303] py-16 text-xs text-white/70 relative z-10 select-none">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-16 space-y-8">
           
           <div className="flex flex-col sm:flex-row justify-between items-center gap-6 text-center sm:text-left">
@@ -1850,8 +1850,8 @@ export default function ReservationPage() {
           </div>
 
           {/* Legal Limitations & PIPEDA Disclaimer */}
-          <div className="pt-8 border-t border-white/5 text-[10px] text-white/30 leading-relaxed font-mono space-y-2">
-            <div className="flex items-center space-x-2 text-white/50 font-bold uppercase tracking-wider text-[9px]">
+          <div className="pt-8 border-t border-white/5 text-[10px] text-white/65 leading-relaxed font-mono space-y-2">
+            <div className="flex items-center space-x-2 text-white/80 font-bold uppercase tracking-wider text-[9px]">
               <Lock className="w-3.5 h-3.5 text-[#00D4FF]" />
               <span>{lang === "en" ? "LEGAL DISCLAIMERS & RESPONSIBILITY CHARTER" : "AVERTISSEMENTS LÉGAUX ET CHARTE DE RESPONSABILITÉ"}</span>
             </div>
@@ -1952,7 +1952,7 @@ export default function ReservationPage() {
                       {/* Highlight Selection metrics summary */}
                       <div className="bg-white/2 rounded-2xl p-4 border border-white/10 flex items-center justify-between">
                         <div>
-                          <span className="text-[9px] font-mono text-white/50 block uppercase leading-none mb-1.5">{t.modalCheckoutTitle}</span>
+                          <span className="text-[9px] font-mono text-white/75 block uppercase leading-none mb-1.5">{t.modalCheckoutTitle}</span>
                           <span className="text-sm font-semibold text-white block font-display" id="checkout-tier-name">{selectedTier.name[lang]}</span>
                         </div>
                         <div className="text-right">
@@ -1995,7 +1995,7 @@ export default function ReservationPage() {
                           </div>
 
                           <div>
-                            <label className="text-[10px] font-mono uppercase block text-white/50 mb-1.5">{t.modalCardLabel}</label>
+                            <label className="text-[10px] font-mono uppercase block text-white/75 mb-1.5">{t.modalCardLabel}</label>
                             <input 
                               type="text"
                               required
@@ -2009,7 +2009,7 @@ export default function ReservationPage() {
 
                           <div className="grid grid-cols-2 gap-3">
                             <div>
-                              <label className="text-[10px] font-mono uppercase block text-white/50 mb-1.5">{t.modalExpirationLabel}</label>
+                              <label className="text-[10px] font-mono uppercase block text-white/75 mb-1.5">{t.modalExpirationLabel}</label>
                               <input 
                                 type="text"
                                 required
@@ -2021,7 +2021,7 @@ export default function ReservationPage() {
                               />
                             </div>
                             <div>
-                              <label className="text-[10px] font-mono uppercase block text-white/50 mb-1.5">{t.modalCvcLabel}</label>
+                              <label className="text-[10px] font-mono uppercase block text-white/75 mb-1.5">{t.modalCvcLabel}</label>
                               <input 
                                 type="text"
                                 required
@@ -2085,7 +2085,7 @@ export default function ReservationPage() {
                           )}
                         </motion.button>
                         
-                        <p className="text-[10px] font-mono text-white/50 text-center uppercase tracking-wide leading-normal px-2">
+                        <p className="text-[10px] font-mono text-white/75 text-center uppercase tracking-wide leading-normal px-2">
                           🛡️ {t.modalRefundGuarantee}
                         </p>
                       </div>
@@ -2112,22 +2112,22 @@ export default function ReservationPage() {
                       </div>
 
                       <div className="bg-[#141414] border border-white/10 rounded-2xl p-4 max-w-[380px] mx-auto space-y-3 shadow-inner" id="receipt-details">
-                        <span className="text-[10px] font-mono tracking-[0.15em] font-semibold text-white/50 uppercase block border-b border-white/5 pb-1.5">{t.successDetailsTitle}</span>
+                        <span className="text-[10px] font-mono tracking-[0.15em] font-semibold text-white/75 uppercase block border-b border-white/5 pb-1.5">{t.successDetailsTitle}</span>
                         
                         <div className="flex justify-between text-xs font-mono py-1">
-                          <span className="text-white/40">{lang === "en" ? "MEMBER ID" : "ID MEMBRE"} :</span>
+                          <span className="text-white/70">{lang === "en" ? "MEMBER ID" : "ID MEMBRE"} :</span>
                           <strong className="text-[#00D4FF]">{generatedOrderNum}</strong>
                         </div>
                         <div className="flex justify-between text-xs font-mono py-1">
-                          <span className="text-white/40">{lang === "en" ? "TRANSACTION AMOUNT" : "MONTANT VERSÉ"} :</span>
+                          <span className="text-white/70">{lang === "en" ? "TRANSACTION AMOUNT" : "MONTANT VERSÉ"} :</span>
                           <strong className="text-white">${selectedTier.deposit}.00 CAD</strong>
                         </div>
                         <div className="flex justify-between text-xs font-mono py-1">
-                          <span className="text-white/40">{lang === "en" ? "EMAIL RESERVED" : "COURRIEL LIÉ"} :</span>
+                          <span className="text-white/70">{lang === "en" ? "EMAIL RESERVED" : "COURRIEL LIÉ"} :</span>
                           <strong className="text-white text-ellipsis overflow-hidden max-w-[180px]">{emailInput}</strong>
                         </div>
                         <div className="flex justify-between text-xs font-mono py-1">
-                          <span className="text-white/40">{lang === "en" ? "COMPLIANCE KEY" : "CONFORMITÉ CA"} :</span>
+                          <span className="text-white/70">{lang === "en" ? "COMPLIANCE KEY" : "CONFORMITÉ CA"} :</span>
                           <strong className="text-white">PIPEDA-SHA256</strong>
                         </div>
                       </div>
@@ -2190,7 +2190,7 @@ export default function ReservationPage() {
                       </div>
 
                       <div className="pt-4 text-center space-y-4">
-                        <p className="text-[10px] text-white/50 font-mono leading-relaxed px-4 max-w-[360px] mx-auto">
+                        <p className="text-[10px] text-white/70 font-mono leading-relaxed px-4 max-w-[360px] mx-auto">
                           {t.successComplianceNotice}
                         </p>
 
