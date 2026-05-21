@@ -1,0 +1,6 @@
+{
+  "name": "ASTRA-AI Reservation Page",
+  "description": "Pre-launch reservation funnel for the astra-ai predictive vehicle safety system by astrateq gadgets.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
