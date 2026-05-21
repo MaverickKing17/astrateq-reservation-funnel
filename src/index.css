@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "DM Serif Display", Georgia, serif;
-  --font-sans: "DM Sans", Arial, sans-serif;
+  --font-sans: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  --font-display: "Segoe UI Semibold", "Segoe UI", -apple-system, sans-serif;
+  --font-mono: "Consolas", "Segoe UI Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
 /* Custom scrollbar and ambient animation classes */
@@ -11,12 +12,12 @@
   0%, 100% {
     transform: scale(1);
     opacity: 1;
-    box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.7);
+    box-shadow: 0 0 0 0 rgba(0, 103, 184, 0.7);
   }
   50% {
     transform: scale(1.15);
     opacity: 0.8;
-    box-shadow: 0 0 0 8px rgba(0, 212, 255, 0);
+    box-shadow: 0 0 0 8px rgba(0, 103, 184, 0);
   }
 }
 
@@ -29,4 +30,149 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
+
+/* 
+=========================================================
+MICROSOFT SURFACE PLATINUM THEME OVERRIDES (LIGHT MODEL)
+=========================================================
+Lighter background (100% non-white), premium readability, 
+Microsoft Fluent brand aesthetics.
+*/
+
+/* Core Background (Matt Platinum) */
+#funnel-container,
+#funnel-container .bg-\[\#050505\],
+#funnel-container nav.bg-\[\#050505\]\/85 {
+  background-color: #E6ECF1 !important;
+  color: #111C24 !important;
+}
+
+/* Secondary Background (Slightly deeper slate for contrasting sections) */
+#funnel-container .bg-\[\#090909\],
+#funnel-container section.bg-gradient-to-b.from-\[\#050505\].to-\[\#090909\] {
+  background-color: #DAE1E8 !important;
+  background-image: none !important;
+}
+
+/* Card and Panel Backgrounds (Slightly lighter premium silver/gray, completely non-white) */
+#funnel-container .bg-\[\#0c0c0c\],
+#funnel-container .bg-\[\#0a0a0a\],
+#funnel-container .bg-\[\#141414\],
+#funnel-container #canadian-compliance-banner {
+  background-color: #F0F3F6 !important;
+}
+
+#funnel-container .bg-\[\#030303\] {
+  background-color: #CCD3DC !important; /* Footer subtle depth */
+}
+
+/* Glass panel wrappers overrides with light transparency */
+#funnel-container .bg-white\/2 {
+  background-color: rgba(17, 28, 36, 0.05) !important;
+}
+#funnel-container .bg-white\/3 {
+  background-color: rgba(17, 28, 36, 0.07) !important;
+}
+#funnel-container .bg-white\/5 {
+  background-color: rgba(17, 28, 36, 0.1) !important;
+}
+
+/* Checkout Modal Custom Styling */
+#funnel-container .bg-\[\#0c0c0c\]#checkout-modal {
+  background-color: #F8FAFC !important;
+}
+
+/* Text elements color conversion (charcoal black for supreme contrast) */
+#funnel-container .text-white {
+  color: #111C24 !important;
+}
+#funnel-container .text-white\/80 {
+  color: rgba(17, 28, 36, 0.85) !important;
+}
+#funnel-container .text-white\/70 {
+  color: rgba(17, 28, 36, 0.72) !important;
+}
+#funnel-container .text-white\/60 {
+  color: rgba(17, 28, 36, 0.62) !important;
+}
+#funnel-container .text-white\/50 {
+  color: rgba(17, 28, 36, 0.5) !important;
+}
+#funnel-container .text-white\/40 {
+  color: rgba(17, 28, 36, 0.38) !important;
+}
+#funnel-container .text-white\/30 {
+  color: rgba(17, 28, 36, 0.28) !important;
+}
+#funnel-container .text-white\/20 {
+  color: rgba(17, 28, 36, 0.2) !important;
+}
+
+/* Neon Cyan => Microsoft Fluent Blue (#0067B8) for readability and trust */
+#funnel-container .text-\[\#00D4FF\] {
+  color: #0067B8 !important;
+}
+#funnel-container .bg-\[\#00D4FF\] {
+  background-color: #0067B8 !important;
+  color: #FFFFFF !important; /* Forces white text on buttons so it's readable */
+}
+#funnel-container .hover\:bg-cyan-400:hover {
+  background-color: #005A9E !important;
+}
+#funnel-container .stroke-\[\#00D4FF\] {
+  stroke: #0067B8 !important;
+}
+
+/* Keep button / CTA span texts crisp white on blue */
+#funnel-container button.bg-\[\#00D4FF\],
+#funnel-container button.bg-\[\#00D4FF\] span,
+#funnel-container a.bg-\[\#00D4FF\],
+#funnel-container .bg-\[\#00D4FF\] span {
+  color: #FFFFFF !important;
+}
+
+#funnel-container .text-[#050505] {
+  color: #FFFFFF !important;
+}
+
+/* Interactive Accordion Custom Overrides */
+#funnel-container .border-white\/10 {
+  border-color: rgba(17, 28, 36, 0.15) !important;
+}
+#funnel-container .border-white\/5 {
+  border-color: rgba(17, 28, 36, 0.08) !important;
+}
+
+#funnel-container .text-cyan-400 {
+  color: #0067B8 !important;
+}
+#funnel-container .bg-cyan-400 {
+  background-color: #0067B8 !important;
+}
+
+/* Input elements readable placeholders */
+#funnel-container input,
+#funnel-container textarea {
+  color: #111C24 !important;
+  background-color: rgba(17, 28, 36, 0.05) !important;
+  border-color: rgba(17, 28, 36, 0.2) !important;
+}
+#funnel-container input::placeholder {
+  color: rgba(17, 28, 36, 0.45) !important;
+}
+
+/* Fix Logo to be charcoal-black on light background */
+#funnel-container #top-logo-img {
+  filter: brightness(0) opacity(0.9) !important;
+}
+
+/* Linear backdrops invert for image visibility */
+#funnel-container .from-\[\#050505\]\/60 {
+  --tw-gradient-from: rgba(230, 236, 241, 0.6) var(--tw-gradient-from-position) !important;
+}
+
+#funnel-container .bg-black\/80 {
+  background-color: rgba(17, 28, 36, 0.75) !important;
+}
+
 

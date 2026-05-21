@@ -111,6 +111,20 @@ interface TranslationSchema {
   countdownHours: string;
   countdownMinutes: string;
   countdownSeconds: string;
+  brandTagline: string;
+  brandingPillarsTitle: string;
+  pillarProactiveTitle: string;
+  pillarProactiveDesc: string;
+  pillarAiTitle: string;
+  pillarAiDesc: string;
+  pillarConfidenceTitle: string;
+  pillarConfidenceDesc: string;
+  pillarSimplicityTitle: string;
+  pillarSimplicityDesc: string;
+  certTransportCanada: string;
+  certIsed: string;
+  certIso: string;
+  legalDisclaimer: string;
 }
 
 // Complete bilingual translation dictionary
@@ -188,6 +202,20 @@ const translations: Record<Language, TranslationSchema> = {
     countdownHours: "Hrs",
     countdownMinutes: "Min",
     countdownSeconds: "Sec",
+    brandTagline: "Drive Safer. Drive Smarter.",
+    brandingPillarsTitle: "FOUR BRAND PILLARS OF DRIVER PREDICTIVITY",
+    pillarProactiveTitle: "Proactive Protection",
+    pillarProactiveDesc: "Prevent complex road emergencies before they manifest on-screen.",
+    pillarAiTitle: "AI Intelligence",
+    pillarAiDesc: "Smart, adaptive, completely local edge-processed vehicle safety layers.",
+    pillarConfidenceTitle: "Driver Confidence",
+    pillarConfidenceDesc: "Significantly minimize ongoing operational uncertainty on Canadian winter pavements.",
+    pillarSimplicityTitle: "Premium Simplicity",
+    pillarSimplicityDesc: "Clean, elegant, non-intrusive monitoring. Absolutely no sudden screaming sirens.",
+    certTransportCanada: "Transport Canada Regulated",
+    certIsed: "ISED Certified (CA-8592)",
+    certIso: "ISO 26262 Auto-Grade",
+    legalDisclaimer: "AI LIMITATION WARNING & RESPONSIBILITY PROVISION: Astra-AI/ASTRA-Vision serves exclusively as a predictive assistance driver aid and does not replace active steering, alertness, or total vehicle command. Drivers assume all active liabilities. Secure telemetry utilizes local memory nodes in full conformity with Canadian PIPEDA regulations.",
   },
   fr: {
     navFeatures: "Fonctionnalités",
@@ -262,6 +290,20 @@ const translations: Record<Language, TranslationSchema> = {
     countdownHours: "Heures",
     countdownMinutes: "Min",
     countdownSeconds: "Sec",
+    brandTagline: "Conduisez plus sûr. Conduisez plus intelligent.",
+    brandingPillarsTitle: "LES QUATRE PILIERS DE LA PRÉDICTION ROUTIÈRE",
+    pillarProactiveTitle: "Protection Proactive",
+    pillarProactiveDesc: "Évitez les urgences complexes bien avant qu'elles ne s'affichent sur l'écran.",
+    pillarAiTitle: "Intelligence Artificielle",
+    pillarAiDesc: "Sécurité intégrée gérée à 100% localement sur processeurs d'analyse embarqués.",
+    pillarConfidenceTitle: "Confiance au Volant",
+    pillarConfidenceDesc: "Réduisez l'incertitude liée aux conditions routières extrêmes et aux hivers canadiens.",
+    pillarSimplicityTitle: "Simplicité Premium",
+    pillarSimplicityDesc: "Télésurveillance calme, rassurante et sans alertes d'alarmes brusques ou stridentes.",
+    certTransportCanada: "Normes de Transports Canada",
+    certIsed: "Certifié ISDE Canada (CA-8592)",
+    certIso: "Sécurisé ISO 26262 Automobile",
+    legalDisclaimer: "AVERTISSEMENT DE LIMITATION DE L'IA ET RESPONSABILITÉ : Astra-AI/ASTRA-Vision sert d'aide prédictive et ne remplace nullement l'attention, le jugement ou la maîtrise active du conducteur. Les conducteurs assument toutes les responsabilités. Conformité LPRPDE complète avec serveurs cryptés basés au Canada.",
   }
 };
 
@@ -567,7 +609,7 @@ export default function ReservationPage() {
               id="top-logo-img"
             />
             <div className="flex flex-col">
-              <span className="text-sm font-serif font-black tracking-tight text-white leading-none">Astrateq Gadgets</span>
+              <span className="text-sm font-display font-black tracking-tight text-white leading-none">Astrateq Gadgets</span>
               <span className="text-[9px] font-mono leading-none tracking-[0.25em] text-[#00D4FF] mt-1">ASTRA-AI</span>
             </div>
           </div>
@@ -665,9 +707,10 @@ export default function ReservationPage() {
             <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full py-1 text-xs text-white/70 tracking-[0.2em] font-mono uppercase px-3.5" id="hero-mini-tag">
               <span className="flex h-2 w-2 rounded-full bg-[#00D4FF] animate-pulse"></span>
               <span>{t.heroSubtitle}</span>
+              <span className="text-white/30 font-sans font-medium border-l border-white/10 pl-2.5 ml-1.5 normal-case tracking-normal">{t.brandTagline}</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-serif tracking-tight text-white leading-[1.1]" id="hero-main-title">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-display font-black tracking-tight text-white leading-[1.1]" id="hero-main-title">
               {t.heroHeadline}
             </h1>
 
@@ -697,7 +740,7 @@ export default function ReservationPage() {
                   </span>
                 </div>
 
-                <span className="text-white/20 font-serif text-xl -mt-5 select-none">:</span>
+                <span className="text-white/20 font-display text-xl -mt-5 select-none">:</span>
 
                 {/* Hours */}
                 <div className="flex flex-col items-center">
@@ -712,7 +755,7 @@ export default function ReservationPage() {
                   </span>
                 </div>
 
-                <span className="text-white/20 font-serif text-xl -mt-5 select-none">:</span>
+                <span className="text-white/20 font-display text-xl -mt-5 select-none">:</span>
 
                 {/* Minutes */}
                 <div className="flex flex-col items-center">
@@ -727,7 +770,7 @@ export default function ReservationPage() {
                   </span>
                 </div>
 
-                <span className="text-white/20 font-serif text-xl -mt-5 select-none">:</span>
+                <span className="text-white/20 font-display text-xl -mt-5 select-none">:</span>
 
                 {/* Seconds */}
                 <div className="flex flex-col items-center">
@@ -836,7 +879,7 @@ export default function ReservationPage() {
                 <span className="flex h-1.5 w-1.5 rounded-full bg-[#00D4FF] animate-pulse-cyan"></span>
                 <span>{t.scarcityLiveBadge}</span>
               </div>
-              <h3 className="text-xl font-serif font-black text-white">{t.scarcityTitle}</h3>
+              <h3 className="text-xl font-display font-black text-white">{t.scarcityTitle}</h3>
               <p className="text-xs font-semibold text-white/70 font-mono tracking-wide mt-1">
                 {lang === "en" ? `${spotsRemaining} of 250 spots remaining in Batch 01` : `${spotsRemaining} places restantes sur 250 dans le Lot 01`}
               </p>
@@ -878,7 +921,7 @@ export default function ReservationPage() {
           {/* Left Column Pain Points Presentation */}
           <div className="lg:col-span-5 space-y-6">
             <span className="text-[10px] font-mono tracking-[0.25em] text-[#00D4FF] uppercase font-bold block">{t.empathyTagline}</span>
-            <h2 className="text-3xl sm:text-4xl font-serif tracking-tight text-white" id="empathy-section-title">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-white" id="empathy-section-title">
               {t.empathyHeadline}
             </h2>
             <p className="text-base text-white/70 leading-relaxed">
@@ -930,7 +973,7 @@ export default function ReservationPage() {
               >
                 <div className="space-y-1.5 pr-4">
                   <span className="text-[9px] font-mono font-bold uppercase text-[#00D4FF] tracking-[0.25em]">{t.accPredictiveSubtitle}</span>
-                  <h3 className="text-lg font-serif font-semibold text-white">{t.accPredictiveTitle}</h3>
+                  <h3 className="text-lg font-display font-semibold text-white">{t.accPredictiveTitle}</h3>
                 </div>
                 <div className={`p-1.5 rounded-full bg-white/5 border border-white/10 shrink-0 transition-transform duration-300 ${activeAccordion === 0 ? "rotate-180 bg-white/10" : ""}`}>
                   <ChevronDown className="w-5 h-5 text-white/70" />
@@ -974,7 +1017,7 @@ export default function ReservationPage() {
               >
                 <div className="space-y-1.5 pr-4">
                   <span className="text-[9px] font-mono font-bold uppercase text-[#00D4FF] tracking-[0.25em]">{t.accDiagnosticsSubtitle}</span>
-                  <h3 className="text-lg font-serif font-semibold text-white">{t.accDiagnosticsTitle}</h3>
+                  <h3 className="text-lg font-display font-semibold text-white">{t.accDiagnosticsTitle}</h3>
                 </div>
                 <div className={`p-1.5 rounded-full bg-white/5 border border-white/10 shrink-0 transition-transform duration-300 ${activeAccordion === 1 ? "rotate-180 bg-white/10" : ""}`}>
                   <ChevronDown className="w-5 h-5 text-white/70" />
@@ -1012,7 +1055,7 @@ export default function ReservationPage() {
               >
                 <div className="space-y-1.5 pr-4">
                   <span className="text-[9px] font-mono font-bold uppercase text-[#00D4FF] tracking-[0.25em]">{t.accQuietSubtitle}</span>
-                  <h3 className="text-lg font-serif font-semibold text-white">{t.accQuietTitle}</h3>
+                  <h3 className="text-lg font-display font-semibold text-white">{t.accQuietTitle}</h3>
                 </div>
                 <div className={`p-1.5 rounded-full bg-white/5 border border-white/10 shrink-0 transition-transform duration-300 ${activeAccordion === 2 ? "rotate-180 bg-white/10" : ""}`}>
                   <ChevronDown className="w-5 h-5 text-white/70" />
@@ -1044,6 +1087,73 @@ export default function ReservationPage() {
         </div>
       </section>
 
+      {/* Brand Core Pillars Section (from Brand Identity System Document) */}
+      <section className="py-20 bg-gradient-to-b from-[#050505] to-[#090909] border-t border-white/10 relative" id="pillars">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-16 text-center space-y-12">
+          
+          <div className="space-y-3 max-w-xl mx-auto">
+            <span className="text-[10px] font-mono tracking-[0.25em] text-[#00D4FF] uppercase font-bold block" id="pillars-sub">{t.brandingPillarsTitle}</span>
+            <h2 className="text-3xl sm:text-4xl font-display tracking-tight text-white font-extrabold" id="pillars-main-title">
+              {lang === "en" ? "Our Core Product Philosophy" : "Notre philosophie produit d'excellence"}
+            </h2>
+            <div className="h-[2px] w-12 bg-[#00D4FF] mx-auto rounded-full mt-4"></div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+            
+            {/* Pillar 1: Proactive Protection */}
+            <div className="bg-white/2 border border-white/10 rounded-2xl p-6 hover:border-[#00D4FF]/30 transition-all duration-300 relative group flex flex-col justify-between" id="pillar-card-1">
+              <div className="space-y-4">
+                <div className="p-3 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 w-fit">
+                  <ShieldCheck className="w-6 h-6 stroke-[1.8]" />
+                </div>
+                <h3 className="text-lg font-display font-black text-white">{t.pillarProactiveTitle}</h3>
+                <p className="text-xs text-white/60 leading-relaxed font-sans">{t.pillarProactiveDesc}</p>
+              </div>
+              <span className="text-[10px] font-mono font-bold text-white/20 mt-6 block uppercase tracking-wider">PILLAR // 01</span>
+            </div>
+
+            {/* Pillar 2: AI Intelligence */}
+            <div className="bg-white/2 border border-white/10 rounded-2xl p-6 hover:border-[#00D4FF]/30 transition-all duration-300 relative group flex flex-col justify-between" id="pillar-card-2">
+              <div className="space-y-4">
+                <div className="p-3 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 w-fit">
+                  <Zap className="w-6 h-6 stroke-[1.8]" />
+                </div>
+                <h3 className="text-lg font-display font-black text-white">{t.pillarAiTitle}</h3>
+                <p className="text-xs text-white/60 leading-relaxed font-sans">{t.pillarAiDesc}</p>
+              </div>
+              <span className="text-[10px] font-mono font-bold text-white/20 mt-6 block uppercase tracking-wider">PILLAR // 02</span>
+            </div>
+
+            {/* Pillar 3: Driver Confidence */}
+            <div className="bg-white/2 border border-white/10 rounded-2xl p-6 hover:border-[#00D4FF]/30 transition-all duration-300 relative group flex flex-col justify-between" id="pillar-card-3">
+              <div className="space-y-4">
+                <div className="p-3 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 w-fit">
+                  <BadgeCheck className="w-6 h-6 stroke-[1.8]" />
+                </div>
+                <h3 className="text-lg font-display font-black text-white">{t.pillarConfidenceTitle}</h3>
+                <p className="text-xs text-white/60 leading-relaxed font-sans">{t.pillarConfidenceDesc}</p>
+              </div>
+              <span className="text-[10px] font-mono font-bold text-white/20 mt-6 block uppercase tracking-wider">PILLAR // 03</span>
+            </div>
+
+            {/* Pillar 4: Premium Simplicity */}
+            <div className="bg-white/2 border border-white/10 rounded-2xl p-6 hover:border-[#00D4FF]/30 transition-all duration-300 relative group flex flex-col justify-between" id="pillar-card-4">
+              <div className="space-y-4">
+                <div className="p-3 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 w-fit">
+                  <Sparkles className="w-6 h-6 stroke-[1.8]" />
+                </div>
+                <h3 className="text-lg font-display font-black text-white">{t.pillarSimplicityTitle}</h3>
+                <p className="text-xs text-white/60 leading-relaxed font-sans">{t.pillarSimplicityDesc}</p>
+              </div>
+              <span className="text-[10px] font-mono font-bold text-white/20 mt-6 block uppercase tracking-wider">PILLAR // 04</span>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
       {/* 4.5 Explicit 3-Tier Pricing Grid */}
       <section ref={pricingSectionRef} className="py-20 lg:py-32 bg-[#090909] border-t border-white/10 scroll-mt-20 relative overflow-hidden" id="pricing">
         {/* Decorative backdrop geometric vector lines */}
@@ -1052,7 +1162,7 @@ export default function ReservationPage() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-16 relative z-10">
           <div className="text-center max-w-[700px] mx-auto mb-16 space-y-4">
             <span className="text-[10px] font-mono tracking-[0.25em] text-[#00D4FF] uppercase font-bold px-3.5 py-1.5 bg-white/5 border border-white/10 rounded-full inline-block">{lang === "en" ? "EARLY ADOPTER ACCESS" : "COMPAGNE PILOTE LIMITÉE"}</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif tracking-tight text-white" id="pricing-headline">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display tracking-tight text-white font-extrabold" id="pricing-headline">
               {t.pricingTitle}
             </h2>
             <p className="text-sm sm:text-base text-white/60 leading-relaxed">
@@ -1081,7 +1191,7 @@ export default function ReservationPage() {
 
                 <div className="p-8 flex-1 flex flex-col justify-between">
                   <div className="space-y-4">
-                    <h3 className="text-xl font-serif text-white font-extrabold">{tier.name[lang]}</h3>
+                    <h3 className="text-xl font-display text-white font-extrabold">{tier.name[lang]}</h3>
                     <p className="text-[10px] font-mono font-bold text-[#00D4FF] uppercase bg-white/5 py-1.5 px-3 rounded-md inline-block tracking-wide border border-white/5">
                       {tier.savings[lang]}
                     </p>
@@ -1089,7 +1199,7 @@ export default function ReservationPage() {
                     {/* Largest typographical hierarchy for deposit amounts as mandated */}
                     <div className="pt-4 pb-2">
                       <span className="text-[10px] font-mono uppercase align-super text-white/50 mr-1.5">DEP.</span>
-                      <span className="text-5xl lg:text-6xl font-serif font-black text-white" id={`price-label-${tier.id}`}>
+                      <span className="text-5xl lg:text-6xl font-display font-black text-white" id={`price-label-${tier.id}`}>
                         ${tier.deposit}
                       </span>
                       <span className="text-xs font-mono text-white/40 ml-1.5">CAD</span>
@@ -1141,26 +1251,58 @@ export default function ReservationPage() {
       <section className="py-20 lg:py-32 max-w-[1400px] mx-auto px-6 lg:px-16" id="faq">
         
         {/* Strict Canadian Data Declaration */}
-        <div className="bg-white/2 rounded-3xl p-8 lg:p-12 border border-white/10 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8 mb-20 relative overflow-hidden animate-fade-in" id="canadian-compliance-banner">
+        <div className="bg-white/2 rounded-3xl p-8 lg:p-12 border border-white/10 shadow-sm flex flex-col relative overflow-hidden animate-fade-in" id="canadian-compliance-banner">
           <div className="absolute left-0 top-0 bottom-0 w-2 bg-[#00D4FF]"></div>
-          <div className="flex items-center space-x-4 shrink-0">
-            <div className="p-4 bg-white/5 border border-white/10 rounded-2xl text-[#00D4FF]">
-              <ShieldCheck className="w-8 h-8 stroke-[1.8]" />
+          
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+            <div className="flex items-center space-x-4 shrink-0">
+              <div className="p-4 bg-white/5 border border-white/10 rounded-2xl text-[#00D4FF]">
+                <ShieldCheck className="w-8 h-8 stroke-[1.8]" />
+              </div>
+              <div>
+                <span className="text-[10px] tracking-[0.2em] font-mono font-bold block text-[#00D4FF] uppercase">{t.secTrustLabel}</span>
+                <h3 className="text-xl font-display font-black text-white">PIPEDA Conformity</h3>
+              </div>
             </div>
-            <div>
-              <span className="text-[10px] tracking-[0.2em] font-mono font-bold block text-[#00D4FF] uppercase">{t.secTrustLabel}</span>
-              <h3 className="text-xl font-serif font-black text-white">PIPEDA Conformity</h3>
-            </div>
+            <p className="text-xs sm:text-sm text-white/60 leading-relaxed max-w-[720px] lg:border-l lg:border-white/10 lg:pl-8">
+              {t.secTrustContent}
+            </p>
           </div>
-          <p className="text-xs sm:text-sm text-white/60 leading-relaxed max-w-[720px] md:border-l md:border-white/10 md:pl-8">
-            {t.secTrustContent}
-          </p>
+
+          {/* Critical Brand Certification Row (Page 6 of Brand document) */}
+          <div className="border-t border-white/5 pt-8 mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6" id="brand-certifications-row">
+            
+            <div className="flex items-center space-x-3.5 bg-white/2 p-3.5 rounded-xl border border-white/5">
+              <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></div>
+              <div>
+                <span className="text-[9px] font-mono text-white/40 block uppercase tracking-wider">{lang === "en" ? "FEDERAL REGISTRY" : "REGISTRE FÉDÉRAL"}</span>
+                <span className="text-xs font-semibold text-white font-mono">{t.certTransportCanada}</span>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-3.5 bg-white/2 p-3.5 rounded-xl border border-white/5">
+              <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></div>
+              <div>
+                <span className="text-[9px] font-mono text-white/40 block uppercase tracking-wider">{lang === "en" ? "RADIO SPECTRUM" : "SPECTRUM RADIO"}</span>
+                <span className="text-xs font-semibold text-white font-mono">{t.certIsed}</span>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-3.5 bg-white/2 p-3.5 rounded-xl border border-white/5">
+              <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></div>
+              <div>
+                <span className="text-[9px] font-mono text-white/40 block uppercase tracking-wider">{lang === "en" ? "FUNCTIONAL SAFETY" : "SÉCURITÉ FONCTIONNELLE"}</span>
+                <span className="text-xs font-semibold text-white font-mono">{t.certIso}</span>
+              </div>
+            </div>
+
+          </div>
         </div>
 
         {/* FAQ grid addressing precise mandates */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-4 space-y-4">
-            <h2 className="text-3xl font-serif tracking-tight text-white" id="faq-heading-text">
+            <h2 className="text-3xl font-display font-extrabold tracking-tight text-white" id="faq-heading-text">
               {t.faqHeading}
             </h2>
             <p className="text-xs sm:text-sm text-white/50 leading-relaxed">
@@ -1279,18 +1421,31 @@ export default function ReservationPage() {
       </section>
 
       {/* Footer copyright, billing context and legal attribution */}
-      <footer className="border-t border-white/10 bg-[#030303] py-12 text-xs text-white/40 relative z-10 select-none">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-16 flex flex-col sm:flex-row justify-between items-center gap-6 text-center sm:text-left">
+      <footer className="border-t border-white/10 bg-[#030303] py-16 text-xs text-white/40 relative z-10 select-none">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-16 space-y-8">
           
-          <div className="flex flex-col space-y-1.5 items-center sm:items-start">
-            <span className="font-serif font-bold text-sm text-white tracking-tight">© 2026 Astrateq Gadgets</span>
-            <span className="text-[10px] uppercase font-mono tracking-widest text-[#00D4FF]">Predictive Hardware Ecosystem — ASTRA-AI</span>
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-6 text-center sm:text-left">
+            <div className="flex flex-col space-y-1.5 items-center sm:items-start">
+              <span className="font-display font-black text-sm text-white tracking-tight">© 2026 Astrateq Gadgets</span>
+              <span className="text-[10px] uppercase font-mono tracking-widest text-[#00D4FF]">{t.brandTagline}</span>
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:space-x-8 items-center gap-2 font-mono text-[10px]">
+              <span>{t.heroRefundSnippet}</span>
+              <span className="hidden sm:inline-block">|</span>
+              <span>Version française disponible sur commande.</span>
+            </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:space-x-8 items-center gap-2 font-mono text-[10px]">
-            <span>{t.heroRefundSnippet}</span>
-            <span className="hidden sm:inline-block">|</span>
-            <span>Version française disponible sur demande.</span>
+          {/* Legal Limitations & PIPEDA Disclaimer */}
+          <div className="pt-8 border-t border-white/5 text-[10px] text-white/30 leading-relaxed font-mono space-y-2">
+            <div className="flex items-center space-x-2 text-white/50 font-bold uppercase tracking-wider text-[9px]">
+              <Lock className="w-3.5 h-3.5 text-[#00D4FF]" />
+              <span>{lang === "en" ? "LEGAL DISCLAIMERS & RESPONSIBILITY CHARTER" : "AVERTISSEMENTS LÉGAUX ET CHARTE DE RESPONSABILITÉ"}</span>
+            </div>
+            <p className="max-w-5xl">
+              {t.legalDisclaimer}
+            </p>
           </div>
 
         </div>
@@ -1309,7 +1464,7 @@ export default function ReservationPage() {
           >
             <div className="hidden sm:flex flex-col">
               <span className="text-[9px] font-mono text-[#00D4FF] tracking-[0.2em] uppercase font-bold leading-none mb-1">FOUNDER BATCH 01</span>
-              <span className="text-sm font-serif font-extrabold text-white leading-tight">ASTRA-AI Pre-order Bundle</span>
+              <span className="text-sm font-display font-black text-white leading-tight">ASTRA-AI Pre-order Bundle</span>
             </div>
             
             <div className="flex items-center space-x-3 w-full sm:w-auto">
@@ -1353,7 +1508,7 @@ export default function ReservationPage() {
                     <CreditCard className="w-4 h-4 text-black shrink-0" />
                   </div>
                   <div>
-                    <h3 className="text-base font-serif font-black text-white leading-none mb-0.5">{t.modalCheckoutTitle}</h3>
+                    <h3 className="text-base font-display font-black text-white leading-none mb-0.5">{t.modalCheckoutTitle}</h3>
                     <p className="text-[10px] font-mono text-[#00D4FF] tracking-widest uppercase leading-none mt-1">{t.modalCheckoutSubtitle}</p>
                   </div>
                 </div>
@@ -1386,7 +1541,7 @@ export default function ReservationPage() {
                       <div className="bg-white/2 rounded-2xl p-4 border border-white/10 flex items-center justify-between">
                         <div>
                           <span className="text-[9px] font-mono text-white/50 block uppercase leading-none mb-1.5">{t.modalCheckoutTitle}</span>
-                          <span className="text-sm font-semibold text-white block font-serif" id="checkout-tier-name">{selectedTier.name[lang]}</span>
+                          <span className="text-sm font-semibold text-white block font-display" id="checkout-tier-name">{selectedTier.name[lang]}</span>
                         </div>
                         <div className="text-right">
                           <span className="text-[9px] font-mono block text-[#00D4FF] uppercase tracking-wider leading-none mb-1.5">{lang === "en" ? "FULLY REFUNDABLE" : "REMBOURSEMENT 100%"}</span>
@@ -1538,7 +1693,7 @@ export default function ReservationPage() {
                       </div>
 
                       <div className="space-y-2">
-                        <h4 className="text-xl font-serif font-black text-white">{t.successTitle}</h4>
+                        <h4 className="text-xl font-display font-black text-white">{t.successTitle}</h4>
                         <p className="text-xs text-white/60 leading-relaxed max-w-[340px] mx-auto">
                           {t.successSubtitle}
                         </p>
