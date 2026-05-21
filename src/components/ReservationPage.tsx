@@ -1380,89 +1380,174 @@ export default function ReservationPage() {
 
           {/* Pricing cards wrapper container */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch pt-4">
-            {pricingTiers.map((tier, idx) => (
-              <motion.div 
-                key={tier.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                whileHover={{ 
-                  y: -12, 
-                  scale: 1.015,
-                  borderColor: tier.id === "founding-member" ? "rgba(0, 212, 255, 1)" : "rgba(255, 255, 255, 0.25)",
-                  boxShadow: tier.id === "founding-member" 
-                    ? "0 30px 60px -15px rgba(0, 212, 255, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.15)"
-                    : "0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.05)"
-                }}
-                className={`bg-navy-card rounded-3xl border ${tier.id === "founding-member" ? "border-[#00D4FF] ring-[1px] ring-[#00D4FF]/40 shadow-2xl shadow-cyan-950/20" : "border-white/10"} flex flex-col justify-between overflow-hidden shadow-xl transition-all duration-350 relative group`}
-                id={`pricing-card-${tier.id}`}
-              >
-                {/* Visual Glass Shimmer Overlay effect inside card */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.01] via-transparent to-white/[0.03] pointer-events-none"></div>
+            {pricingTiers.map((tier, idx) => {
+              const isFounding = tier.id === "founding-member";
+              const isGuardian = tier.id === "guardian";
+              const isEarlyBird = tier.id === "early-bird";
+              
+              // Dynamic pre-order spots scarcity and claim percentages
+              const urgency = {
+                "early-bird": { spots: 8, total: 120, pct: 93, color: "bg-[#00D4FF]", glow: "shadow-[0_0_50px_rgba(0,212,255,0.15)]" },
+                "founding-member": { spots: 21, total: 250, pct: 91, color: "bg-cyan-400", glow: "shadow-[0_0_60px_rgba(0,212,255,0.3)]" },
+                "guardian": { spots: 14, total: 75, pct: 81, color: "bg-indigo-400", glow: "shadow-[0_0_50px_rgba(99,102,241,0.2)]" }
+              }[tier.id] || { spots: 10, total: 100, pct: 90, color: "bg-cyan-400", glow: "shadow-xl" };
 
-                {/* Popular card highlights */}
-                {tier.badge && (
-                  <div className="bg-[#00D4FF] text-black text-[9px] font-mono tracking-[0.3em] leading-none py-2.5 px-4 text-center font-black uppercase w-full relative z-10 shadow-md">
-                    {tier.badge[lang]}
-                  </div>
-                )}
+              const estValue = {
+                "early-bird": 249,
+                "founding-member": 449,
+                "guardian": 599
+              }[tier.id];
 
-                <div className="p-8 flex-1 flex flex-col justify-between relative z-10">
-                  <div className="space-y-5">
-                    <div className="flex justify-between items-start">
-                      <h3 className="text-xl font-display text-white font-extrabold tracking-tight group-hover:text-[#00D4FF] transition-colors duration-250">{tier.name[lang]}</h3>
-                      {tier.id === "founding-member" && (
-                        <span className="inline-flex w-2.5 h-2.5 rounded-full bg-[#00D4FF] animate-pulse"></span>
-                      )}
+              const borderStyles = isFounding 
+                ? "border-[#00D4FF] ring-[1px] ring-[#00D4FF]/40 shadow-2xl shadow-cyan-950/20" 
+                : isGuardian 
+                  ? "border-white/10 hover:border-indigo-400/40" 
+                  : "border-white/10 hover:border-cyan-400/30";
+
+              return (
+                <motion.div 
+                  key={tier.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  whileHover={{ 
+                    y: -12, 
+                    scale: 1.015,
+                    borderColor: isFounding 
+                      ? "rgba(0, 212, 255, 1)" 
+                      : isGuardian 
+                        ? "rgba(99, 102, 241, 0.6)" 
+                        : "rgba(34, 211, 238, 0.5)",
+                    boxShadow: isFounding 
+                      ? "0 30px 60px -15px rgba(0, 212, 255, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.15)"
+                      : isGuardian 
+                        ? "0 30px 60px -15px rgba(99, 102, 241, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.05)"
+                        : "0 30px 60px -15px rgba(34, 211, 238, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.05)"
+                  }}
+                  className={`bg-navy-card rounded-3xl border ${borderStyles} flex flex-col justify-between overflow-hidden shadow-xl transition-all duration-350 relative group`}
+                  id={`pricing-card-${tier.id}`}
+                >
+                  {/* Visual Glass Shimmer Overlay effect inside card */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.01] via-transparent to-white/[0.03] pointer-events-none"></div>
+
+                  {/* Corner Accent Glow */}
+                  <div className={`absolute top-0 right-0 w-48 h-48 rounded-full blur-[80px] pointer-events-none transition-all duration-300 group-hover:scale-110 ${
+                    isFounding ? "bg-[#00D4FF]/5 opacity-60" : isGuardian ? "bg-indigo-500/5 opacity-40" : "bg-cyan-500/5 opacity-40"
+                  }`}></div>
+
+                  {/* Popular card highlights */}
+                  {tier.badge && (
+                    <div className={`text-black text-xs font-mono tracking-[0.25em] leading-none py-3 px-5 text-center font-black uppercase w-full relative z-10 shadow-md ${
+                      isFounding ? "bg-[#00D4FF]" : isGuardian ? "bg-indigo-500 text-white" : "bg-cyan-500"
+                    }`}>
+                      {tier.badge[lang]}
+                    </div>
+                  )}
+
+                  <div className="p-8 flex-1 flex flex-col justify-between relative z-10">
+                    <div className="space-y-6">
+                      <div className="flex justify-between items-center">
+                        <h3 className="text-2xl lg:text-3xl font-display text-white font-extrabold tracking-tight group-hover:text-[#00D4FF] transition-colors duration-250">{tier.name[lang]}</h3>
+                        <div className={`p-2 rounded-xl bg-white/5 border border-white/5 transition-colors duration-300 ${
+                          isFounding ? "text-[#00D4FF]" : isGuardian ? "text-indigo-400" : "text-cyan-400"
+                        }`}>
+                          {isFounding && <BadgeCheck className="w-5.5 h-5.5" />}
+                          {isGuardian && <ShieldCheck className="w-5.5 h-5.5" />}
+                          {isEarlyBird && <Sparkles className="w-5.5 h-5.5" />}
+                        </div>
+                      </div>
+
+                      <p className={`text-xs font-mono font-bold uppercase py-2 px-4 rounded-full inline-block tracking-widest border ${
+                        isFounding 
+                          ? "text-[#00D4FF] bg-[#00D4FF]/8 border-[#00D4FF]/15" 
+                          : isGuardian 
+                            ? "text-indigo-400 bg-indigo-400/8 border-indigo-400/15" 
+                            : "text-cyan-400 bg-cyan-400/8 border-cyan-400/15"
+                      }`}>
+                        {tier.savings[lang]}
+                      </p>
+                      
+                      {/* Price Section with Estimated Final Value Crossed Out */}
+                      <div className="pt-2 pb-2 relative flex flex-col">
+                        <div className="flex items-center gap-1.5 mb-2 text-xs font-mono tracking-widest text-white/45">
+                          <span>{lang === "en" ? "EST. RETAIL:" : "VALEUR ESTIMÉE :"}</span>
+                          <span className="line-through">${estValue} CAD</span>
+                        </div>
+                        <div className="flex items-baseline">
+                          <span className="text-[11px] font-mono uppercase bg-white/5 border border-white/8 px-1.5 py-0.5 rounded text-white/50 inline-block align-middle mr-2 mt-0.5">DEP.</span>
+                          <span className="text-5xl lg:text-6xl font-display font-black text-white tracking-tighter align-middle" id={`price-label-${tier.id}`}>
+                            ${tier.deposit}
+                          </span>
+                          <span className="text-sm font-mono text-white/45 ml-2 uppercase tracking-wider">CAD</span>
+                        </div>
+                      </div>
+
+                      {/* Scarcity / Urgency indicator bar */}
+                      <div className="bg-white/3 border border-white/5 rounded-2xl p-4.5 space-y-3">
+                        <div className="flex justify-between items-center text-xs font-mono">
+                          <span className="text-white/70 font-bold">
+                            {lang === "en" 
+                              ? `Only ${urgency.spots} spots left in Batch 01` 
+                              : `Plus que ${urgency.spots} places restantes`}
+                          </span>
+                          <span className={`font-extrabold ${
+                            isFounding ? "text-[#00D4FF]" : isGuardian ? "text-indigo-400" : "text-cyan-400"
+                          }`}>{urgency.pct}% {lang === "en" ? "Claimed" : "Réclamé"}</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                          <motion.div 
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${urgency.pct}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                            className={`h-full rounded-full ${urgency.color}`}
+                          ></motion.div>
+                        </div>
+                      </div>
+
+                      <div className="border-t border-white/5 pt-6 mt-4 animate-fade-in">
+                        <ul className="space-y-4">
+                          {tier.benefits[lang].map((benefit, bIdx) => (
+                            <li key={bIdx} className="flex items-start text-sm text-white/70 leading-relaxed font-sans group-hover:text-white/85 transition-colors duration-250">
+                              <span className={`mr-3 mt-0.5 shrink-0 p-0.5 rounded-full ${
+                                isFounding ? "text-[#00D4FF] bg-[#00D4FF]/15" : isGuardian ? "text-indigo-400 bg-indigo-400/15" : "text-cyan-400 bg-cyan-400/15"
+                              }`}>
+                                <Check className="w-3.5 h-3.5 stroke-[3]" />
+                              </span>
+                              <span>{benefit}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
 
-                    <p className="text-[10px] font-mono font-bold text-[#00D4FF] uppercase bg-[#00D4FF]/8 py-1.5 px-3.5 rounded-full inline-block tracking-widest border border-[#00D4FF]/15">
-                      {tier.savings[lang]}
-                    </p>
-                    
-                    {/* Largest typographical hierarchy for deposit amounts as mandated */}
-                    <div className="pt-2 pb-2 relative">
-                      <span className="text-[9px] font-mono uppercase bg-white/5 border border-white/8 px-1.5 py-0.5 rounded text-white/50 inline-block align-middle mr-2 -mt-1.5">DEP.</span>
-                      <span className="text-5xl lg:text-6xl font-display font-black text-white tracking-tighter align-middle" id={`price-label-${tier.id}`}>
-                        ${tier.deposit}
-                      </span>
-                      <span className="text-xs font-mono text-white/40 ml-1.5 uppercase tracking-wider">CAD</span>
-                    </div>
-
-                    <div className="border-t border-white/5 pt-6 mt-4">
-                      <ul className="space-y-4">
-                        {tier.benefits[lang].map((benefit, bIdx) => (
-                          <li key={bIdx} className="flex items-start text-xs text-white/70 leading-relaxed font-sans group-hover:text-white/85 transition-colors duration-250">
-                            <span className="text-[#00D4FF] mr-3 mt-0.5 shrink-0 bg-[#00D4FF]/10 p-0.5 rounded-full">
-                              <Check className="w-3 h-3 stroke-[3]" />
-                            </span>
-                            <span>{benefit}</span>
-                          </li>
-                        ))}
-                      </ul>
+                    <div className="pt-8 space-y-4">
+                      <motion.button 
+                        whileHover={{ scale: 1.02, y: -1 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => handleOpenCheckout(tier)}
+                        className={`w-full py-4.5 px-6 rounded-xl font-mono text-xs font-black uppercase tracking-[0.2em] text-center transition-all duration-300 border cursor-pointer ${
+                          isFounding 
+                            ? "bg-[#00D4FF] text-black hover:bg-cyan-300 hover:shadow-lg hover:shadow-cyan-400/20 border-none" 
+                            : isGuardian
+                              ? "bg-indigo-500 text-white hover:bg-indigo-400 hover:shadow-lg hover:shadow-indigo-500/20 border-none"
+                              : "bg-white text-black hover:bg-gray-100 border-none"
+                        }`}
+                        id={`pricing-booking-${tier.id}`}
+                      >
+                        {t.pricingCta}
+                      </motion.button>
+                      
+                      {/* Mandatory refund guarantee under every single pricing CTA */}
+                      <p className="text-xs font-mono text-center text-white/40 uppercase tracking-widest leading-none font-bold">
+                        {lang === "en" ? "✓ 100% Refundable Deposit" : "✓ Dépôt 100% remboursable"}
+                      </p>
                     </div>
                   </div>
-
-                  <div className="pt-8 space-y-4">
-                    <motion.button 
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
-                      onClick={() => handleOpenCheckout(tier)}
-                      className={`w-full py-4 px-6 rounded-xl font-mono text-xs font-black uppercase tracking-[0.2em] text-center transition-all duration-300 border cursor-pointer ${tier.id === "founding-member" ? "bg-[#00D4FF] text-black hover:bg-cyan-300 hover:shadow-lg hover:shadow-cyan-400/20 border-none" : "bg-white text-black hover:bg-gray-100 border-none"}`}
-                      id={`pricing-booking-${tier.id}`}
-                    >
-                      {t.pricingCta}
-                    </motion.button>
-                    
-                    {/* Mandatory refund guarantee under every single pricing CTA */}
-                    <p className="text-[10px] font-mono text-center text-white/40 uppercase tracking-widest leading-none font-bold">
-                      {lang === "en" ? "✓ 100% Refundable Deposit" : "✓ Dépôt 100% remboursable"}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
 
           <div className="text-center mt-12">
