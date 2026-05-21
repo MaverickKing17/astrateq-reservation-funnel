@@ -106,6 +106,11 @@ interface TranslationSchema {
   successOrderNum: string;
   successComplianceNotice: string;
   successCloseBtn: string;
+  countdownTitle: string;
+  countdownDays: string;
+  countdownHours: string;
+  countdownMinutes: string;
+  countdownSeconds: string;
 }
 
 // Complete bilingual translation dictionary
@@ -178,6 +183,11 @@ const translations: Record<Language, TranslationSchema> = {
     successOrderNum: "ASTRA-01-CA-",
     successComplianceNotice: "Transaction processed via stripe. Data encrypted in Canada. Digital receipt has been delivered. You can cancel at any time within a 48h turnaround.",
     successCloseBtn: "Return to Hardware Page",
+    countdownTitle: "FOUNDER BATCH 01 OFFER CLOSES IN:",
+    countdownDays: "Days",
+    countdownHours: "Hrs",
+    countdownMinutes: "Min",
+    countdownSeconds: "Sec",
   },
   fr: {
     navFeatures: "Fonctionnalités",
@@ -247,6 +257,11 @@ const translations: Record<Language, TranslationSchema> = {
     successOrderNum: "ASTRA-01-CA-",
     successComplianceNotice: "Paiement sécurisé Stripe. Hébergement local des données au Canada. Votre reçu vient de vous être envoyé. Annulation possible d'un simple courriel.",
     successCloseBtn: "Retourner à la page produit",
+    countdownTitle: "L'OFFRE DU LOT PILOTE 01 SE TERMINE DANS :",
+    countdownDays: "Jours",
+    countdownHours: "Heures",
+    countdownMinutes: "Min",
+    countdownSeconds: "Sec",
   }
 };
 
@@ -350,6 +365,51 @@ export default function ReservationPage() {
 
   // Active translation selector
   const t = useMemo(() => translations[lang], [lang]);
+
+  // Countdown Timer State
+  const [timeRemaining, setTimeRemaining] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+
+  useEffect(() => {
+    // End target date set to end of current month + dynamic adjustment to prevent it from ever showing expired
+    let target = new Date("2026-06-30T23:59:59Z").getTime();
+    
+    // Safety check: if target date has already passed relative to local time, push it 30 days ahead dynamically
+    const nowTime = new Date().getTime();
+    if (target < nowTime) {
+      target = nowTime + 30 * 24 * 60 * 60 * 1000;
+    }
+
+    const calculateTime = () => {
+      const now = new Date().getTime();
+      const diff = target - now;
+
+      if (diff <= 0) {
+        return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+      }
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+      return { d, h, m, s };
+    };
+
+    const initialVal = calculateTime();
+    setTimeRemaining({ days: initialVal.d, hours: initialVal.h, minutes: initialVal.m, seconds: initialVal.s });
+
+    const timer = setInterval(() => {
+      const calculated = calculateTime();
+      setTimeRemaining({ days: calculated.d, hours: calculated.h, minutes: calculated.m, seconds: calculated.s });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   // Handle live scarcity countdown emulation
   useEffect(() => {
@@ -614,6 +674,76 @@ export default function ReservationPage() {
             <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-[620px]" id="hero-body-paragraph">
               {t.heroBody}
             </p>
+
+            {/* Premium pre-launch countdown container */}
+            <div className="py-2 inline-block" id="prelaunch-countdown-widget">
+              <p className="text-[10px] font-mono tracking-[0.25em] text-[#00D4FF] uppercase font-bold mb-3 flex items-center space-x-2">
+                <span className="inline-block w-1.5 h-1.5 bg-red-500 rounded-full animate-ping"></span>
+                <span>{t.countdownTitle}</span>
+              </p>
+              
+              <div className="flex items-center space-x-2.5 sm:space-x-3.5" role="timer" aria-label="Pre-launch Countdown Timer">
+                
+                {/* Days */}
+                <div className="flex flex-col items-center">
+                  <div className="bg-white/5 border border-white/10 w-16 h-14 sm:w-20 sm:h-16 rounded-xl flex items-center justify-center shadow-lg relative overflow-hidden backdrop-blur-sm group hover:border-[#00D4FF]/30 transition-colors">
+                    <div className="absolute inset-x-0 top-0 h-[1px] bg-white/20"></div>
+                    <span className="font-mono text-xl sm:text-2xl font-black text-white leading-none tracking-tight">
+                      {String(timeRemaining.days).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-white/40 mt-1.5 font-bold">
+                    {t.countdownDays}
+                  </span>
+                </div>
+
+                <span className="text-white/20 font-serif text-xl -mt-5 select-none">:</span>
+
+                {/* Hours */}
+                <div className="flex flex-col items-center">
+                  <div className="bg-white/5 border border-white/10 w-16 h-14 sm:w-20 sm:h-16 rounded-xl flex items-center justify-center shadow-lg relative overflow-hidden backdrop-blur-sm group hover:border-[#00D4FF]/30 transition-colors">
+                    <div className="absolute inset-x-0 top-0 h-[1px] bg-white/20"></div>
+                    <span className="font-mono text-xl sm:text-2xl font-black text-white leading-none tracking-tight">
+                      {String(timeRemaining.hours).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-white/40 mt-1.5 font-bold">
+                    {t.countdownHours}
+                  </span>
+                </div>
+
+                <span className="text-white/20 font-serif text-xl -mt-5 select-none">:</span>
+
+                {/* Minutes */}
+                <div className="flex flex-col items-center">
+                  <div className="bg-white/5 border border-white/10 w-16 h-14 sm:w-20 sm:h-16 rounded-xl flex items-center justify-center shadow-lg relative overflow-hidden backdrop-blur-sm group hover:border-[#00D4FF]/30 transition-colors">
+                    <div className="absolute inset-x-0 top-0 h-[1px] bg-white/20"></div>
+                    <span className="font-mono text-xl sm:text-2xl font-black text-white leading-none tracking-tight">
+                      {String(timeRemaining.minutes).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-white/40 mt-1.5 font-bold">
+                    {t.countdownMinutes}
+                  </span>
+                </div>
+
+                <span className="text-white/20 font-serif text-xl -mt-5 select-none">:</span>
+
+                {/* Seconds */}
+                <div className="flex flex-col items-center">
+                  <div className="bg-white/5 border border-white/10 w-16 h-14 sm:w-20 sm:h-16 rounded-xl flex items-center justify-center shadow-lg relative overflow-hidden backdrop-blur-sm group hover:border-[#00D4FF]/30 transition-colors">
+                    <div className="absolute inset-x-0 top-0 h-[1px] bg-white/20"></div>
+                    <span className="font-mono text-xl sm:text-2xl font-black text-[#00D4FF] leading-none tracking-tight">
+                      {String(timeRemaining.seconds).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-white/40 mt-1.5 font-bold">
+                    {t.countdownSeconds}
+                  </span>
+                </div>
+
+              </div>
+            </div>
 
             {/* CTA action container */}
             <div className="pt-4 space-y-3">
