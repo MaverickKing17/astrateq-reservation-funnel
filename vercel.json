@@ -1,0 +1,18 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://ais-pre-s6u7jrrldvcs37we67vooo-17591009632.us-east1.run.app/api/:path*"
+    },
+    {
+      "source": "/assets/:path*",
+      "destination": "/dist/assets/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/dist/index.html"
+    }
+  ]
+}

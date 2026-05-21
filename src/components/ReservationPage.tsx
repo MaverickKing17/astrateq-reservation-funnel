@@ -19,7 +19,12 @@ import {
   Lock,
   RefreshCw,
   Eye,
-  AlertCircle
+  AlertCircle,
+  Share2,
+  Twitter,
+  Facebook,
+  Linkedin,
+  Copy
 } from "lucide-react";
 
 // Asset imports
@@ -125,6 +130,12 @@ interface TranslationSchema {
   certIsed: string;
   certIso: string;
   legalDisclaimer: string;
+  shareTitle: string;
+  shareSubtitle: string;
+  shareCopyBtn: string;
+  shareCopied: string;
+  shareBadge: string;
+  successShareCallout: string;
 }
 
 // Complete bilingual translation dictionary
@@ -216,6 +227,12 @@ const translations: Record<Language, TranslationSchema> = {
     certIsed: "ISED Certified (CA-8592)",
     certIso: "ISO 26262 Auto-Grade",
     legalDisclaimer: "AI LIMITATION WARNING & RESPONSIBILITY PROVISION: Astra-AI/ASTRA-Vision serves exclusively as a predictive assistance driver aid and does not replace active steering, alertness, or total vehicle command. Drivers assume all active liabilities. Secure telemetry utilizes local memory nodes in full conformity with Canadian PIPEDA regulations.",
+    shareTitle: "Spread the Word, Save Lives",
+    shareSubtitle: "Join our pre-launch community. Help spread the word about senior driving safety under unpredictable winter pavements.",
+    shareCopyBtn: "Copy Invite Link",
+    shareCopied: "Link Copied!",
+    shareBadge: "SHARE THE 혁신 REVOLUTION",
+    successShareCallout: "Spread the viral excitement! Share your Batch 01 reservation with your friends and family.",
   },
   fr: {
     navFeatures: "Fonctionnalités",
@@ -304,6 +321,12 @@ const translations: Record<Language, TranslationSchema> = {
     certIsed: "Certifié ISDE Canada (CA-8592)",
     certIso: "Sécurisé ISO 26262 Automobile",
     legalDisclaimer: "AVERTISSEMENT DE LIMITATION DE L'IA ET RESPONSABILITÉ : Astra-AI/ASTRA-Vision sert d'aide prédictive et ne remplace nullement l'attention, le jugement ou la maîtrise active du conducteur. Les conducteurs assument toutes les responsabilités. Conformité LPRPDE complète avec serveurs cryptés basés au Canada.",
+    shareTitle: "Partagez l'Innovation, Sauvez des Vies",
+    shareSubtitle: "Rejoignez notre communauté de pré-lancement. Aidez à faire connaître la télésurveillance sécuritaire de nos aînés d'un océan à l'autre.",
+    shareCopyBtn: "Copier le Lien d'Invitation",
+    shareCopied: "Lien Copié !",
+    shareBadge: "PARTAGEZ LA RÉVOLUTION",
+    successShareCallout: "Partagez votre enthousiasme ! Parrainez vos amis et invitez-les à rejoindre la vague Astra-AI.",
   }
 };
 
@@ -401,6 +424,41 @@ export default function ReservationPage() {
   const [formError, setFormError] = useState<string>("");
   const [isProcessingPayment, setIsProcessingPayment] = useState<boolean>(false);
   const [generatedOrderNum, setGeneratedOrderNum] = useState<string>("");
+
+  // Social Sharing State & Methods
+  const [isCopied, setIsCopied] = useState<boolean>(false);
+
+  const handleCopyLink = () => {
+    const url = "https://astrateq-reservation-funnel.vercel.app";
+    navigator.clipboard.writeText(url).then(() => {
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2500);
+    }).catch((err) => {
+      console.error("Could not copy text: ", err);
+    });
+  };
+
+  const shareMessage = useMemo(() => {
+    if (lang === "en") {
+      return "I just secure-registered my spot for Astra-AI Batch 01 by Astrateq Gadgets! Active AI-powered predictive vehicle safety engineered for elder parents in hivers/canadian winter. Check it out and lock earliest pricing risk-free: ";
+    } else {
+      return "Je viens de réserver ma place pour le lot 01 d'Astra-AI par Astrateq Gadgets ! Diagnostic actif d'assistance et de sécurité IA pour nos aînés face aux rigueurs de l'hiver. Découvrez-le sans risque : ";
+    }
+  }, [lang]);
+
+  const shareUrl = "https://astrateq-reservation-funnel.vercel.app";
+
+  const twitterShareUrl = useMemo(() => {
+    return `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareMessage)}&url=${encodeURIComponent(shareUrl)}`;
+  }, [shareMessage]);
+
+  const facebookShareUrl = useMemo(() => {
+    return `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+  }, []);
+
+  const linkedinShareUrl = useMemo(() => {
+    return `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+  }, []);
 
   const heroRef = useRef<HTMLDivElement>(null);
   const pricingSectionRef = useRef<HTMLDivElement>(null);
@@ -593,10 +651,68 @@ export default function ReservationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-sans antialiased selection:bg-[#00D4FF] selection:text-[#050505] overflow-x-hidden" id="funnel-container">
+    <div className="min-h-screen bg-navy-bg text-white font-sans antialiased selection:bg-navy-brand selection:text-white overflow-x-hidden" id="funnel-container">
       
+      {/* Floating Premium Social Sharing Bar - Desktop only (hidden on mobile/tablet) */}
+      <div className="fixed left-6 top-1/2 -translate-y-1/2 z-30 hidden xl:flex flex-col items-center space-y-4 bg-navy-card/85 backdrop-blur-md border border-white/10 px-3 py-6 rounded-2xl shadow-xl hover:border-white/20 hover:shadow-[#00D4FF]/10 hover:shadow-lg transition-all duration-300 select-none" id="floating-share-dock">
+        <div className="w-8 h-8 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-white/50 mb-1" title="Share and Invite">
+          <Share2 className="w-4 h-4" />
+        </div>
+        <a 
+          href={twitterShareUrl} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="w-10 h-10 rounded-xl bg-white/5 hover:bg-[#1DA1F2]/20 border border-white/5 hover:border-[#1DA1F2]/30 flex items-center justify-center text-white hover:text-[#1DA1F2] transition-all duration-200 group"
+          aria-label="Share on Twitter / X"
+        >
+          <Twitter className="w-4 h-4 group-hover:scale-110 transition-transform" />
+        </a>
+        <a 
+          href={facebookShareUrl} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="w-10 h-10 rounded-xl bg-white/5 hover:bg-[#1877F2]/20 border border-white/5 hover:border-[#1877F2]/30 flex items-center justify-center text-white hover:text-[#1877F2] transition-all duration-200 group"
+          aria-label="Share on Facebook"
+        >
+          <Facebook className="w-4 h-4 group-hover:scale-110 transition-transform" />
+        </a>
+        <a 
+          href={linkedinShareUrl} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="w-10 h-10 rounded-xl bg-white/5 hover:bg-[#0077B5]/20 border border-white/5 hover:border-[#0077B5]/30 flex items-center justify-center text-white hover:text-[#0077B5] transition-all duration-200 group"
+          aria-label="Share on LinkedIn"
+        >
+          <Linkedin className="w-4 h-4 group-hover:scale-110 transition-transform" />
+        </a>
+        <button 
+          onClick={handleCopyLink} 
+          className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 flex items-center justify-center text-white relative transition-all duration-200 cursor-pointer group"
+          aria-label="Copy Page Link"
+        >
+          {isCopied ? (
+            <Check className="w-4 h-4 text-emerald-400" />
+          ) : (
+            <Copy className="w-4 h-4 text-white/70 group-hover:text-white group-hover:scale-110 transition-transform" />
+          )}
+          
+          <AnimatePresence>
+            {isCopied && (
+              <motion.span 
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
+                className="absolute left-14 bg-emerald-500 text-black font-mono font-bold text-[9px] uppercase px-2.5 py-1 rounded shadow-lg whitespace-nowrap pointer-events-none"
+              >
+                {t.shareCopied}
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </button>
+      </div>
+
       {/* 4.1 Global Navigation Header */}
-      <nav className="sticky top-0 z-40 w-full border-b border-white/10 bg-[#050505]/85 backdrop-blur-md transition-colors duration-200">
+      <nav className="sticky top-0 z-40 w-full border-b border-white/10 bg-navy-bg/85 backdrop-blur-md transition-colors duration-200">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-16 h-20 flex items-center justify-between">
           
           {/* Typographic branding & Logo integration */}
@@ -669,7 +785,7 @@ export default function ReservationPage() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden border-t border-white/10 bg-[#050505]"
+              className="md:hidden border-t border-white/10 bg-navy-bg"
             >
               <div className="px-6 py-8 space-y-5 flex flex-col">
                 <a href="#features" onClick={() => setMobileMenuOpen(false)} className="text-white/70 font-medium hover:text-white transition-colors">{t.navFeatures}</a>
@@ -853,10 +969,10 @@ export default function ReservationPage() {
                 referrerPolicy="no-referrer"
                 id="hero-lifestyle-img"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/60 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-bg/60 via-transparent to-transparent"></div>
               
               {/* Overlapping interactive maple leaf flag decorative accent to represent Canada */}
-              <div className="absolute top-4 right-4 bg-[#050505]/80 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-lg flex items-center space-x-2 border border-white/10 select-none">
+              <div className="absolute top-4 right-4 bg-navy-bg/80 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-lg flex items-center space-x-2 border border-white/10 select-none">
                 <span className="text-xs text-red-500 font-bold font-serif">🇨🇦</span>
                 <span className="text-[9px] tracking-[0.2em] font-mono font-bold text-white">CA EDITION</span>
               </div>
@@ -869,7 +985,7 @@ export default function ReservationPage() {
       {/* 4.3 Real-Time Scarcity & Social Proof Banner */}
       <section className="bg-white/2 border-y border-white/10 py-10" id="scarcity-block">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-16">
-          <div className="bg-[#0c0c0c] rounded-2xl p-6 lg:p-8 border border-white/10 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+          <div className="bg-navy-card rounded-2xl p-6 lg:p-8 border border-white/10 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
             
             {/* Visual ambient accent ring */}
             <div className="absolute top-0 right-0 transform translate-x-20 -translate-y-20 w-80 h-80 rounded-full bg-[#00D4FF]/5 blur-3xl pointer-events-none"></div>
@@ -992,11 +1108,11 @@ export default function ReservationPage() {
                     <div className="px-6 pb-6 text-sm text-white/70 space-y-4 border-t border-white/5 pt-4 leading-relaxed">
                       <p>{t.accPredictiveBody}</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-                        <div className="bg-[#0c0c0c] p-4 rounded-xl border border-white/10">
+                        <div className="bg-navy-card p-4 rounded-xl border border-white/10">
                           <strong className="text-xs font-semibold block text-[#00D4FF] font-mono tracking-wider mb-1.5">{lang === "en" ? "LENS 1: HAZARD ENGINE" : "LENS 1 : COMPORTEMENT ROUTE"}</strong>
                           <span className="text-xs text-white/50 leading-relaxed">{lang === "en" ? "Road surface collision tracking and lane guard alerts." : "Suivi prédictif des lignes de voies et alertes anti-collision."}</span>
                         </div>
-                        <div className="bg-[#0c0c0c] p-4 rounded-xl border border-[#00D4FF]/20">
+                        <div className="bg-navy-card p-4 rounded-xl border border-[#00D4FF]/20">
                           <strong className="text-xs font-semibold block text-[#00D4FF] font-mono tracking-wider mb-1.5">{lang === "en" ? "LENS 2: WELLNESS NODE" : "LENS 2 : SÉCURITÉ CONDUCTEUR"}</strong>
                           <span className="text-xs text-white/50 leading-relaxed">{lang === "en" ? "Senses sudden drowsiness, distress, or lack of attention." : "Analyse l'assoupissement, le malaise brutal ou l'inattention."}</span>
                         </div>
@@ -1035,7 +1151,7 @@ export default function ReservationPage() {
                   >
                     <div className="px-6 pb-6 text-sm text-white/70 space-y-4 border-t border-white/5 pt-4 leading-relaxed">
                       <p>{t.accDiagnosticsBody}</p>
-                      <div className="bg-[#0c0c0c] p-4 rounded-xl border border-[#00D4FF]/20 flex space-x-3 items-start">
+                      <div className="bg-navy-card p-4 rounded-xl border border-[#00D4FF]/20 flex space-x-3 items-start">
                         <Check className="w-4 h-4 text-[#00D4FF] shrink-0 fill-none mt-1 stroke-[3]" />
                         <span className="text-xs text-white/60 leading-relaxed">{lang === "en" ? "Active mechanical polling connects into standard OBD-II systems built post-1996 for reliable diagnostic monitoring." : "Le décodage OBD-II s'adapte à tous véhicules fabriqués de 1996 à aujourd'hui."}</span>
                       </div>
@@ -1073,7 +1189,7 @@ export default function ReservationPage() {
                   >
                     <div className="px-6 pb-6 text-sm text-white/70 space-y-4 border-t border-white/5 pt-4 leading-relaxed">
                       <p>{t.accQuietBody}</p>
-                      <div className="bg-[#0c0c0c] p-4 rounded-xl border border-[#00D4FF]/20 flex space-x-3 items-start">
+                      <div className="bg-navy-card p-4 rounded-xl border border-[#00D4FF]/20 flex space-x-3 items-start">
                         <Check className="w-4 h-4 text-[#00D4FF] shrink-0 fill-none mt-1 stroke-[3]" />
                         <span className="text-xs text-white/60 leading-relaxed">{lang === "en" ? "Unlike classical systems with sirens, safety calls are issued via polite smart alerts or quiet phone companion messages." : "De simples messages silencieux ou bips harmonieux à volume progressif remplacent les alarmes stridentes d'autrefois."}</span>
                       </div>
@@ -1088,7 +1204,7 @@ export default function ReservationPage() {
       </section>
 
       {/* Brand Core Pillars Section (from Brand Identity System Document) */}
-      <section className="py-20 bg-gradient-to-b from-[#050505] to-[#090909] border-t border-white/10 relative" id="pillars">
+      <section className="py-20 bg-gradient-to-b from-navy-bg to-navy-secondary border-t border-white/10 relative" id="pillars">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-16 text-center space-y-12">
           
           <div className="space-y-3 max-w-xl mx-auto">
@@ -1102,52 +1218,144 @@ export default function ReservationPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             
             {/* Pillar 1: Proactive Protection */}
-            <div className="bg-white/2 border border-white/10 rounded-2xl p-6 hover:border-[#00D4FF]/30 transition-all duration-300 relative group flex flex-col justify-between" id="pillar-card-1">
-              <div className="space-y-4">
-                <div className="p-3 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 w-fit">
-                  <ShieldCheck className="w-6 h-6 stroke-[1.8]" />
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              whileHover={{ 
+                y: -10, 
+                borderColor: "rgba(0, 212, 255, 0.45)", 
+                boxShadow: "0 20px 40px -15px rgba(0, 212, 255, 0.25)",
+                backgroundColor: "rgba(255, 255, 255, 0.05)"
+              }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="bg-white/2 border border-white/10 rounded-2xl p-6 hover:border-[#00D4FF]/30 transition-all duration-300 relative group flex flex-col justify-between overflow-hidden" 
+              id="pillar-card-1"
+            >
+              {/* Premium Gradient Glow on Hover */}
+              <div className="absolute top-0 right-0 w-40 h-40 bg-[radial-gradient(circle_at_top_right,rgba(0,212,255,0.08),transparent_70%)] pointer-events-none transition-all duration-300 group-hover:scale-110 opacity-60"></div>
+              
+              <div className="space-y-4 relative z-10">
+                <div className="p-3 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 w-fit group-hover:bg-[#00D4FF]/10 group-hover:border-[#00D4FF]/30 transition-all duration-300 relative">
+                  <div className="absolute inset-0 bg-[#00D4FF]/10 blur-md rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <ShieldCheck className="w-6 h-6 stroke-[1.8] relative z-10 transition-transform duration-300 group-hover:scale-105" />
                 </div>
-                <h3 className="text-lg font-display font-black text-white">{t.pillarProactiveTitle}</h3>
+                <h3 className="text-lg font-display font-black text-white group-hover:text-[#00D4FF] transition-colors duration-200">{t.pillarProactiveTitle}</h3>
                 <p className="text-xs text-white/60 leading-relaxed font-sans">{t.pillarProactiveDesc}</p>
               </div>
-              <span className="text-[10px] font-mono font-bold text-white/20 mt-6 block uppercase tracking-wider">PILLAR // 01</span>
-            </div>
+              
+              <div className="mt-8 flex items-center justify-between relative z-10">
+                <div className="h-[1px] bg-white/10 group-hover:bg-[#00D4FF]/20 flex-grow transition-colors duration-300 mr-4"></div>
+                <span className="text-[9px] font-mono font-extrabold text-white/30 group-hover:text-[#00D4FF]/80 group-hover:bg-[#00D4FF]/8 border border-transparent group-hover:border-[#00D4FF]/20 px-2 py-0.5 rounded transition-all duration-300 uppercase tracking-widest bg-white/2">
+                  PILLAR // 01
+                </span>
+              </div>
+            </motion.div>
 
             {/* Pillar 2: AI Intelligence */}
-            <div className="bg-white/2 border border-white/10 rounded-2xl p-6 hover:border-[#00D4FF]/30 transition-all duration-300 relative group flex flex-col justify-between" id="pillar-card-2">
-              <div className="space-y-4">
-                <div className="p-3 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 w-fit">
-                  <Zap className="w-6 h-6 stroke-[1.8]" />
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              whileHover={{ 
+                y: -10, 
+                borderColor: "rgba(0, 212, 255, 0.45)", 
+                boxShadow: "0 20px 40px -15px rgba(0, 212, 255, 0.25)",
+                backgroundColor: "rgba(255, 255, 255, 0.05)"
+              }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="bg-white/2 border border-white/10 rounded-2xl p-6 hover:border-[#00D4FF]/30 transition-all duration-300 relative group flex flex-col justify-between overflow-hidden" 
+              id="pillar-card-2"
+            >
+              {/* Premium Gradient Glow on Hover */}
+              <div className="absolute top-0 right-0 w-40 h-40 bg-[radial-gradient(circle_at_top_right,rgba(0,212,255,0.08),transparent_70%)] pointer-events-none transition-all duration-300 group-hover:scale-110 opacity-60"></div>
+              
+              <div className="space-y-4 relative z-10">
+                <div className="p-3 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 w-fit group-hover:bg-[#00D4FF]/10 group-hover:border-[#00D4FF]/30 transition-all duration-300 relative">
+                  <div className="absolute inset-0 bg-[#00D4FF]/10 blur-md rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <Zap className="w-6 h-6 stroke-[1.8] relative z-10 transition-transform duration-300 group-hover:scale-105" />
                 </div>
-                <h3 className="text-lg font-display font-black text-white">{t.pillarAiTitle}</h3>
+                <h3 className="text-lg font-display font-black text-white group-hover:text-[#00D4FF] transition-colors duration-200">{t.pillarAiTitle}</h3>
                 <p className="text-xs text-white/60 leading-relaxed font-sans">{t.pillarAiDesc}</p>
               </div>
-              <span className="text-[10px] font-mono font-bold text-white/20 mt-6 block uppercase tracking-wider">PILLAR // 02</span>
-            </div>
+              
+              <div className="mt-8 flex items-center justify-between relative z-10">
+                <div className="h-[1px] bg-white/10 group-hover:bg-[#00D4FF]/20 flex-grow transition-colors duration-300 mr-4"></div>
+                <span className="text-[9px] font-mono font-extrabold text-white/30 group-hover:text-[#00D4FF]/80 group-hover:bg-[#00D4FF]/8 border border-transparent group-hover:border-[#00D4FF]/20 px-2 py-0.5 rounded transition-all duration-300 uppercase tracking-widest bg-white/2">
+                  PILLAR // 02
+                </span>
+              </div>
+            </motion.div>
 
             {/* Pillar 3: Driver Confidence */}
-            <div className="bg-white/2 border border-white/10 rounded-2xl p-6 hover:border-[#00D4FF]/30 transition-all duration-300 relative group flex flex-col justify-between" id="pillar-card-3">
-              <div className="space-y-4">
-                <div className="p-3 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 w-fit">
-                  <BadgeCheck className="w-6 h-6 stroke-[1.8]" />
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              whileHover={{ 
+                y: -10, 
+                borderColor: "rgba(0, 212, 255, 0.45)", 
+                boxShadow: "0 20px 40px -15px rgba(0, 212, 255, 0.25)",
+                backgroundColor: "rgba(255, 255, 255, 0.05)"
+              }}
+              transition={{ duration: 0.5, delay: 0.25 }}
+              className="bg-white/2 border border-white/10 rounded-2xl p-6 hover:border-[#00D4FF]/30 transition-all duration-300 relative group flex flex-col justify-between overflow-hidden" 
+              id="pillar-card-3"
+            >
+              {/* Premium Gradient Glow on Hover */}
+              <div className="absolute top-0 right-0 w-40 h-40 bg-[radial-gradient(circle_at_top_right,rgba(0,212,255,0.08),transparent_70%)] pointer-events-none transition-all duration-300 group-hover:scale-110 opacity-60"></div>
+              
+              <div className="space-y-4 relative z-10">
+                <div className="p-3 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 w-fit group-hover:bg-[#00D4FF]/10 group-hover:border-[#00D4FF]/30 transition-all duration-300 relative">
+                  <div className="absolute inset-0 bg-[#00D4FF]/10 blur-md rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <BadgeCheck className="w-6 h-6 stroke-[1.8] relative z-10 transition-transform duration-300 group-hover:scale-105" />
                 </div>
-                <h3 className="text-lg font-display font-black text-white">{t.pillarConfidenceTitle}</h3>
+                <h3 className="text-lg font-display font-black text-white group-hover:text-[#00D4FF] transition-colors duration-200">{t.pillarConfidenceTitle}</h3>
                 <p className="text-xs text-white/60 leading-relaxed font-sans">{t.pillarConfidenceDesc}</p>
               </div>
-              <span className="text-[10px] font-mono font-bold text-white/20 mt-6 block uppercase tracking-wider">PILLAR // 03</span>
-            </div>
+              
+              <div className="mt-8 flex items-center justify-between relative z-10">
+                <div className="h-[1px] bg-white/10 group-hover:bg-[#00D4FF]/20 flex-grow transition-colors duration-300 mr-4"></div>
+                <span className="text-[9px] font-mono font-extrabold text-white/30 group-hover:text-[#00D4FF]/80 group-hover:bg-[#00D4FF]/8 border border-transparent group-hover:border-[#00D4FF]/20 px-2 py-0.5 rounded transition-all duration-300 uppercase tracking-widest bg-white/2">
+                  PILLAR // 03
+                </span>
+              </div>
+            </motion.div>
 
             {/* Pillar 4: Premium Simplicity */}
-            <div className="bg-white/2 border border-white/10 rounded-2xl p-6 hover:border-[#00D4FF]/30 transition-all duration-300 relative group flex flex-col justify-between" id="pillar-card-4">
-              <div className="space-y-4">
-                <div className="p-3 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 w-fit">
-                  <Sparkles className="w-6 h-6 stroke-[1.8]" />
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              whileHover={{ 
+                y: -10, 
+                borderColor: "rgba(0, 212, 255, 0.45)", 
+                boxShadow: "0 20px 40px -15px rgba(0, 212, 255, 0.25)",
+                backgroundColor: "rgba(255, 255, 255, 0.05)"
+              }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="bg-white/2 border border-white/10 rounded-2xl p-6 hover:border-[#00D4FF]/30 transition-all duration-300 relative group flex flex-col justify-between overflow-hidden" 
+              id="pillar-card-4"
+            >
+              {/* Premium Gradient Glow on Hover */}
+              <div className="absolute top-0 right-0 w-40 h-40 bg-[radial-gradient(circle_at_top_right,rgba(0,212,255,0.08),transparent_70%)] pointer-events-none transition-all duration-300 group-hover:scale-110 opacity-60"></div>
+              
+              <div className="space-y-4 relative z-10">
+                <div className="p-3 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 w-fit group-hover:bg-[#00D4FF]/10 group-hover:border-[#00D4FF]/30 transition-all duration-300 relative">
+                  <div className="absolute inset-0 bg-[#00D4FF]/10 blur-md rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <Sparkles className="w-6 h-6 stroke-[1.8] relative z-10 transition-transform duration-300 group-hover:scale-105" />
                 </div>
-                <h3 className="text-lg font-display font-black text-white">{t.pillarSimplicityTitle}</h3>
+                <h3 className="text-lg font-display font-black text-white group-hover:text-[#00D4FF] transition-colors duration-200">{t.pillarSimplicityTitle}</h3>
                 <p className="text-xs text-white/60 leading-relaxed font-sans">{t.pillarSimplicityDesc}</p>
               </div>
-              <span className="text-[10px] font-mono font-bold text-white/20 mt-6 block uppercase tracking-wider">PILLAR // 04</span>
-            </div>
+              
+              <div className="mt-8 flex items-center justify-between relative z-10">
+                <div className="h-[1px] bg-white/10 group-hover:bg-[#00D4FF]/20 flex-grow transition-colors duration-300 mr-4"></div>
+                <span className="text-[9px] font-mono font-extrabold text-white/30 group-hover:text-[#00D4FF]/80 group-hover:bg-[#00D4FF]/8 border border-transparent group-hover:border-[#00D4FF]/20 px-2 py-0.5 rounded transition-all duration-300 uppercase tracking-widest bg-white/2">
+                  PILLAR // 04
+                </span>
+              </div>
+            </motion.div>
 
           </div>
 
@@ -1155,7 +1363,7 @@ export default function ReservationPage() {
       </section>
 
       {/* 4.5 Explicit 3-Tier Pricing Grid */}
-      <section ref={pricingSectionRef} className="py-20 lg:py-32 bg-[#090909] border-t border-white/10 scroll-mt-20 relative overflow-hidden" id="pricing">
+      <section ref={pricingSectionRef} className="py-20 lg:py-32 bg-navy-secondary border-t border-white/10 scroll-mt-20 relative overflow-hidden" id="pricing">
         {/* Decorative backdrop geometric vector lines */}
         <div className="absolute w-[800px] h-[800px] border border-white/3 rounded-full pointer-events-none left-1/2 -translate-x-1/2 top-10"></div>
         
@@ -1179,38 +1387,55 @@ export default function ReservationPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className={`bg-[#0c0c0c] rounded-2xl border ${tier.id === "founding-member" ? "border-[#00D4FF] ring-[1px] ring-[#00D4FF]/40 shadow-2xl shadow-cyan-950/20" : "border-white/10"} flex flex-col justify-between overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-white/20 hover:-translate-y-1 relative group`}
+                whileHover={{ 
+                  y: -12, 
+                  scale: 1.015,
+                  borderColor: tier.id === "founding-member" ? "rgba(0, 212, 255, 1)" : "rgba(255, 255, 255, 0.25)",
+                  boxShadow: tier.id === "founding-member" 
+                    ? "0 30px 60px -15px rgba(0, 212, 255, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.15)"
+                    : "0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.05)"
+                }}
+                className={`bg-navy-card rounded-3xl border ${tier.id === "founding-member" ? "border-[#00D4FF] ring-[1px] ring-[#00D4FF]/40 shadow-2xl shadow-cyan-950/20" : "border-white/10"} flex flex-col justify-between overflow-hidden shadow-xl transition-all duration-350 relative group`}
                 id={`pricing-card-${tier.id}`}
               >
+                {/* Visual Glass Shimmer Overlay effect inside card */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.01] via-transparent to-white/[0.03] pointer-events-none"></div>
+
                 {/* Popular card highlights */}
                 {tier.badge && (
-                  <div className="bg-[#00D4FF] text-black text-[9px] font-mono tracking-[0.25em] leading-none py-2 px-3 text-center font-bold uppercase w-full">
+                  <div className="bg-[#00D4FF] text-black text-[9px] font-mono tracking-[0.3em] leading-none py-2.5 px-4 text-center font-black uppercase w-full relative z-10 shadow-md">
                     {tier.badge[lang]}
                   </div>
                 )}
 
-                <div className="p-8 flex-1 flex flex-col justify-between">
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-display text-white font-extrabold">{tier.name[lang]}</h3>
-                    <p className="text-[10px] font-mono font-bold text-[#00D4FF] uppercase bg-white/5 py-1.5 px-3 rounded-md inline-block tracking-wide border border-white/5">
+                <div className="p-8 flex-1 flex flex-col justify-between relative z-10">
+                  <div className="space-y-5">
+                    <div className="flex justify-between items-start">
+                      <h3 className="text-xl font-display text-white font-extrabold tracking-tight group-hover:text-[#00D4FF] transition-colors duration-250">{tier.name[lang]}</h3>
+                      {tier.id === "founding-member" && (
+                        <span className="inline-flex w-2.5 h-2.5 rounded-full bg-[#00D4FF] animate-pulse"></span>
+                      )}
+                    </div>
+
+                    <p className="text-[10px] font-mono font-bold text-[#00D4FF] uppercase bg-[#00D4FF]/8 py-1.5 px-3.5 rounded-full inline-block tracking-widest border border-[#00D4FF]/15">
                       {tier.savings[lang]}
                     </p>
                     
                     {/* Largest typographical hierarchy for deposit amounts as mandated */}
-                    <div className="pt-4 pb-2">
-                      <span className="text-[10px] font-mono uppercase align-super text-white/50 mr-1.5">DEP.</span>
-                      <span className="text-5xl lg:text-6xl font-display font-black text-white" id={`price-label-${tier.id}`}>
+                    <div className="pt-2 pb-2 relative">
+                      <span className="text-[9px] font-mono uppercase bg-white/5 border border-white/8 px-1.5 py-0.5 rounded text-white/50 inline-block align-middle mr-2 -mt-1.5">DEP.</span>
+                      <span className="text-5xl lg:text-6xl font-display font-black text-white tracking-tighter align-middle" id={`price-label-${tier.id}`}>
                         ${tier.deposit}
                       </span>
-                      <span className="text-xs font-mono text-white/40 ml-1.5">CAD</span>
+                      <span className="text-xs font-mono text-white/40 ml-1.5 uppercase tracking-wider">CAD</span>
                     </div>
 
                     <div className="border-t border-white/5 pt-6 mt-4">
-                      <ul className="space-y-3.5">
+                      <ul className="space-y-4">
                         {tier.benefits[lang].map((benefit, bIdx) => (
-                          <li key={bIdx} className="flex items-start text-xs text-white/70 leading-relaxed">
-                            <span className="text-[#00D4FF] mr-2.5 mt-0.5 shrink-0">
-                              <Check className="w-3.5 h-3.5 stroke-[3]" />
+                          <li key={bIdx} className="flex items-start text-xs text-white/70 leading-relaxed font-sans group-hover:text-white/85 transition-colors duration-250">
+                            <span className="text-[#00D4FF] mr-3 mt-0.5 shrink-0 bg-[#00D4FF]/10 p-0.5 rounded-full">
+                              <Check className="w-3 h-3 stroke-[3]" />
                             </span>
                             <span>{benefit}</span>
                           </li>
@@ -1220,16 +1445,18 @@ export default function ReservationPage() {
                   </div>
 
                   <div className="pt-8 space-y-4">
-                    <button 
+                    <motion.button 
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
                       onClick={() => handleOpenCheckout(tier)}
-                      className={`w-full py-3.5 px-6 rounded-xl font-mono text-xs font-bold uppercase tracking-[0.18em] text-center transition-all duration-300 border cursor-pointer ${tier.id === "founding-member" ? "bg-[#00D4FF] text-black hover:bg-cyan-400 border-none shadow-lg shadow-cyan-950/20" : "bg-white text-black hover:bg-gray-100 border-none"}`}
+                      className={`w-full py-4 px-6 rounded-xl font-mono text-xs font-black uppercase tracking-[0.2em] text-center transition-all duration-300 border cursor-pointer ${tier.id === "founding-member" ? "bg-[#00D4FF] text-black hover:bg-cyan-300 hover:shadow-lg hover:shadow-cyan-400/20 border-none" : "bg-white text-black hover:bg-gray-100 border-none"}`}
                       id={`pricing-booking-${tier.id}`}
                     >
                       {t.pricingCta}
-                    </button>
+                    </motion.button>
                     
                     {/* Mandatory refund guarantee under every single pricing CTA */}
-                    <p className="text-[10px] font-mono text-center text-white/40 uppercase tracking-wide leading-none">
+                    <p className="text-[10px] font-mono text-center text-white/40 uppercase tracking-widest leading-none font-bold">
                       {lang === "en" ? "✓ 100% Refundable Deposit" : "✓ Dépôt 100% remboursable"}
                     </p>
                   </div>
@@ -1420,6 +1647,106 @@ export default function ReservationPage() {
 
       </section>
 
+      {/* 4.6 Brand Co-Sharing & Viral Growth Section */}
+      <section className="py-20 bg-gradient-to-b from-navy-secondary to-navy-deeper border-t border-white/10 relative overflow-hidden" id="viral-share">
+        {/* Subtle decorative elements for a high-end designer visual feel */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#00D4FF]/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-16 text-center space-y-10 relative z-10">
+          <div className="space-y-3 max-w-xl mx-auto">
+            <span className="text-[10px] font-mono tracking-[0.3em] font-semibold text-[#00D4FF] uppercase bg-[#00D4FF]/10 border border-[#00D4FF]/20 px-3 py-1.5 rounded-full inline-block">
+              {t.shareBadge}
+            </span>
+            <h2 className="text-3xl lg:text-4xl font-display font-medium tracking-tight text-white mb-2 leading-none">
+              {t.shareTitle}
+            </h2>
+            <p className="text-sm font-sans text-white/60 leading-relaxed">
+              {t.shareSubtitle}
+            </p>
+          </div>
+
+          {/* Social Buttons Container */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+            
+            {/* Share to Twitter / X */}
+            <a 
+              href={twitterShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto flex items-center justify-center space-x-2.5 bg-white/5 hover:bg-[#1DA1F2]/10 border border-white/10 hover:border-[#1DA1F2]/30 px-6 py-3.5 rounded-xl text-xs uppercase font-mono tracking-wider text-white hover:text-[#1DA1F2] font-semibold transition-all duration-350 shadow-md transform hover:-translate-y-0.5 select-none"
+              id="share-btn-twitter"
+            >
+              <Twitter className="w-4 h-4 shrink-0 transition-transform duration-200" />
+              <span>Twitter / X</span>
+            </a>
+
+            {/* Share to Facebook */}
+            <a 
+              href={facebookShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto flex items-center justify-center space-x-2.5 bg-white/5 hover:bg-[#1877F2]/10 border border-white/10 hover:border-[#1877F2]/30 px-6 py-3.5 rounded-xl text-xs uppercase font-mono tracking-wider text-white hover:text-[#1877F2] font-semibold transition-all duration-350 shadow-md transform hover:-translate-y-0.5 select-none"
+              id="share-btn-facebook"
+            >
+              <Facebook className="w-4 h-4 shrink-0 transition-transform duration-200" />
+              <span>Facebook</span>
+            </a>
+
+            {/* Share to LinkedIn */}
+            <a 
+              href={linkedinShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto flex items-center justify-center space-x-2.5 bg-white/5 hover:bg-[#0077B5]/10 border border-white/10 hover:border-[#0077B5]/30 px-6 py-3.5 rounded-xl text-xs uppercase font-mono tracking-wider text-white hover:text-[#0077B5] font-semibold transition-all duration-350 shadow-md transform hover:-translate-y-0.5 select-none"
+              id="share-btn-linkedin"
+            >
+              <Linkedin className="w-4 h-4 shrink-0 transition-transform duration-200" />
+              <span>LinkedIn</span>
+            </a>
+
+          </div>
+
+          {/* Quick Copy Link Bar */}
+          <div className="max-w-md mx-auto p-1.5 bg-white/4 border border-white/8 rounded-2xl flex items-center shadow-inner relative justify-between gap-2 overflow-hidden">
+            <span className="text-xs font-mono text-white/55 px-4 truncate select-all">
+              {shareUrl}
+            </span>
+            <button 
+              onClick={handleCopyLink}
+              className="bg-white text-black hover:bg-gray-100 flex items-center gap-2 px-5 py-3 rounded-xl font-mono text-xs font-bold uppercase tracking-wider relative transition-all shadow-inner border border-white/10 whitespace-nowrap overflow-hidden shrink-0 select-none cursor-pointer"
+              id="share-btn-copy"
+            >
+              <AnimatePresence mode="wait">
+                {isCopied ? (
+                  <motion.div 
+                    key="copied"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -20, opacity: 0 }}
+                    className="flex items-center gap-1.5 text-emerald-600"
+                  >
+                    <Check className="w-4.5 h-4.5 stroke-[2.5]" />
+                    <span>{t.shareCopied}</span>
+                  </motion.div>
+                ) : (
+                  <motion.div 
+                    key="copy"
+                    initial={{ y: -20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 20, opacity: 0 }}
+                    className="flex items-center gap-1.5"
+                  >
+                    <Copy className="w-3.5 h-3.5 stroke-[2]" />
+                    <span>{t.shareCopyBtn}</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Footer copyright, billing context and legal attribution */}
       <footer className="border-t border-white/10 bg-[#030303] py-16 text-xs text-white/40 relative z-10 select-none">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-16 space-y-8">
@@ -1459,7 +1786,7 @@ export default function ReservationPage() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="fixed bottom-0 left-0 right-0 z-30 bg-[#050505]/95 backdrop-blur-md border-t border-white/10 px-6 py-4 shadow-2xl flex items-center justify-between max-w-[1400px] mx-auto rounded-t-2xl"
+            className="fixed bottom-0 left-0 right-0 z-30 bg-navy-bg/95 backdrop-blur-md border-t border-white/10 px-6 py-4 shadow-2xl flex items-center justify-between max-w-[1400px] mx-auto rounded-t-2xl"
             id="sticky-mobile-drawer"
           >
             <div className="hidden sm:flex flex-col">
@@ -1497,7 +1824,7 @@ export default function ReservationPage() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-[#0c0c0c] rounded-3xl w-full max-w-lg shadow-2xl relative overflow-hidden flex flex-col max-h-[90vh] border border-white/12 text-white"
+              className="bg-navy-modal rounded-3xl w-full max-w-lg shadow-2xl relative overflow-hidden flex flex-col max-h-[90vh] border border-white/12 text-white"
               id="checkout-modal-panel"
             >
               
@@ -1567,7 +1894,7 @@ export default function ReservationPage() {
                             value={emailInput}
                             onChange={(e) => setEmailInput(e.target.value)}
                             placeholder={t.modalEmailPlaceholder}
-                            className="w-full bg-white/5 border border-white/10 font-mono text-sm px-4 py-2.5 rounded-xl focus:bg-[#050505] focus:outline-none focus:ring-1 focus:ring-[#00D4FF] focus:border-[#00D4FF] transition-all duration-200 text-white placeholder:text-white/30"
+                            className="w-full bg-white/5 border border-white/10 font-mono text-sm px-4 py-2.5 rounded-xl focus:bg-navy-bg focus:outline-none focus:ring-1 focus:ring-[#00D4FF] focus:border-[#00D4FF] transition-all duration-200 text-white placeholder:text-white/30"
                             id="checkout-email-input"
                           />
                         </div>
@@ -1590,7 +1917,7 @@ export default function ReservationPage() {
                               value={cardNumber}
                               onChange={(e) => formatCardNumber(e.target.value)}
                               placeholder="4242  4242  4242  4242"
-                              className="w-full bg-white/5 border border-white/10 font-mono text-sm px-4 py-2.5 rounded-xl focus:bg-[#050505] focus:outline-none focus:ring-1 focus:ring-[#00D4FF] focus:border-[#00D4FF] transition-all placeholder:text-white/30 text-white"
+                              className="w-full bg-white/5 border border-white/10 font-mono text-sm px-4 py-2.5 rounded-xl focus:bg-navy-bg focus:outline-none focus:ring-1 focus:ring-[#00D4FF] focus:border-[#00D4FF] transition-all placeholder:text-white/30 text-white"
                               id="checkout-card-num"
                             />
                           </div>
@@ -1604,7 +1931,7 @@ export default function ReservationPage() {
                                 value={cardExpiry}
                                 onChange={(e) => formatExpiry(e.target.value)}
                                 placeholder="MM / YY"
-                                className="w-full bg-white/5 border border-white/10 font-mono text-sm px-4 py-2.5 rounded-xl focus:bg-[#050505] focus:outline-none focus:ring-1 focus:ring-[#00D4FF] focus:border-[#00D4FF] transition-all text-center text-white placeholder:text-white/30"
+                                className="w-full bg-white/5 border border-white/10 font-mono text-sm px-4 py-2.5 rounded-xl focus:bg-navy-bg focus:outline-none focus:ring-1 focus:ring-[#00D4FF] focus:border-[#00D4FF] transition-all text-center text-white placeholder:text-white/30"
                                 id="checkout-card-expiry"
                               />
                             </div>
@@ -1616,7 +1943,7 @@ export default function ReservationPage() {
                                 value={cardCVC}
                                 onChange={(e) => setCardCVC(e.target.value.replace(/\D/g, ""))}
                                 placeholder="123"
-                                className="w-full bg-white/5 border border-white/10 font-mono text-sm px-4 py-2.5 rounded-xl focus:bg-[#050505] focus:outline-none focus:ring-1 focus:ring-[#00D4FF] focus:border-[#00D4FF] transition-all text-center text-white placeholder:text-white/30"
+                                className="w-full bg-white/5 border border-white/10 font-mono text-sm px-4 py-2.5 rounded-xl focus:bg-navy-bg focus:outline-none focus:ring-1 focus:ring-[#00D4FF] focus:border-[#00D4FF] transition-all text-center text-white placeholder:text-white/30"
                                 id="checkout-card-cvc"
                               />
                             </div>
@@ -1632,7 +1959,7 @@ export default function ReservationPage() {
                             value={cardName}
                             onChange={(e) => setCardName(e.target.value)}
                             placeholder={t.modalNamePlaceholder}
-                            className="w-full bg-white/5 border border-white/10 text-sm px-4 py-2.5 rounded-xl focus:bg-[#050505] focus:outline-none focus:ring-1 focus:ring-[#00D4FF] focus:border-[#00D4FF] transition-all text-white placeholder:text-white/20"
+                            className="w-full bg-white/5 border border-white/10 text-sm px-4 py-2.5 rounded-xl focus:bg-navy-bg focus:outline-none focus:ring-1 focus:ring-[#00D4FF] focus:border-[#00D4FF] transition-all text-white placeholder:text-white/20"
                             id="checkout-name-input"
                           />
                         </div>
@@ -1646,7 +1973,7 @@ export default function ReservationPage() {
                             value={postalCode}
                             onChange={(e) => setPostalCode(e.target.value.toUpperCase())}
                             placeholder="M5V 2T6"
-                            className="w-full bg-white/5 border border-white/10 font-mono text-sm px-4 py-2.5 rounded-xl focus:bg-[#050505] focus:outline-none focus:ring-1 focus:ring-[#00D4FF] focus:border-[#00D4FF] transition-all text-white placeholder:text-white/20"
+                            className="w-full bg-white/5 border border-white/10 font-mono text-sm px-4 py-2.5 rounded-xl focus:bg-navy-bg focus:outline-none focus:ring-1 focus:ring-[#00D4FF] focus:border-[#00D4FF] transition-all text-white placeholder:text-white/20"
                             id="checkout-postal-input"
                           />
                         </div>
@@ -1718,6 +2045,63 @@ export default function ReservationPage() {
                           <span className="text-white/40">{lang === "en" ? "COMPLIANCE KEY" : "CONFORMITÉ CA"} :</span>
                           <strong className="text-white">PIPEDA-SHA256</strong>
                         </div>
+                      </div>
+
+                      {/* High-Conversion Viral Social Sharing Block */}
+                      <div className="bg-white/5 border border-white/5 p-4 rounded-xl max-w-[380px] mx-auto space-y-3 text-left" id="success-share-callout">
+                        <div className="flex items-center space-x-2">
+                          <Share2 className="w-3.5 h-3.5 text-[#00D4FF]" />
+                          <span className="text-xs font-display font-medium text-white/95">{t.successShareCallout}</span>
+                        </div>
+                        
+                        <div className="flex gap-2">
+                          <a 
+                            href={twitterShareUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="flex-1 flex items-center justify-center space-x-1 bg-white/5 hover:bg-[#1DA1F2]/20 border border-white/8 hover:border-[#1DA1F2]/30 py-2.5 rounded-lg text-[10px] uppercase font-mono tracking-wider font-bold text-white hover:text-[#1DA1F2] transition-colors"
+                          >
+                            <Twitter className="w-3.5 h-3.5" />
+                            <span>Twitter</span>
+                          </a>
+
+                          <a 
+                            href={facebookShareUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="flex-1 flex items-center justify-center space-x-1 bg-white/5 hover:bg-[#1877F2]/20 border border-white/8 hover:border-[#1877F2]/30 py-2.5 rounded-lg text-[10px] uppercase font-mono tracking-wider font-bold text-white hover:text-[#1877F2] transition-colors"
+                          >
+                            <Facebook className="w-3.5 h-3.5" />
+                            <span>Facebook</span>
+                          </a>
+
+                          <a 
+                            href={linkedinShareUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="flex-1 flex items-center justify-center space-x-1 bg-white/5 hover:bg-[#0077B5]/20 border border-white/8 hover:border-[#0077B5]/30 py-2.5 rounded-lg text-[10px] uppercase font-mono tracking-wider font-bold text-white hover:text-[#0077B5] transition-colors"
+                          >
+                            <Linkedin className="w-3.5 h-3.5" />
+                            <span>LinkedIn</span>
+                          </a>
+                        </div>
+
+                        <button 
+                          onClick={handleCopyLink} 
+                          className="w-full flex items-center justify-center space-x-1.5 bg-white/5 hover:bg-white/10 border border-white/8 py-2 rounded-lg text-[10px] uppercase font-mono tracking-wider font-bold text-white transition-all cursor-pointer"
+                        >
+                          {isCopied ? (
+                            <>
+                              <Check className="w-3.5 h-3.5 text-emerald-400" />
+                              <span className="text-emerald-400">{t.shareCopied}</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-3 h-3 text-white/70" />
+                              <span>{t.shareCopyBtn}</span>
+                            </>
+                          )}
+                        </button>
                       </div>
 
                       <div className="pt-4 text-center space-y-4">
