@@ -654,7 +654,7 @@ export default function ReservationPage() {
     <div className="min-h-screen bg-navy-bg text-white font-sans antialiased selection:bg-navy-brand selection:text-white overflow-x-hidden" id="funnel-container">
       
       {/* Floating Premium Social Sharing Bar - Desktop only (hidden on mobile/tablet) */}
-      <div className="fixed left-6 top-1/2 -translate-y-1/2 z-30 hidden xl:flex flex-col items-center space-y-4 bg-navy-card/85 backdrop-blur-md border border-white/10 px-3 py-6 rounded-2xl shadow-xl hover:border-white/20 hover:shadow-[#00D4FF]/10 hover:shadow-lg transition-all duration-300 select-none" id="floating-share-dock">
+      <aside className="fixed left-6 top-1/2 -translate-y-1/2 z-30 hidden xl:flex flex-col items-center space-y-4 bg-navy-card/85 backdrop-blur-md border border-white/10 px-3 py-6 rounded-2xl shadow-xl hover:border-white/20 hover:shadow-[#00D4FF]/10 hover:shadow-lg transition-all duration-300 select-none" id="floating-share-dock" aria-label="Social sharing dock">
         <div className="w-8 h-8 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-white/50 mb-1" title="Share and Invite">
           <Share2 className="w-4 h-4" />
         </div>
@@ -709,11 +709,11 @@ export default function ReservationPage() {
             )}
           </AnimatePresence>
         </button>
-      </div>
+      </aside>
 
       {/* 4.1 Global Navigation Header */}
-      <nav className="sticky top-0 z-40 w-full border-b border-white/10 bg-navy-bg/85 backdrop-blur-md transition-colors duration-200">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-16 h-20 flex items-center justify-between">
+      <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-navy-bg/85 backdrop-blur-md transition-colors duration-200">
+        <nav className="max-w-[1400px] mx-auto px-6 lg:px-16 h-20 flex items-center justify-between" aria-label="Main Navigation">
           
           {/* Typographic branding & Logo integration */}
           <div className="flex items-center space-x-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
@@ -776,7 +776,7 @@ export default function ReservationPage() {
             </button>
           </div>
 
-        </div>
+        </nav>
 
         {/* Mobile Dropdown Options */}
         <AnimatePresence>
@@ -802,9 +802,10 @@ export default function ReservationPage() {
             </motion.div>
           )}
         </AnimatePresence>
-      </nav>
+      </header>
 
-      {/* 4.2 Split-Screen Hero Section */}
+      <main id="main-content">
+        {/* 4.2 Split-Screen Hero Section */}
       <section ref={heroRef} className="relative overflow-hidden py-16 lg:py-28 max-w-[1400px] mx-auto px-6 lg:px-16" id="features">
         {/* Background Concentric Geometric Fine Circles */}
         <div className="absolute w-[500px] h-[500px] border border-white/5 rounded-full pointer-events-none -right-40 top-1/4 animate-pulse duration-10000"></div>
@@ -931,7 +932,7 @@ export default function ReservationPage() {
                   <ShieldCheck className="w-5 h-5 stroke-[2]" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-white">{t.trustRefundTitle}</h4>
+                  <p className="text-sm font-semibold text-white">{t.trustRefundTitle}</p>
                   <p className="text-xs text-white/70 leading-relaxed">{t.trustRefundDesc}</p>
                 </div>
               </div>
@@ -941,7 +942,7 @@ export default function ReservationPage() {
                   <MapPin className="w-5 h-5 stroke-[2]" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-white">{t.trustDataTitle}</h4>
+                  <p className="text-sm font-semibold text-white">{t.trustDataTitle}</p>
                   <p className="text-xs text-white/70 leading-relaxed">{t.trustDataDesc}</p>
                 </div>
               </div>
@@ -995,7 +996,7 @@ export default function ReservationPage() {
                 <span className="flex h-1.5 w-1.5 rounded-full bg-[#00D4FF] animate-pulse-cyan"></span>
                 <span>{t.scarcityLiveBadge}</span>
               </div>
-              <h3 className="text-xl font-display font-black text-white">{t.scarcityTitle}</h3>
+              <h2 className="text-xl font-display font-black text-white">{t.scarcityTitle}</h2>
               <p className="text-xs font-semibold text-white/70 font-mono tracking-wide mt-1">
                 {lang === "en" ? `${spotsRemaining} of 250 spots remaining in Batch 01` : `${spotsRemaining} places restantes sur 250 dans le Lot 01`}
               </p>
@@ -1046,9 +1047,9 @@ export default function ReservationPage() {
             
             {/* Visual Separation Card explaining sandwich generation problems */}
             <div className="bg-white/2 rounded-2xl p-6 border border-white/10 space-y-4" id="pain-points-card">
-              <h4 className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-white/90">
+              <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-white/90">
                 {t.empathyObstacleTitle}
-              </h4>
+              </p>
               <ul className="space-y-3.5">
                 <li className="flex items-start text-xs text-white/60 leading-relaxed">
                   <span className="min-w-5 h-5 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center font-bold font-mono text-[10px] mr-3 mt-0.5 border border-red-500/20">!</span>
@@ -1831,6 +1832,7 @@ export default function ReservationPage() {
           </div>
         </div>
       </section>
+      </main>
 
       {/* Footer copyright, billing context and legal attribution */}
       <footer className="border-t border-white/10 bg-[#030303] py-16 text-xs text-white/70 relative z-10 select-none">
@@ -1866,7 +1868,8 @@ export default function ReservationPage() {
       {/* 5. Sticky Mobile & Floating Bottom CTA Drawer (appears when scrolling down past Hero) */}
       <AnimatePresence>
         {isStickyCtaVisible && (
-          <motion.div 
+          <motion.aside 
+            aria-label="Sticky booking bar"
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
@@ -1896,14 +1899,20 @@ export default function ReservationPage() {
                 <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
               </button>
             </div>
-          </motion.div>
+          </motion.aside>
         )}
       </AnimatePresence>
 
       {/* 4.5 Pre-Order Checkout Simulation Drawer Module */}
       <AnimatePresence>
         {isCheckoutOpen && selectedTier && (
-          <div className="fixed inset-0 z-50 overflow-hidden flex items-center justify-center bg-black/80 backdrop-blur-md p-4 sm:p-6" id="checkout-modal-backdrop">
+          <div 
+            className="fixed inset-0 z-50 overflow-hidden flex items-center justify-center bg-black/80 backdrop-blur-md p-4 sm:p-6" 
+            id="checkout-modal-backdrop"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="checkout-dialog-title"
+          >
             
             <motion.div 
               initial={{ scale: 0.95, opacity: 0 }}
@@ -1920,7 +1929,7 @@ export default function ReservationPage() {
                     <CreditCard className="w-4 h-4 text-black shrink-0" />
                   </div>
                   <div>
-                    <h3 className="text-base font-display font-black text-white leading-none mb-0.5">{t.modalCheckoutTitle}</h3>
+                    <h2 className="text-base font-display font-black text-white leading-none mb-0.5" id="checkout-dialog-title">{t.modalCheckoutTitle}</h2>
                     <p className="text-[10px] font-mono text-[#00D4FF] tracking-widest uppercase leading-none mt-1">{t.modalCheckoutSubtitle}</p>
                   </div>
                 </div>
@@ -2105,7 +2114,7 @@ export default function ReservationPage() {
                       </div>
 
                       <div className="space-y-2">
-                        <h4 className="text-xl font-display font-black text-white">{t.successTitle}</h4>
+                        <h2 className="text-xl font-display font-black text-white" id="checkout-success-title">{t.successTitle}</h2>
                         <p className="text-xs text-white/60 leading-relaxed max-w-[340px] mx-auto">
                           {t.successSubtitle}
                         </p>
