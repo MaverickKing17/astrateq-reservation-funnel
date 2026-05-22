@@ -678,10 +678,10 @@ export default function ReservationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-navy-bg text-white font-sans antialiased selection:bg-navy-brand selection:text-white overflow-x-hidden" id="funnel-container">
+    <div className="min-h-screen bg-[#FAF9F6] text-slate-800 font-sans antialiased selection:bg-[#005A9E] selection:text-white overflow-x-hidden" id="funnel-container">
       
       {/* 4.1 Global Navigation Header */}
-      <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-navy-bg/85 backdrop-blur-md transition-colors duration-200">
+      <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-md transition-all duration-200">
         <nav className="max-w-[1400px] mx-auto px-6 lg:px-16 h-20 flex items-center justify-between" aria-label="Main Navigation">
           
           {/* Typographic branding & Logo integration */}
@@ -689,38 +689,38 @@ export default function ReservationPage() {
             <img 
               src="https://i.ibb.co/Lz56Kf7m/Gemini-Generated-Image-pta8i9pta8i9pta8.png" 
               alt="Astrateq Gadgets Logo" 
-              className="h-10 w-10 object-contain rounded-md brightness-0 invert"
+              className="h-10 w-10 object-contain rounded-md"
               referrerPolicy="no-referrer"
               id="top-logo-img"
             />
             <div className="flex flex-col">
-              <span className="text-sm font-display font-black tracking-tight text-white leading-none">Astrateq Gadgets</span>
-              <span className="text-[9px] font-mono leading-none tracking-[0.25em] text-[#00D4FF] mt-1">ASTRA-AI</span>
+              <span className="text-sm font-sans font-extrabold tracking-tight text-slate-900 leading-none">Astrateq Gadgets</span>
+              <span className="text-[10px] font-mono leading-none tracking-[0.2em] text-[#005A9E] mt-1 font-bold">ASTRA-AI</span>
             </div>
           </div>
 
           {/* Desktop Navigation Menu Links */}
-          <div className="hidden md:flex items-center space-x-10 text-[11px] uppercase tracking-[0.2em] font-semibold">
-            <a href="#features" className="text-white/60 hover:text-white transition-colors">{t.navFeatures}</a>
-            <a href="#technology" className="text-white/60 hover:text-white transition-colors">{t.navTech}</a>
-            <a href="#faq" className="text-white/60 hover:text-white transition-colors">{t.navFaq}</a>
-            <a href="#pricing" className="text-white/60 hover:text-white transition-colors">{t.navSupport}</a>
+          <div className="hidden md:flex items-center space-x-10 text-xs uppercase tracking-[0.15em] font-semibold">
+            <a href="#features" className="text-slate-600 hover:text-slate-900 transition-colors">{t.navFeatures}</a>
+            <a href="#technology" className="text-slate-600 hover:text-slate-900 transition-colors">{t.navTech}</a>
+            <a href="#faq" className="text-slate-600 hover:text-slate-900 transition-colors">{t.navFaq}</a>
+            <a href="#pricing" className="text-slate-600 hover:text-slate-900 transition-colors">{t.navSupport}</a>
           </div>
 
           {/* Right Header Options - EN/FR language toggle and Reservation Trigger button */}
           <div className="hidden md:flex items-center space-x-6">
             <button 
               onClick={() => setLang(lang === "en" ? "fr" : "en")}
-              className="flex items-center space-x-2 text-xs font-mono tracking-wider text-white/70 hover:text-white focus:outline-none transition-colors border border-white/10 px-3.5 py-1.5 rounded-full bg-white/5 cursor-pointer"
+              className="flex items-center space-x-2 text-xs font-mono tracking-wider text-slate-700 hover:text-slate-900 focus:outline-none transition-colors border border-slate-200 px-3.5 py-1.5 rounded-full bg-white cursor-pointer hover:bg-slate-50"
               aria-label="Toggle language"
               id="desktop-lang-tgl"
             >
-              <Globe className="w-3.5 h-3.5 stroke-[#00D4FF]" />
-              <span>{lang.toUpperCase()}</span>
+              <Globe className="w-3.5 h-3.5 stroke-[#005A9E]" />
+              <span className="font-bold">{lang.toUpperCase()}</span>
             </button>
             <button 
               onClick={() => scrollToSection(pricingSectionRef)}
-              className="bg-[#00D4FF] text-[#050505] hover:bg-cyan-400 font-extrabold text-[11px] tracking-widest uppercase py-2.5 px-6 rounded-full transition-all duration-300 shadow-lg shadow-cyan-950/20 cursor-pointer"
+              className="bg-[#005A9E] text-white hover:bg-[#106ebe] font-bold text-xs tracking-wider uppercase py-2.5 px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer"
               id="nav-my-reservation-btn"
             >
               {t.navMyReservation}
@@ -728,20 +728,20 @@ export default function ReservationPage() {
           </div>
 
           {/* Mobile Hamburguer Toggle */}
-          <div className="flex md:hidden items-center space-x-2 bg-white/5 border border-white/10 p-1.5 rounded-full">
+          <div className="flex md:hidden items-center space-x-2 bg-slate-100 border border-slate-200 p-1.5 rounded-full">
             <button 
               onClick={() => setLang(lang === "en" ? "fr" : "en")}
-              className="text-xs font-mono px-2.5 py-1 text-white/80 hover:text-white flex items-center space-x-1 cursor-pointer"
+              className="text-xs font-mono px-2.5 py-1 text-slate-800 hover:text-slate-950 flex items-center space-x-1 cursor-pointer"
             >
-              <Globe className="w-3.5 h-3.5 stroke-[#00D4FF]" />
-              <span>{lang.toUpperCase()}</span>
+              <Globe className="w-3.5 h-3.5 stroke-[#005A9E]" />
+              <span className="font-bold">{lang.toUpperCase()}</span>
             </button>
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-white hover:text-white/80 p-1 focus:outline-none cursor-pointer"
+              className="text-slate-800 hover:text-slate-950 p-1 focus:outline-none cursor-pointer"
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
 
@@ -754,16 +754,16 @@ export default function ReservationPage() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden border-t border-white/10 bg-navy-bg"
+              className="md:hidden border-t border-slate-200 bg-white"
             >
               <div className="px-6 py-8 space-y-5 flex flex-col">
-                <a href="#features" onClick={() => setMobileMenuOpen(false)} className="text-white/70 font-medium hover:text-white transition-colors">{t.navFeatures}</a>
-                <a href="#technology" onClick={() => setMobileMenuOpen(false)} className="text-white/70 font-medium hover:text-white transition-colors">{t.navTech}</a>
-                <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="text-white/70 font-medium hover:text-white transition-colors">{t.navFaq}</a>
-                <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="text-white/70 font-medium hover:text-white transition-colors">{t.navSupport}</a>
+                <a href="#features" onClick={() => setMobileMenuOpen(false)} className="text-slate-700 font-semibold hover:text-slate-950 transition-colors uppercase tracking-wider text-xs">{t.navFeatures}</a>
+                <a href="#technology" onClick={() => setMobileMenuOpen(false)} className="text-slate-700 font-semibold hover:text-slate-950 transition-colors uppercase tracking-wider text-xs">{t.navTech}</a>
+                <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="text-slate-700 font-semibold hover:text-slate-950 transition-colors uppercase tracking-wider text-xs">{t.navFaq}</a>
+                <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="text-slate-700 font-semibold hover:text-slate-950 transition-colors uppercase tracking-wider text-xs">{t.navSupport}</a>
                 <button 
                   onClick={() => { setMobileMenuOpen(false); scrollToSection(pricingSectionRef); }}
-                  className="bg-[#00D4FF] text-black hover:bg-cyan-400 font-bold text-center text-sm py-3 px-6 rounded-xl transition-all duration-300 w-full self-center cursor-pointer"
+                  className="bg-[#005A9E] text-white hover:bg-[#106ebe] font-bold text-center text-xs py-3.5 px-6 rounded-full transition-all duration-300 w-full self-center cursor-pointer shadow-md"
                 >
                   {t.navMyReservation}
                 </button>
@@ -775,98 +775,125 @@ export default function ReservationPage() {
 
       <main id="main-content">
         {/* 4.2 Split-Screen Hero Section */}
-      <section ref={heroRef} className="relative overflow-hidden py-16 lg:py-28 max-w-[1400px] mx-auto px-6 lg:px-16" id="features">
-        {/* Background Concentric Geometric Fine Circles */}
-        <div className="absolute w-[500px] h-[500px] border border-white/5 rounded-full pointer-events-none -right-40 top-1/4 animate-pulse duration-10000"></div>
-        <div className="absolute w-[350px] h-[350px] border border-white/10 rounded-full pointer-events-none -right-20 top-[35%]"></div>
-        <div className="absolute w-[200px] h-[200px] border border-white/5 rounded-full pointer-events-none -right-2 top-[45%]"></div>
-
+      <section ref={heroRef} className="relative overflow-hidden py-20 lg:py-32 max-w-[1400px] mx-auto px-6 lg:px-16" id="features">
+        {/* Subtle, elegant light editorial geometric background lines */}
+        <div className="absolute w-[600px] h-[600px] border border-slate-200/50 rounded-full pointer-events-none -right-40 top-1/4 animate-pulse duration-10000"></div>
+        <div className="absolute w-[400px] h-[400px] border border-slate-200/40 rounded-full pointer-events-none -right-20 top-[35%]"></div>
+        
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
           
-          {/* Left Column Content Block */}
+          {/* Left Column Content Block (Decision Block) */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-7 space-y-6"
+            className="lg:col-span-7 space-y-8 text-slate-800"
           >
-            <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full py-1 text-xs text-white/70 tracking-[0.2em] font-mono uppercase px-3.5" id="hero-mini-tag">
-              <span className="flex h-2 w-2 rounded-full bg-[#00D4FF] animate-pulse"></span>
-              <span>{t.heroSubtitle}</span>
-              <span className="text-white/30 font-sans font-medium border-l border-white/10 pl-2.5 ml-1.5 normal-case tracking-normal">{t.brandTagline}</span>
+            {/* Scarcity / batch status badge */}
+            <div className="inline-flex flex-wrap items-center gap-2 bg-slate-100 border border-slate-200 rounded-full py-1.5 px-4 text-xs tracking-wider text-slate-700 uppercase" id="hero-mini-tag">
+              <span className="flex h-2 w-2 rounded-full bg-[#005A9E] animate-ping"></span>
+              <span className="font-extrabold text-[#005A9E]">{t.heroSubtitle}</span>
+              <span className="hidden sm:inline text-slate-400">|</span>
+              <span className="font-medium normal-case font-sans">{t.brandTagline}</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-display font-black tracking-tight text-white leading-[1.1]" id="hero-main-title">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display text-slate-900 leading-[1.125] font-semibold tracking-tight" id="hero-main-title">
               {t.heroHeadline}
             </h1>
 
-            <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-[620px]" id="hero-body-paragraph">
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-[620px]" id="hero-body-paragraph">
               {t.heroBody}
             </p>
 
-            {/* Premium pre-launch countdown container */}
-            <div className="py-2 inline-block" id="prelaunch-countdown-widget">
-              <p className="text-[10px] font-mono tracking-[0.25em] text-[#00D4FF] uppercase font-bold mb-3 flex items-center space-x-2">
-                <span className="inline-block w-1.5 h-1.5 bg-red-500 rounded-full animate-ping"></span>
-                <span>{t.countdownTitle}</span>
-              </p>
+            {/* Structured Answers to the Three Crucial Conversion Questions */}
+            <div className="bg-white border border-slate-200 p-6 rounded-2xl grid grid-cols-1 gap-4 shadow-sm" id="decision-block-questions">
+              <div className="flex items-start space-x-3 text-xs sm:text-sm">
+                <span className="flex h-5 w-5 rounded-full bg-slate-100 text-[#005A9E] font-bold font-mono items-center justify-center shrink-0 border border-slate-200">1</span>
+                <div>
+                  <strong className="font-semibold text-slate-950 font-sans">{lang === "en" ? "What is ASTRA-AI?" : "Qu'est-ce qu'Astra-AI ?"}</strong>
+                  <p className="text-slate-600 text-xs mt-0.5 leading-relaxed">{lang === "en" ? "A premium quiet safety hub combining intelligent road-scanning, driver wellness monitoring, and early motor diagnostics." : "Un boîtier connecté de sécurité calme associant double caméra de route et diagnostic préventif de panne de moteur."}</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-3 text-xs sm:text-sm border-t border-slate-100 pt-3">
+                <span className="flex h-5 w-5 rounded-full bg-slate-100 text-[#005A9E] font-bold font-mono items-center justify-center shrink-0 border border-slate-200">2</span>
+                <div>
+                  <strong className="font-semibold text-slate-950 font-sans">{lang === "en" ? "Who is this built for?" : "Pour qui est-ce conçu ?"}</strong>
+                  <p className="text-slate-600 text-xs mt-0.5 leading-relaxed">{lang === "en" ? "Canadian families / children aged 35–55 who want absolute driving protection and diagnostic confidence for their aging parents." : "Les familles et proches aidants de 35 à 55 ans cherchant la certitude de la protection routière de leurs parents âgés."}</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-3 text-xs sm:text-sm border-t border-slate-100 pt-3">
+                <span className="flex h-5 w-5 rounded-full bg-slate-100 text-[#005A9E] font-bold font-mono items-center justify-center shrink-0 border border-slate-200">3</span>
+                <div>
+                  <strong className="font-semibold text-slate-950 font-sans">{lang === "en" ? "Why should I trust it?" : "Pourquoi devrais-je faire confiance ?" }</strong>
+                  <p className="text-slate-600 text-xs mt-0.5 leading-relaxed">{lang === "en" ? "Standard Transport Canada regulatory alignment, PIPEDA compliant Canadian data residency hosting, and a 100% money-back refundable pre-order." : "Conformité complète LPRPDE, hébergement local des données au Canada, et dépôt 100 % garanti sans risques et remboursable."}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Premium Countdown / Offer widget */}
+            <div className="bg-slate-100/50 border border-slate-200/80 p-5 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4" id="prelaunch-countdown-widget-container">
+              <div>
+                <p className="text-xs font-mono font-extrabold tracking-wider text-slate-800 uppercase flex items-center space-x-2">
+                  <span className="inline-block w-2 h-2 bg-red-500 rounded-full animate-ping"></span>
+                  <span>{t.countdownTitle}</span>
+                </p>
+                <p className="text-xs text-slate-600 font-medium mt-1">{lang === "en" ? "Founder perks are secured only during pre-launch period." : "Avantages réservés spécifiquement durant la phase pilote."}</p>
+              </div>
               
-              <div className="flex items-center space-x-2.5 sm:space-x-3.5" role="timer" aria-label="Pre-launch Countdown Timer">
+              <div className="flex items-center space-x-2" role="timer" aria-label="Pre-launch Countdown Timer">
                 
                 {/* Days */}
                 <div className="flex flex-col items-center">
-                  <div className="bg-white/5 border border-white/10 w-16 h-14 sm:w-20 sm:h-16 rounded-xl flex items-center justify-center shadow-lg relative overflow-hidden backdrop-blur-sm group hover:border-[#00D4FF]/30 transition-colors">
-                    <div className="absolute inset-x-0 top-0 h-[1px] bg-white/20"></div>
-                    <span className="font-mono text-xl sm:text-2xl font-black text-white leading-none tracking-tight">
+                  <div className="bg-white border border-slate-200 w-12 h-11 rounded-lg flex items-center justify-center shadow-sm">
+                    <span className="font-mono text-sm font-black text-slate-900">
                       {String(timeRemaining.days).padStart(2, "0")}
                     </span>
                   </div>
-                  <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-white/40 mt-1.5 font-bold">
+                  <span className="text-[9px] font-mono uppercase tracking-widest text-slate-600 mt-1 font-bold">
                     {t.countdownDays}
                   </span>
                 </div>
 
-                <span className="text-white/20 font-display text-xl -mt-5 select-none">:</span>
+                <span className="text-slate-400 font-sans text-xs -mt-4">:</span>
 
                 {/* Hours */}
                 <div className="flex flex-col items-center">
-                  <div className="bg-white/5 border border-white/10 w-16 h-14 sm:w-20 sm:h-16 rounded-xl flex items-center justify-center shadow-lg relative overflow-hidden backdrop-blur-sm group hover:border-[#00D4FF]/30 transition-colors">
-                    <div className="absolute inset-x-0 top-0 h-[1px] bg-white/20"></div>
-                    <span className="font-mono text-xl sm:text-2xl font-black text-white leading-none tracking-tight">
+                  <div className="bg-white border border-slate-200 w-12 h-11 rounded-lg flex items-center justify-center shadow-sm">
+                    <span className="font-mono text-sm font-black text-slate-900">
                       {String(timeRemaining.hours).padStart(2, "0")}
                     </span>
                   </div>
-                  <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-white/40 mt-1.5 font-bold">
+                  <span className="text-[9px] font-mono uppercase tracking-widest text-slate-600 mt-1 font-bold">
                     {t.countdownHours}
                   </span>
                 </div>
 
-                <span className="text-white/20 font-display text-xl -mt-5 select-none">:</span>
+                <span className="text-slate-400 font-sans text-xs -mt-4">:</span>
 
                 {/* Minutes */}
                 <div className="flex flex-col items-center">
-                  <div className="bg-white/5 border border-white/10 w-16 h-14 sm:w-20 sm:h-16 rounded-xl flex items-center justify-center shadow-lg relative overflow-hidden backdrop-blur-sm group hover:border-[#00D4FF]/30 transition-colors">
-                    <div className="absolute inset-x-0 top-0 h-[1px] bg-white/20"></div>
-                    <span className="font-mono text-xl sm:text-2xl font-black text-white leading-none tracking-tight">
+                  <div className="bg-white border border-slate-200 w-12 h-11 rounded-lg flex items-center justify-center shadow-sm">
+                    <span className="font-mono text-sm font-black text-slate-900">
                       {String(timeRemaining.minutes).padStart(2, "0")}
                     </span>
                   </div>
-                  <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-white/40 mt-1.5 font-bold">
+                  <span className="text-[9px] font-mono uppercase tracking-widest text-slate-600 mt-1 font-bold">
                     {t.countdownMinutes}
                   </span>
                 </div>
 
-                <span className="text-white/20 font-display text-xl -mt-5 select-none">:</span>
+                <span className="text-slate-400 font-sans text-xs -mt-4">:</span>
 
                 {/* Seconds */}
                 <div className="flex flex-col items-center">
-                  <div className="bg-white/5 border border-white/10 w-16 h-14 sm:w-20 sm:h-16 rounded-xl flex items-center justify-center shadow-lg relative overflow-hidden backdrop-blur-sm group hover:border-[#00D4FF]/30 transition-colors">
-                    <div className="absolute inset-x-0 top-0 h-[1px] bg-white/20"></div>
-                    <span className="font-mono text-xl sm:text-2xl font-black text-[#00D4FF] leading-none tracking-tight">
+                  <div className="bg-white border border-[#005A9E]/40 w-12 h-11 rounded-lg flex items-center justify-center shadow-sm">
+                    <span className="font-mono text-sm font-black text-[#005A9E]">
                       {String(timeRemaining.seconds).padStart(2, "0")}
                     </span>
                   </div>
-                  <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-white/40 mt-1.5 font-bold">
+                  <span className="text-[9px] font-mono uppercase tracking-widest text-[#005A9E] mt-1 font-bold">
                     {t.countdownSeconds}
                   </span>
                 </div>
@@ -874,45 +901,49 @@ export default function ReservationPage() {
               </div>
             </div>
 
-            {/* CTA action container */}
-            <div className="pt-4 space-y-3">
+            {/* CTA Option with Trust Markers */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
               <motion.button 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => scrollToSection(pricingSectionRef)}
-                className="bg-[#00D4FF] text-[#050505] hover:bg-[#00e1ff] font-extrabold uppercase tracking-[0.2em] py-4.5 px-9 rounded-full shadow-lg shadow-cyan-950/30 transition-all duration-300 text-xs inline-flex items-center space-x-3 border-none cursor-pointer"
+                className="bg-[#005A9E] hover:bg-[#106ebe] text-white font-mono font-black uppercase tracking-[0.15em] py-4.5 px-8 rounded-full shadow-md hover:shadow-lg transition-all duration-300 text-xs inline-flex items-center justify-center space-x-3 border-none cursor-pointer"
                 id="hero-reserve-btn"
               >
                 <span>{t.heroCta}</span>
-                <ArrowRight className="w-4 h-4 ml-1 stroke-[2.5]" />
+                <ArrowRight className="w-4 h-4 ml-1 stroke-[3]" />
               </motion.button>
               
-              {/* Mandatory refund snippet explicitly near CTA */}
-              <p className="text-[11px] font-mono text-white/70 flex items-center space-x-1.5 pt-1.5 pl-1.5 select-none">
-                <Check className="w-3.5 h-3.5 text-[#00D4FF] stroke-[3]" />
-                <span>{t.heroRefundSnippet}</span>
-              </p>
+              <div className="space-y-1">
+                <p className="text-xs font-semibold text-slate-700 flex items-center space-x-1.5 pl-1 select-none">
+                  <Check className="w-4 h-4 text-emerald-600 stroke-[3.5]" />
+                  <span>{t.heroRefundSnippet}</span>
+                </p>
+                <p className="text-[11px] text-slate-600 font-medium pl-6 leading-none">
+                  {lang === "en" ? "100% Hosted in local Canadian borders" : "Hébergement des données souverain au Canada"}
+                </p>
+              </div>
             </div>
 
-            {/* Trust Row Section containing detailed trust badges */}
-            <div className="border-t border-white/10 pt-8 mt-4 grid grid-cols-1 sm:grid-cols-2 gap-6" id="hero-trust-badges">
+            {/* Highlighted Trust badging blocks */}
+            <div className="border-t border-slate-200/80 pt-6 mt-2 grid grid-cols-1 sm:grid-cols-2 gap-6" id="hero-trust-badges">
               <div className="flex items-start space-x-3.5">
-                <div className="p-2.5 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 mt-0.5">
+                <div className="p-2.5 bg-slate-100 rounded-xl text-[#005A9E] border border-slate-200 mt-0.5 shadow-sm">
                   <ShieldCheck className="w-5 h-5 stroke-[2]" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">{t.trustRefundTitle}</p>
-                  <p className="text-xs text-white/70 leading-relaxed">{t.trustRefundDesc}</p>
+                  <p className="text-sm font-bold text-slate-900">{t.trustRefundTitle}</p>
+                  <p className="text-xs text-slate-600 leading-relaxed font-sans">{t.trustRefundDesc}</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-3.5">
-                <div className="p-2.5 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 mt-0.5">
+                <div className="p-2.5 bg-slate-100 rounded-xl text-[#005A9E] border border-slate-200 mt-0.5 shadow-sm">
                   <MapPin className="w-5 h-5 stroke-[2]" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">{t.trustDataTitle}</p>
-                  <p className="text-xs text-white/70 leading-relaxed">{t.trustDataDesc}</p>
+                  <p className="text-sm font-bold text-slate-900">{t.trustDataTitle}</p>
+                  <p className="text-xs text-slate-600 leading-relaxed font-sans">{t.trustDataDesc}</p>
                 </div>
               </div>
             </div>
@@ -921,30 +952,31 @@ export default function ReservationPage() {
 
           {/* Right Column Imagery Block */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.96 }}
+            initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.15 }}
             className="lg:col-span-5 relative"
             id="hero-image-block"
           >
-            {/* Embedded circular target elements highlighting geometric safety focus */}
-            <div className="absolute -inset-8 border border-white/5 rounded-full pointer-events-none"></div>
-            <div className="absolute -inset-4 border border-white/10 rounded-full pointer-events-none"></div>
+            {/* Elegant visual shadow outline */}
+            <div className="absolute -inset-4 border border-slate-200/40 rounded-3xl pointer-events-none"></div>
 
-            <div className="relative rounded-[24px] overflow-hidden shadow-2xl border border-white/10 bg-white/5 aspect-video lg:aspect-[4/3] group">
-              <img 
-                src={canadianSnowDrive} 
-                alt="Safe Vehicle Driving in Snowy Canadian Road" 
-                className="w-full h-full object-cover select-none transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                referrerPolicy="no-referrer"
-                id="hero-lifestyle-img"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-bg/60 via-transparent to-transparent"></div>
+            <div className="relative rounded-[24px] overflow-hidden shadow-lg border border-slate-200 bg-white aspect-video lg:aspect-[4/3] group p-1.5">
+              <div className="w-full h-full rounded-[18px] overflow-hidden relative">
+                <img 
+                  src={canadianSnowDrive} 
+                  alt="Safe Vehicle Driving in Snowy Canadian Road" 
+                  className="w-full h-full object-cover select-none transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                  referrerPolicy="no-referrer"
+                  id="hero-lifestyle-img"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent"></div>
+              </div>
               
-              {/* Overlapping interactive maple leaf flag decorative accent to represent Canada */}
-              <div className="absolute top-4 right-4 bg-navy-bg/80 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-lg flex items-center space-x-2 border border-white/10 select-none">
-                <span className="text-xs text-red-500 font-bold font-serif">🇨🇦</span>
-                <span className="text-[9px] tracking-[0.2em] font-mono font-bold text-white">CA EDITION</span>
+              {/* Overlapping premium Maple Leaf localized sticker */}
+              <div className="absolute top-6 right-6 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-md flex items-center space-x-2 border border-slate-200 select-none">
+                <span className="text-sm font-bold">🇨🇦</span>
+                <span className="text-[10px] tracking-wider font-mono font-black text-slate-900">CA SECURE NETWORK</span>
               </div>
             </div>
           </motion.div>
@@ -953,35 +985,35 @@ export default function ReservationPage() {
       </section>
 
       {/* 4.3 Real-Time Scarcity & Social Proof Banner */}
-      <section className="bg-white/2 border-y border-white/10 py-10" id="scarcity-block">
+      <section className="bg-slate-50 border-y border-slate-200/70 py-10" id="scarcity-block">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-16">
-          <div className="bg-navy-card rounded-2xl p-6 lg:p-8 border border-white/10 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+          <div className="bg-white rounded-2xl p-6 lg:p-8 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
             
-            {/* Visual ambient accent ring */}
-            <div className="absolute top-0 right-0 transform translate-x-20 -translate-y-20 w-80 h-80 rounded-full bg-[#00D4FF]/5 blur-3xl pointer-events-none"></div>
+            {/* Ambient visual background glow ring */}
+            <div className="absolute top-0 right-0 transform translate-x-32 -translate-y-32 w-80 h-80 rounded-full bg-sky-500/5 blur-3xl pointer-events-none"></div>
             
             <div className="space-y-2 relative z-10">
-              <div className="inline-flex items-center space-x-2 bg-[#00D4FF]/10 border border-[#00D4FF]/30 text-[#00D4FF] py-1 px-3 rounded-full text-[9px] font-mono tracking-[0.2em] leading-none font-bold">
-                <span className="flex h-1.5 w-1.5 rounded-full bg-[#00D4FF] animate-pulse-cyan"></span>
+              <div className="inline-flex items-center space-x-2 bg-sky-50 border border-sky-100 text-[#005A9E] py-1 px-3 rounded-full text-[10px] font-mono tracking-wider font-extrabold">
+                <span className="flex h-2 w-2 rounded-full bg-[#005A9E] animate-ping"></span>
                 <span>{t.scarcityLiveBadge}</span>
               </div>
-              <h2 className="text-xl font-display font-black text-white">{t.scarcityTitle}</h2>
-              <p className="text-xs font-semibold text-white/70 font-mono tracking-wide mt-1">
+              <h2 className="text-xl font-display font-bold text-slate-900 leading-tight">{t.scarcityTitle}</h2>
+              <p className="text-xs font-semibold text-slate-600 font-mono tracking-wide mt-1">
                 {lang === "en" ? `${spotsRemaining} of 250 spots remaining in Batch 01` : `${spotsRemaining} places restantes sur 250 dans le Lot 01`}
               </p>
             </div>
 
             {/* Progress indicator representing active scarcity levels */}
             <div className="flex-1 max-w-xl self-center w-full relative z-10" id="progress-bar-container">
-              <div className="w-full bg-white/5 rounded-full h-3 overflow-hidden p-0.5 border border-white/10">
+              <div className="w-full bg-slate-100 rounded-full h-3.5 overflow-hidden p-0.5 border border-slate-200">
                 <motion.div 
-                  className="bg-gradient-to-r from-cyan-400 to-[#00D4FF] h-full rounded-full"
+                  className="bg-[#005A9E] h-full rounded-full"
                   initial={{ width: "0%" }}
                   animate={{ width: `${(spotsRemaining / 250) * 100}%` }}
                   transition={{ duration: 1.2, ease: "easeOut" }}
                 ></motion.div>
               </div>
-              <div className="flex justify-between items-center text-[10px] font-mono mt-2 text-white/50 tracking-wider">
+              <div className="flex justify-between items-center text-[10px] font-mono mt-2 text-slate-650 tracking-wider font-bold">
                 <span>96% {lang === "en" ? "RESERVED" : "RÉSERVÉ"}</span>
                 <span>{250 - spotsRemaining} {lang === "en" ? "ACTUAL RESERVATIONS" : "INSCRIPTIONS COMPTABILISÉES"}</span>
               </div>
@@ -989,11 +1021,11 @@ export default function ReservationPage() {
 
             <button 
               onClick={() => scrollToSection(pricingSectionRef)}
-              className="bg-white/5 hover:bg-white/10 text-white text-[11px] font-semibold px-5 py-3 rounded-xl transition-all duration-300 self-start md:self-center shrink-0 border border-white/10 uppercase tracking-[0.25em] font-mono flex items-center space-x-2 cursor-pointer"
+              className="bg-slate-50 hover:bg-slate-100 text-slate-800 text-[10px] font-bold px-5 py-3 rounded-full transition-all duration-300 self-start md:self-center shrink-0 border border-slate-200 uppercase tracking-widest font-mono flex items-center space-x-2 cursor-pointer"
               id="scarcity-jump-btn"
             >
               <span>{lang === "en" ? "Jump to pricing" : "Accéder aux prix"}</span>
-              <ChevronRight className="w-3.5 h-3.5" />
+              <ChevronRight className="w-4 h-4 text-[#005A9E] stroke-[3]" />
             </button>
 
           </div>
@@ -1001,56 +1033,58 @@ export default function ReservationPage() {
       </section>
 
       {/* 4.4 Hardware Ecosystem & Empathy Accordion */}
-      <section className="py-20 lg:py-32 max-w-[1400px] mx-auto px-6 lg:px-16" id="technology">
+      <section className="py-20 lg:py-28 max-w-[1400px] mx-auto px-6 lg:px-16" id="technology">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* Left Column Pain Points Presentation */}
           <div className="lg:col-span-5 space-y-6">
-            <span className="text-[10px] font-mono tracking-[0.25em] text-[#00D4FF] uppercase font-bold block">{t.empathyTagline}</span>
-            <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-white" id="empathy-section-title">
+            <span className="text-xs font-mono tracking-wider text-[#005A9E] uppercase font-black block">{t.empathyTagline}</span>
+            <h2 className="text-3xl sm:text-4xl font-display font-medium tracking-tight text-slate-900" id="empathy-section-title">
               {t.empathyHeadline}
             </h2>
-            <p className="text-base text-white/70 leading-relaxed">
+            <p className="text-sm text-slate-600 leading-relaxed font-sans">
               {t.empathyDescription}
             </p>
             
-            {/* Visual Separation Card explaining sandwich generation problems */}
-            <div className="bg-white/2 rounded-2xl p-6 border border-white/10 space-y-4" id="pain-points-card">
-              <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-white/90">
+            {/* Visual Separation Card presenting client pain points */}
+            <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4" id="pain-points-card">
+              <p className="text-[10px] font-mono font-black uppercase tracking-wider text-slate-900 border-b border-slate-100 pb-2">
                 {t.empathyObstacleTitle}
               </p>
-              <ul className="space-y-3.5">
-                <li className="flex items-start text-xs text-white/60 leading-relaxed">
-                  <span className="min-w-5 h-5 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center font-bold font-mono text-[10px] mr-3 mt-0.5 border border-red-500/20">!</span>
+              <ul className="space-y-3">
+                <li className="flex items-start text-xs text-slate-600 leading-relaxed">
+                  <span className="min-w-5 h-5 bg-red-50 text-red-600 rounded-full flex items-center justify-center font-bold font-mono text-[10px] mr-3 mt-0.5 border border-red-100 shrink-0">!</span>
                   <span>{t.empathyObstacle1}</span>
                 </li>
-                <li className="flex items-start text-xs text-white/60 leading-relaxed">
-                  <span className="min-w-5 h-5 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center font-bold font-mono text-[10px] mr-3 mt-0.5 border border-red-500/20">!</span>
+                <li className="flex items-start text-xs text-slate-600 leading-relaxed">
+                  <span className="min-w-5 h-5 bg-red-50 text-red-600 rounded-full flex items-center justify-center font-bold font-mono text-[10px] mr-3 mt-0.5 border border-red-100 shrink-0">!</span>
                   <span>{t.empathyObstacle2}</span>
                 </li>
-                <li className="flex items-start text-xs text-white/60 leading-relaxed">
-                  <span className="min-w-5 h-5 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center font-bold font-mono text-[10px] mr-3 mt-0.5 border border-red-500/20">!</span>
+                <li className="flex items-start text-xs text-slate-600 leading-relaxed">
+                  <span className="min-w-5 h-5 bg-red-50 text-red-600 rounded-full flex items-center justify-center font-bold font-mono text-[10px] mr-3 mt-0.5 border border-red-100 shrink-0">!</span>
                   <span>{t.empathyObstacle3}</span>
                 </li>
               </ul>
             </div>
 
-            <div className="rounded-2xl overflow-hidden shadow-xl border border-white/10 bg-white/5 aspect-video relative group">
-              <img 
-                src={astraAiHardware} 
-                alt="Astrateq Gadgets Hardware System OBD-II Camera" 
-                className="w-full h-full object-cover select-none transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                referrerPolicy="no-referrer"
-                id="empathy-hardware-img"
-              />
+            <div className="rounded-2xl overflow-hidden shadow-sm border border-slate-200 bg-slate-50 aspect-video relative group p-1.5">
+              <div className="w-full h-full rounded-[10px] overflow-hidden">
+                <img 
+                  src={astraAiHardware} 
+                  alt="Astrateq Gadgets Hardware System OBD-II Camera" 
+                  className="w-full h-full object-cover select-none transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                  referrerPolicy="no-referrer"
+                  id="empathy-hardware-img"
+                />
+              </div>
             </div>
           </div>
 
           {/* Right Column Expandable Accordion */}
-          <div className="lg:col-span-7 space-y-4 mt-8 lg:mt-0">
+          <div className="lg:col-span-7 space-y-5 mt-8 lg:mt-0">
             
             {/* Accordion Element 1 - Predictive incident alerts */}
-            <div className={`border rounded-2xl transition-all duration-300 ${activeAccordion === 0 ? "bg-white/5 border-white/20" : "border-white/10 hover:border-white/20 bg-transparent"}`}>
+            <div className={`border rounded-2xl transition-all duration-300 shadow-sm ${activeAccordion === 0 ? "bg-white border-[#005A9E] ring-2 ring-[#005A9E]/5" : "border-slate-200 hover:border-slate-300 bg-white"}`}>
               <button 
                 onClick={() => setActiveAccordion(activeAccordion === 0 ? null : 0)}
                 className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none cursor-pointer"
@@ -1058,11 +1092,11 @@ export default function ReservationPage() {
                 id="accordion-trigger-0"
               >
                 <div className="space-y-1.5 pr-4">
-                  <span className="text-[9px] font-mono font-bold uppercase text-[#00D4FF] tracking-[0.25em]">{t.accPredictiveSubtitle}</span>
-                  <h3 className="text-lg font-display font-semibold text-white">{t.accPredictiveTitle}</h3>
+                  <span className="text-[10px] font-mono font-bold uppercase text-[#005A9E] tracking-wider">{t.accPredictiveSubtitle}</span>
+                  <h3 className="text-lg font-sans font-extrabold text-slate-900">{t.accPredictiveTitle}</h3>
                 </div>
-                <div className={`p-1.5 rounded-full bg-white/5 border border-white/10 shrink-0 transition-transform duration-300 ${activeAccordion === 0 ? "rotate-180 bg-white/10" : ""}`}>
-                  <ChevronDown className="w-5 h-5 text-white/70" />
+                <div className={`p-1.5 rounded-full bg-slate-50 border border-slate-100 shrink-0 transition-transform duration-300 ${activeAccordion === 0 ? "rotate-180 bg-slate-100" : ""}`}>
+                  <ChevronDown className="w-5 h-5 text-slate-700" />
                 </div>
               </button>
               
@@ -1075,16 +1109,16 @@ export default function ReservationPage() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 text-sm text-white/70 space-y-4 border-t border-white/5 pt-4 leading-relaxed">
+                    <div className="px-6 pb-6 text-sm text-slate-600 space-y-4 border-t border-slate-100 pt-4 leading-relaxed font-sans">
                       <p>{t.accPredictiveBody}</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-                        <div className="bg-navy-card p-4 rounded-xl border border-white/10">
-                          <strong className="text-xs font-semibold block text-[#00D4FF] font-mono tracking-wider mb-1.5">{lang === "en" ? "LENS 1: HAZARD ENGINE" : "LENS 1 : COMPORTEMENT ROUTE"}</strong>
-                          <span className="text-xs text-white/50 leading-relaxed">{lang === "en" ? "Road surface collision tracking and lane guard alerts." : "Suivi prédictif des lignes de voies et alertes anti-collision."}</span>
+                        <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                          <strong className="text-xs font-black block text-[#005A9E] font-mono tracking-wider mb-1 mt-0">{lang === "en" ? "LENS 1: HAZARD ENGINE" : "LENS 1 : COMPORTEMENT ROUTE"}</strong>
+                          <span className="text-xs text-slate-600 leading-relaxed font-sans">{lang === "en" ? "Road surface collision tracking and lane guard alerts." : "Suivi prédictif des lignes de voies et alertes anti-collision."}</span>
                         </div>
-                        <div className="bg-navy-card p-4 rounded-xl border border-[#00D4FF]/20">
-                          <strong className="text-xs font-semibold block text-[#00D4FF] font-mono tracking-wider mb-1.5">{lang === "en" ? "LENS 2: WELLNESS NODE" : "LENS 2 : SÉCURITÉ CONDUCTEUR"}</strong>
-                          <span className="text-xs text-white/50 leading-relaxed">{lang === "en" ? "Senses sudden drowsiness, distress, or lack of attention." : "Analyse l'assoupissement, le malaise brutal ou l'inattention."}</span>
+                        <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                          <strong className="text-xs font-black block text-[#005A9E] font-mono tracking-wider mb-1 mt-0">{lang === "en" ? "LENS 2: WELLNESS NODE" : "LENS 2 : SÉCURITÉ CONDUCTEUR"}</strong>
+                          <span className="text-xs text-slate-600 leading-relaxed font-sans">{lang === "en" ? "Senses sudden drowsiness, distress, or lack of attention." : "Analyse l'assoupissement, le malaise brutal ou l'inattention."}</span>
                         </div>
                       </div>
                     </div>
@@ -1094,7 +1128,7 @@ export default function ReservationPage() {
             </div>
 
             {/* Accordion Element 2 - Diagnostics */}
-            <div className={`border rounded-2xl transition-all duration-300 ${activeAccordion === 1 ? "bg-white/5 border-white/20" : "border-white/10 hover:border-white/20 bg-transparent"}`}>
+            <div className={`border rounded-2xl transition-all duration-300 shadow-sm ${activeAccordion === 1 ? "bg-white border-[#005A9E] ring-2 ring-[#005A9E]/5" : "border-slate-200 hover:border-slate-300 bg-white"}`}>
               <button 
                 onClick={() => setActiveAccordion(activeAccordion === 1 ? null : 1)}
                 className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none cursor-pointer"
@@ -1102,11 +1136,11 @@ export default function ReservationPage() {
                 id="accordion-trigger-1"
               >
                 <div className="space-y-1.5 pr-4">
-                  <span className="text-[9px] font-mono font-bold uppercase text-[#00D4FF] tracking-[0.25em]">{t.accDiagnosticsSubtitle}</span>
-                  <h3 className="text-lg font-display font-semibold text-white">{t.accDiagnosticsTitle}</h3>
+                  <span className="text-[10px] font-mono font-bold uppercase text-[#005A9E] tracking-wider">{t.accDiagnosticsSubtitle}</span>
+                  <h3 className="text-lg font-sans font-extrabold text-slate-900">{t.accDiagnosticsTitle}</h3>
                 </div>
-                <div className={`p-1.5 rounded-full bg-white/5 border border-white/10 shrink-0 transition-transform duration-300 ${activeAccordion === 1 ? "rotate-180 bg-white/10" : ""}`}>
-                  <ChevronDown className="w-5 h-5 text-white/70" />
+                <div className={`p-1.5 rounded-full bg-slate-50 border border-slate-100 shrink-0 transition-transform duration-300 ${activeAccordion === 1 ? "rotate-180 bg-slate-100" : ""}`}>
+                  <ChevronDown className="w-5 h-5 text-slate-700" />
                 </div>
               </button>
               
@@ -1119,11 +1153,11 @@ export default function ReservationPage() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 text-sm text-white/70 space-y-4 border-t border-white/5 pt-4 leading-relaxed">
+                    <div className="px-6 pb-6 text-sm text-slate-600 space-y-4 border-t border-slate-100 pt-4 leading-relaxed font-sans">
                       <p>{t.accDiagnosticsBody}</p>
-                      <div className="bg-navy-card p-4 rounded-xl border border-[#00D4FF]/20 flex space-x-3 items-start">
-                        <Check className="w-4 h-4 text-[#00D4FF] shrink-0 fill-none mt-1 stroke-[3]" />
-                        <span className="text-xs text-white/60 leading-relaxed">{lang === "en" ? "Active mechanical polling connects into standard OBD-II systems built post-1996 for reliable diagnostic monitoring." : "Le décodage OBD-II s'adapte à tous véhicules fabriqués de 1996 à aujourd'hui."}</span>
+                      <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 flex space-x-3 items-start">
+                        <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[3.5]" />
+                        <span className="text-xs text-slate-600 leading-relaxed font-sans">{lang === "en" ? "Active mechanical polling connects into standard OBD-II systems built post-1996 for reliable diagnostic monitoring." : "Le décodage OBD-II s'adapte à tous véhicules fabriqués de 1996 à aujourd'hui."}</span>
                       </div>
                     </div>
                   </motion.div>
@@ -1132,7 +1166,7 @@ export default function ReservationPage() {
             </div>
 
             {/* Accordion Element 3 - Quiet Protection */}
-            <div className={`border rounded-2xl transition-all duration-300 ${activeAccordion === 2 ? "bg-white/5 border-white/20" : "border-white/10 hover:border-white/20 bg-transparent"}`}>
+            <div className={`border rounded-2xl transition-all duration-300 shadow-sm ${activeAccordion === 2 ? "bg-white border-[#005A9E] ring-2 ring-[#005A9E]/5" : "border-slate-200 hover:border-slate-300 bg-white"}`}>
               <button 
                 onClick={() => setActiveAccordion(activeAccordion === 2 ? null : 2)}
                 className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none cursor-pointer"
@@ -1140,11 +1174,11 @@ export default function ReservationPage() {
                 id="accordion-trigger-2"
               >
                 <div className="space-y-1.5 pr-4">
-                  <span className="text-[9px] font-mono font-bold uppercase text-[#00D4FF] tracking-[0.25em]">{t.accQuietSubtitle}</span>
-                  <h3 className="text-lg font-display font-semibold text-white">{t.accQuietTitle}</h3>
+                  <span className="text-[10px] font-mono font-bold uppercase text-[#005A9E] tracking-wider">{t.accQuietSubtitle}</span>
+                  <h3 className="text-lg font-sans font-extrabold text-slate-900">{t.accQuietTitle}</h3>
                 </div>
-                <div className={`p-1.5 rounded-full bg-white/5 border border-white/10 shrink-0 transition-transform duration-300 ${activeAccordion === 2 ? "rotate-180 bg-white/10" : ""}`}>
-                  <ChevronDown className="w-5 h-5 text-white/70" />
+                <div className={`p-1.5 rounded-full bg-slate-50 border border-slate-100 shrink-0 transition-transform duration-300 ${activeAccordion === 2 ? "rotate-180 bg-slate-100" : ""}`}>
+                  <ChevronDown className="w-5 h-5 text-slate-700" />
                 </div>
               </button>
               
@@ -1157,11 +1191,11 @@ export default function ReservationPage() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 text-sm text-white/70 space-y-4 border-t border-white/5 pt-4 leading-relaxed">
+                    <div className="px-6 pb-6 text-sm text-slate-600 space-y-4 border-t border-slate-100 pt-4 leading-relaxed font-sans">
                       <p>{t.accQuietBody}</p>
-                      <div className="bg-navy-card p-4 rounded-xl border border-[#00D4FF]/20 flex space-x-3 items-start">
-                        <Check className="w-4 h-4 text-[#00D4FF] shrink-0 fill-none mt-1 stroke-[3]" />
-                        <span className="text-xs text-white/60 leading-relaxed">{lang === "en" ? "Unlike classical systems with sirens, safety calls are issued via polite smart alerts or quiet phone companion messages." : "De simples messages silencieux ou bips harmonieux à volume progressif remplacent les alarmes stridentes d'autrefois."}</span>
+                      <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 flex space-x-3 items-start">
+                        <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[3.5]" />
+                        <span className="text-xs text-slate-600 leading-relaxed font-sans">{lang === "en" ? "Unlike classical systems with sirens, safety calls are issued via polite smart alerts or quiet phone companion messages." : "De simples messages silencieux ou bips harmonieux à volume progressif remplacent les alarmes stridentes d'autrefois."}</span>
                       </div>
                     </div>
                   </motion.div>
@@ -1174,15 +1208,15 @@ export default function ReservationPage() {
       </section>
 
       {/* Brand Core Pillars Section (from Brand Identity System Document) */}
-      <section className="py-20 bg-gradient-to-b from-navy-bg to-navy-secondary border-t border-white/10 relative" id="pillars">
+      <section className="py-24 bg-white border-t border-slate-200 relative" id="pillars">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-16 text-center space-y-12">
           
           <div className="space-y-3 max-w-xl mx-auto">
-            <span className="text-[10px] font-mono tracking-[0.25em] text-[#00D4FF] uppercase font-bold block" id="pillars-sub">{t.brandingPillarsTitle}</span>
-            <h2 className="text-3xl sm:text-4xl font-display tracking-tight text-white font-extrabold" id="pillars-main-title">
+            <span className="text-xs font-mono tracking-wider text-[#005A9E] uppercase font-black block" id="pillars-sub">{t.brandingPillarsTitle}</span>
+            <h2 className="text-3xl sm:text-4xl font-display tracking-tight text-slate-900 font-semibold" id="pillars-main-title">
               {lang === "en" ? "Our Core Product Philosophy" : "Notre philosophie produit d'excellence"}
             </h2>
-            <div className="h-[2px] w-12 bg-[#00D4FF] mx-auto rounded-full mt-4"></div>
+            <div className="h-[2.5px] w-12 bg-[#005A9E] mx-auto rounded-full mt-4"></div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
@@ -1193,30 +1227,29 @@ export default function ReservationPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               whileHover={{ 
-                y: -10, 
-                borderColor: "rgba(0, 212, 255, 0.45)", 
-                boxShadow: "0 20px 40px -15px rgba(0, 212, 255, 0.25)",
-                backgroundColor: "rgba(255, 255, 255, 0.05)"
+                y: -8, 
+                borderColor: "#005A9E", 
+                boxShadow: "0 12px 24px -10px rgba(0, 90, 158, 0.15)",
+                backgroundColor: "#FFFFFF"
               }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              className="bg-white/2 border border-white/10 rounded-2xl p-6 hover:border-[#00D4FF]/30 transition-all duration-300 relative group flex flex-col justify-between overflow-hidden" 
+              transition={{ duration: 0.4 }}
+              className="bg-white border border-slate-200 rounded-2xl p-6 transition-all duration-300 relative group flex flex-col justify-between overflow-hidden shadow-sm" 
               id="pillar-card-1"
             >
-              {/* Premium Gradient Glow on Hover */}
-              <div className="absolute top-0 right-0 w-40 h-40 bg-[radial-gradient(circle_at_top_right,rgba(0,212,255,0.08),transparent_70%)] pointer-events-none transition-all duration-300 group-hover:scale-110 opacity-60"></div>
+              {/* Premium Subtle Gradient Glow on Hover */}
+              <div className="absolute top-0 right-0 w-36 h-36 bg-[radial-gradient(circle_at_top_right,rgba(0, 90, 158,0.03),transparent_70%)] pointer-events-none transition-all duration-300 group-hover:scale-110 opacity-70"></div>
               
               <div className="space-y-4 relative z-10">
-                <div className="p-3 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 w-fit group-hover:bg-[#00D4FF]/10 group-hover:border-[#00D4FF]/30 transition-all duration-300 relative">
-                  <div className="absolute inset-0 bg-[#00D4FF]/10 blur-md rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <ShieldCheck className="w-6 h-6 stroke-[1.8] relative z-10 transition-transform duration-300 group-hover:scale-105" />
+                <div className="p-3 bg-slate-50 rounded-xl text-[#005A9E] border border-slate-200 w-fit group-hover:bg-sky-50 transition-all duration-300">
+                  <ShieldCheck className="w-6 h-6 stroke-[2]" />
                 </div>
-                <h3 className="text-lg font-display font-black text-white group-hover:text-[#00D4FF] transition-colors duration-200">{t.pillarProactiveTitle}</h3>
-                <p className="text-xs text-white/60 leading-relaxed font-sans">{t.pillarProactiveDesc}</p>
+                <h3 className="text-lg font-sans font-extrabold text-slate-900 group-hover:text-[#005A9E] transition-colors duration-200">{t.pillarProactiveTitle}</h3>
+                <p className="text-xs text-slate-600 leading-relaxed font-sans">{t.pillarProactiveDesc}</p>
               </div>
               
               <div className="mt-8 flex items-center justify-between relative z-10">
-                <div className="h-[1px] bg-white/10 group-hover:bg-[#00D4FF]/20 flex-grow transition-colors duration-300 mr-4"></div>
-                <span className="text-[9px] font-mono font-extrabold text-white/30 group-hover:text-[#00D4FF]/80 group-hover:bg-[#00D4FF]/8 border border-transparent group-hover:border-[#00D4FF]/20 px-2 py-0.5 rounded transition-all duration-300 uppercase tracking-widest bg-white/2">
+                <div className="h-[1px] bg-slate-100 group-hover:bg-slate-200 flex-grow transition-colors duration-300 mr-4"></div>
+                <span className="text-[9px] font-mono font-black text-slate-400 group-hover:text-[#005A9E] group-hover:bg-sky-50 border border-slate-100 group-hover:border-[#005A9E]/20 px-2.5 py-1 rounded transition-all duration-300 uppercase tracking-widest bg-slate-50">
                   PILLAR // 01
                 </span>
               </div>
@@ -1228,30 +1261,29 @@ export default function ReservationPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               whileHover={{ 
-                y: -10, 
-                borderColor: "rgba(0, 212, 255, 0.45)", 
-                boxShadow: "0 20px 40px -15px rgba(0, 212, 255, 0.25)",
-                backgroundColor: "rgba(255, 255, 255, 0.05)"
+                y: -8, 
+                borderColor: "#005A9E", 
+                boxShadow: "0 12px 24px -10px rgba(0, 90, 158, 0.15)",
+                backgroundColor: "#FFFFFF"
               }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              className="bg-white/2 border border-white/10 rounded-2xl p-6 hover:border-[#00D4FF]/30 transition-all duration-300 relative group flex flex-col justify-between overflow-hidden" 
+              transition={{ duration: 0.4 }}
+              className="bg-white border border-slate-200 rounded-2xl p-6 transition-all duration-300 relative group flex flex-col justify-between overflow-hidden shadow-sm" 
               id="pillar-card-2"
             >
-              {/* Premium Gradient Glow on Hover */}
-              <div className="absolute top-0 right-0 w-40 h-40 bg-[radial-gradient(circle_at_top_right,rgba(0,212,255,0.08),transparent_70%)] pointer-events-none transition-all duration-300 group-hover:scale-110 opacity-60"></div>
+              {/* Premium Subtle Gradient Glow on Hover */}
+              <div className="absolute top-0 right-0 w-36 h-36 bg-[radial-gradient(circle_at_top_right,rgba(0, 90, 158,0.03),transparent_70%)] pointer-events-none transition-all duration-300 group-hover:scale-110 opacity-70"></div>
               
               <div className="space-y-4 relative z-10">
-                <div className="p-3 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 w-fit group-hover:bg-[#00D4FF]/10 group-hover:border-[#00D4FF]/30 transition-all duration-300 relative">
-                  <div className="absolute inset-0 bg-[#00D4FF]/10 blur-md rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <Zap className="w-6 h-6 stroke-[1.8] relative z-10 transition-transform duration-300 group-hover:scale-105" />
+                <div className="p-3 bg-slate-50 rounded-xl text-[#005A9E] border border-slate-200 w-fit group-hover:bg-sky-50 transition-all duration-300">
+                  <Zap className="w-6 h-6 stroke-[2]" />
                 </div>
-                <h3 className="text-lg font-display font-black text-white group-hover:text-[#00D4FF] transition-colors duration-200">{t.pillarAiTitle}</h3>
-                <p className="text-xs text-white/60 leading-relaxed font-sans">{t.pillarAiDesc}</p>
+                <h3 className="text-lg font-sans font-extrabold text-slate-900 group-hover:text-[#005A9E] transition-colors duration-200">{t.pillarAiTitle}</h3>
+                <p className="text-xs text-slate-600 leading-relaxed font-sans">{t.pillarAiDesc}</p>
               </div>
               
               <div className="mt-8 flex items-center justify-between relative z-10">
-                <div className="h-[1px] bg-white/10 group-hover:bg-[#00D4FF]/20 flex-grow transition-colors duration-300 mr-4"></div>
-                <span className="text-[9px] font-mono font-extrabold text-white/30 group-hover:text-[#00D4FF]/80 group-hover:bg-[#00D4FF]/8 border border-transparent group-hover:border-[#00D4FF]/20 px-2 py-0.5 rounded transition-all duration-300 uppercase tracking-widest bg-white/2">
+                <div className="h-[1px] bg-slate-100 group-hover:bg-slate-200 flex-grow transition-colors duration-300 mr-4"></div>
+                <span className="text-[9px] font-mono font-black text-slate-400 group-hover:text-[#005A9E] group-hover:bg-sky-50 border border-slate-100 group-hover:border-[#005A9E]/20 px-2.5 py-1 rounded transition-all duration-300 uppercase tracking-widest bg-slate-50">
                   PILLAR // 02
                 </span>
               </div>
@@ -1263,30 +1295,29 @@ export default function ReservationPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               whileHover={{ 
-                y: -10, 
-                borderColor: "rgba(0, 212, 255, 0.45)", 
-                boxShadow: "0 20px 40px -15px rgba(0, 212, 255, 0.25)",
-                backgroundColor: "rgba(255, 255, 255, 0.05)"
+                y: -8, 
+                borderColor: "#005A9E", 
+                boxShadow: "0 12px 24px -10px rgba(0, 90, 158, 0.15)",
+                backgroundColor: "#FFFFFF"
               }}
-              transition={{ duration: 0.5, delay: 0.25 }}
-              className="bg-white/2 border border-white/10 rounded-2xl p-6 hover:border-[#00D4FF]/30 transition-all duration-300 relative group flex flex-col justify-between overflow-hidden" 
+              transition={{ duration: 0.4 }}
+              className="bg-white border border-slate-200 rounded-2xl p-6 transition-all duration-300 relative group flex flex-col justify-between overflow-hidden shadow-sm" 
               id="pillar-card-3"
             >
-              {/* Premium Gradient Glow on Hover */}
-              <div className="absolute top-0 right-0 w-40 h-40 bg-[radial-gradient(circle_at_top_right,rgba(0,212,255,0.08),transparent_70%)] pointer-events-none transition-all duration-300 group-hover:scale-110 opacity-60"></div>
+              {/* Premium Subtle Gradient Glow on Hover */}
+              <div className="absolute top-0 right-0 w-36 h-36 bg-[radial-gradient(circle_at_top_right,rgba(0, 90, 158,0.03),transparent_70%)] pointer-events-none transition-all duration-300 group-hover:scale-110 opacity-70"></div>
               
               <div className="space-y-4 relative z-10">
-                <div className="p-3 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 w-fit group-hover:bg-[#00D4FF]/10 group-hover:border-[#00D4FF]/30 transition-all duration-300 relative">
-                  <div className="absolute inset-0 bg-[#00D4FF]/10 blur-md rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <BadgeCheck className="w-6 h-6 stroke-[1.8] relative z-10 transition-transform duration-300 group-hover:scale-105" />
+                <div className="p-3 bg-slate-50 rounded-xl text-[#005A9E] border border-slate-200 w-fit group-hover:bg-sky-50 transition-all duration-300">
+                  <BadgeCheck className="w-6 h-6 stroke-[2]" />
                 </div>
-                <h3 className="text-lg font-display font-black text-white group-hover:text-[#00D4FF] transition-colors duration-200">{t.pillarConfidenceTitle}</h3>
-                <p className="text-xs text-white/60 leading-relaxed font-sans">{t.pillarConfidenceDesc}</p>
+                <h3 className="text-lg font-sans font-extrabold text-slate-900 group-hover:text-[#005A9E] transition-colors duration-200">{t.pillarConfidenceTitle}</h3>
+                <p className="text-xs text-slate-600 leading-relaxed font-sans">{t.pillarConfidenceDesc}</p>
               </div>
               
               <div className="mt-8 flex items-center justify-between relative z-10">
-                <div className="h-[1px] bg-white/10 group-hover:bg-[#00D4FF]/20 flex-grow transition-colors duration-300 mr-4"></div>
-                <span className="text-[9px] font-mono font-extrabold text-white/30 group-hover:text-[#00D4FF]/80 group-hover:bg-[#00D4FF]/8 border border-transparent group-hover:border-[#00D4FF]/20 px-2 py-0.5 rounded transition-all duration-300 uppercase tracking-widest bg-white/2">
+                <div className="h-[1px] bg-slate-100 group-hover:bg-slate-200 flex-grow transition-colors duration-300 mr-4"></div>
+                <span className="text-[9px] font-mono font-black text-slate-400 group-hover:text-[#005A9E] group-hover:bg-sky-50 border border-slate-100 group-hover:border-[#005A9E]/20 px-2.5 py-1 rounded transition-all duration-300 uppercase tracking-widest bg-slate-50">
                   PILLAR // 03
                 </span>
               </div>
@@ -1298,30 +1329,29 @@ export default function ReservationPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               whileHover={{ 
-                y: -10, 
-                borderColor: "rgba(0, 212, 255, 0.45)", 
-                boxShadow: "0 20px 40px -15px rgba(0, 212, 255, 0.25)",
-                backgroundColor: "rgba(255, 255, 255, 0.05)"
+                y: -8, 
+                borderColor: "#005A9E", 
+                boxShadow: "0 12px 24px -10px rgba(0, 90, 158, 0.15)",
+                backgroundColor: "#FFFFFF"
               }}
-              transition={{ duration: 0.5, delay: 0.35 }}
-              className="bg-white/2 border border-white/10 rounded-2xl p-6 hover:border-[#00D4FF]/30 transition-all duration-300 relative group flex flex-col justify-between overflow-hidden" 
+              transition={{ duration: 0.4 }}
+              className="bg-white border border-slate-200 rounded-2xl p-6 transition-all duration-300 relative group flex flex-col justify-between overflow-hidden shadow-sm" 
               id="pillar-card-4"
             >
-              {/* Premium Gradient Glow on Hover */}
-              <div className="absolute top-0 right-0 w-40 h-40 bg-[radial-gradient(circle_at_top_right,rgba(0,212,255,0.08),transparent_70%)] pointer-events-none transition-all duration-300 group-hover:scale-110 opacity-60"></div>
+              {/* Premium Subtle Gradient Glow on Hover */}
+              <div className="absolute top-0 right-0 w-36 h-36 bg-[radial-gradient(circle_at_top_right,rgba(0, 90, 158,0.03),transparent_70%)] pointer-events-none transition-all duration-300 group-hover:scale-110 opacity-70"></div>
               
               <div className="space-y-4 relative z-10">
-                <div className="p-3 bg-white/5 rounded-xl text-[#00D4FF] border border-white/10 w-fit group-hover:bg-[#00D4FF]/10 group-hover:border-[#00D4FF]/30 transition-all duration-300 relative">
-                  <div className="absolute inset-0 bg-[#00D4FF]/10 blur-md rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <Sparkles className="w-6 h-6 stroke-[1.8] relative z-10 transition-transform duration-300 group-hover:scale-105" />
+                <div className="p-3 bg-slate-50 rounded-xl text-[#005A9E] border border-slate-200 w-fit group-hover:bg-sky-50 transition-all duration-300">
+                  <Sparkles className="w-6 h-6 stroke-[2]" />
                 </div>
-                <h3 className="text-lg font-display font-black text-white group-hover:text-[#00D4FF] transition-colors duration-200">{t.pillarSimplicityTitle}</h3>
-                <p className="text-xs text-white/60 leading-relaxed font-sans">{t.pillarSimplicityDesc}</p>
+                <h3 className="text-lg font-display font-black text-slate-900 group-hover:text-[#005A9E] transition-colors duration-200">{t.pillarSimplicityTitle}</h3>
+                <p className="text-xs text-slate-600 leading-relaxed font-sans">{t.pillarSimplicityDesc}</p>
               </div>
               
               <div className="mt-8 flex items-center justify-between relative z-10">
-                <div className="h-[1px] bg-white/10 group-hover:bg-[#00D4FF]/20 flex-grow transition-colors duration-300 mr-4"></div>
-                <span className="text-[9px] font-mono font-extrabold text-white/30 group-hover:text-[#00D4FF]/80 group-hover:bg-[#00D4FF]/8 border border-transparent group-hover:border-[#00D4FF]/20 px-2 py-0.5 rounded transition-all duration-300 uppercase tracking-widest bg-white/2">
+                <div className="h-[1px] bg-slate-100 group-hover:bg-slate-200 flex-grow transition-colors duration-300 mr-4"></div>
+                <span className="text-[9px] font-mono font-black text-slate-400 group-hover:text-[#005A9E] group-hover:bg-sky-50 border border-slate-100 group-hover:border-[#005A9E]/20 px-2.5 py-1 rounded transition-all duration-300 uppercase tracking-widest bg-slate-50">
                   PILLAR // 04
                 </span>
               </div>
@@ -1329,21 +1359,15 @@ export default function ReservationPage() {
 
           </div>
 
-        </div>
-      </section>
-
-      {/* 4.5 Explicit 3-Tier Pricing Grid */}
-      <section ref={pricingSectionRef} className="py-20 lg:py-32 bg-navy-secondary border-t border-white/10 scroll-mt-20 relative overflow-hidden" id="pricing">
-        {/* Decorative backdrop geometric vector lines */}
-        <div className="absolute w-[800px] h-[800px] border border-white/3 rounded-full pointer-events-none left-1/2 -translate-x-1/2 top-10"></div>
+        </div>        <div className="absolute w-[800px] h-[800px] border border-slate-200/50 rounded-full pointer-events-none left-1/2 -translate-x-1/2 top-10"></div>
         
         <div className="max-w-[1400px] mx-auto px-6 lg:px-16 relative z-10">
           <div className="text-center max-w-[700px] mx-auto mb-16 space-y-4">
-            <span className="text-[10px] font-mono tracking-[0.25em] text-[#00D4FF] uppercase font-bold px-3.5 py-1.5 bg-white/5 border border-white/10 rounded-full inline-block">{lang === "en" ? "EARLY ADOPTER ACCESS" : "COMPAGNE PILOTE LIMITÉE"}</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display tracking-tight text-white font-extrabold" id="pricing-headline">
+            <span className="text-[10px] font-mono tracking-wider text-[#005A9E] uppercase font-black px-4 py-1.5 bg-white border border-slate-200 rounded-full inline-block">{lang === "en" ? "EARLY ADOPTER ACCESS" : "COMPAGNE PILOTE LIMITÉE"}</span>
+            <h2 className="text-3.5xl sm:text-4xl lg:text-4.5xl font-display tracking-tight text-slate-900 font-bold" id="pricing-headline">
               {t.pricingTitle}
             </h2>
-            <p className="text-sm sm:text-base text-white/60 leading-relaxed">
+            <p className="text-sm text-slate-600 leading-relaxed font-sans">
               {t.pricingSubtitle}
             </p>
           </div>
@@ -1355,12 +1379,11 @@ export default function ReservationPage() {
               const isGuardian = tier.id === "guardian";
               const isEarlyBird = tier.id === "early-bird";
               
-              // Dynamic pre-order spots scarcity and claim percentages
               const urgency = {
-                "early-bird": { spots: 8, total: 120, pct: 93, color: "bg-[#00D4FF]", glow: "shadow-[0_0_50px_rgba(0,212,255,0.15)]" },
-                "founding-member": { spots: 21, total: 250, pct: 91, color: "bg-cyan-400", glow: "shadow-[0_0_60px_rgba(0,212,255,0.3)]" },
-                "guardian": { spots: 14, total: 75, pct: 81, color: "bg-indigo-400", glow: "shadow-[0_0_50px_rgba(99,102,241,0.2)]" }
-              }[tier.id] || { spots: 10, total: 100, pct: 90, color: "bg-cyan-400", glow: "shadow-xl" };
+                "early-bird": { spots: 8, total: 120, pct: 93, color: "bg-[#005A9E]", glow: "" },
+                "founding-member": { spots: 21, total: 250, pct: 91, color: "bg-[#005A9E]", glow: "" },
+                "guardian": { spots: 14, total: 75, pct: 81, color: "bg-[#005A9E]", glow: "" }
+              }[tier.id] || { spots: 10, total: 100, pct: 90, color: "bg-[#005A9E]", glow: "" };
 
               const estValue = {
                 "early-bird": 249,
@@ -1369,10 +1392,8 @@ export default function ReservationPage() {
               }[tier.id];
 
               const borderStyles = isFounding 
-                ? "border-[#00D4FF] ring-[1px] ring-[#00D4FF]/40 shadow-2xl shadow-cyan-950/20" 
-                : isGuardian 
-                  ? "border-white/10 hover:border-indigo-400/40" 
-                  : "border-white/10 hover:border-cyan-400/30";
+                ? "border-[#005A9E] ring-1 ring-[#005A9E]/30 shadow-md shadow-sky-100/40" 
+                : "border-slate-200 hover:border-slate-350";
 
               return (
                 <motion.div 
@@ -1382,34 +1403,25 @@ export default function ReservationPage() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   whileHover={{ 
-                    y: -12, 
-                    scale: 1.015,
+                    y: -8, 
+                    scale: 1.01,
                     borderColor: isFounding 
-                      ? "rgba(0, 212, 255, 1)" 
+                      ? "#005A9E" 
                       : isGuardian 
-                        ? "rgba(99, 102, 241, 0.6)" 
-                        : "rgba(34, 211, 238, 0.5)",
-                    boxShadow: isFounding 
-                      ? "0 30px 60px -15px rgba(0, 212, 255, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.15)"
-                      : isGuardian 
-                        ? "0 30px 60px -15px rgba(99, 102, 241, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.05)"
-                        : "0 30px 60px -15px rgba(34, 211, 238, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.05)"
+                        ? "rgba(0, 90, 158, 0.5)" 
+                        : "rgba(0, 90, 158, 0.4)",
+                    boxShadow: "0 15px 30px -10px rgba(100, 116, 139, 0.15)"
                   }}
-                  className={`bg-navy-card rounded-3xl border ${borderStyles} flex flex-col justify-between overflow-hidden shadow-xl transition-all duration-350 relative group`}
+                  className={`bg-white rounded-3xl border ${borderStyles} flex flex-col justify-between overflow-hidden shadow-sm transition-all duration-300 relative group`}
                   id={`pricing-card-${tier.id}`}
                 >
-                  {/* Visual Glass Shimmer Overlay effect inside card */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.01] via-transparent to-white/[0.03] pointer-events-none"></div>
-
-                  {/* Corner Accent Glow */}
-                  <div className={`absolute top-0 right-0 w-48 h-48 rounded-full blur-[80px] pointer-events-none transition-all duration-300 group-hover:scale-110 ${
-                    isFounding ? "bg-[#00D4FF]/5 opacity-60" : isGuardian ? "bg-indigo-500/5 opacity-40" : "bg-cyan-500/5 opacity-40"
+                  <div className={`absolute top-0 right-0 w-48 h-48 rounded-full blur-3xl pointer-events-none transition-all duration-300 group-hover:scale-110 ${
+                    isFounding ? "bg-sky-400/5 opacity-50" : isGuardian ? "bg-slate-400/5 opacity-30" : "bg-sky-400/5 opacity-30"
                   }`}></div>
 
-                  {/* Popular card highlights */}
                   {tier.badge && (
-                    <div className={`text-black text-xs font-mono tracking-[0.25em] leading-none py-3 px-5 text-center font-black uppercase w-full relative z-10 shadow-md ${
-                      isFounding ? "bg-[#00D4FF]" : isGuardian ? "bg-indigo-500 text-white" : "bg-cyan-500"
+                    <div className={`text-white text-[10px] font-mono tracking-widest py-3 px-5 text-center font-black uppercase w-full relative z-10 ${
+                      isFounding ? "bg-[#005A9E]" : isGuardian ? "bg-[#005A9E]/91" : "bg-slate-800"
                     }`}>
                       {tier.badge[lang]}
                     </div>
@@ -1418,9 +1430,9 @@ export default function ReservationPage() {
                   <div className="p-8 flex-1 flex flex-col justify-between relative z-10">
                     <div className="space-y-6">
                       <div className="flex justify-between items-center">
-                        <h3 className="text-2xl lg:text-3xl font-display text-white font-extrabold tracking-tight group-hover:text-[#00D4FF] transition-colors duration-250">{tier.name[lang]}</h3>
-                        <div className={`p-2 rounded-xl bg-white/5 border border-white/5 transition-colors duration-300 ${
-                          isFounding ? "text-[#00D4FF]" : isGuardian ? "text-indigo-400" : "text-cyan-400"
+                        <h3 className="text-2xl font-sans font-extrabold text-slate-900 tracking-tight group-hover:text-[#005A9E] transition-colors duration-250">{tier.name[lang]}</h3>
+                        <div className={`p-2 rounded-xl bg-slate-50 border border-slate-100 transition-colors duration-300 ${
+                          isFounding ? "text-[#005A9E]" : isGuardian ? "text-[#005A9E]/90" : "text-[#005A9E]/80"
                         }`}>
                           {isFounding && <BadgeCheck className="w-5.5 h-5.5" />}
                           {isGuardian && <ShieldCheck className="w-5.5 h-5.5" />}
@@ -1428,44 +1440,38 @@ export default function ReservationPage() {
                         </div>
                       </div>
 
-                      <p className={`text-xs font-mono font-bold uppercase py-2 px-4 rounded-full inline-block tracking-widest border ${
+                      <p className={`text-[10px] font-mono font-black uppercase py-1.5 px-3.5 rounded-full inline-block tracking-wider border ${
                         isFounding 
-                          ? "text-[#00D4FF] bg-[#00D4FF]/8 border-[#00D4FF]/15" 
-                          : isGuardian 
-                            ? "text-indigo-400 bg-indigo-400/8 border-indigo-400/15" 
-                            : "text-cyan-400 bg-cyan-400/8 border-cyan-400/15"
+                          ? "text-[#005A9E] bg-sky-50 border-[#005A9E]/20" 
+                          : "text-slate-700 bg-slate-50 border-slate-200"
                       }`}>
                         {tier.savings[lang]}
                       </p>
                       
-                      {/* Price Section with Estimated Final Value Crossed Out */}
                       <div className="pt-2 pb-2 relative flex flex-col">
-                        <div className="flex items-center gap-1.5 mb-2 text-xs font-mono tracking-widest text-white/75">
+                        <div className="flex items-center gap-1.5 mb-1.5 text-xs font-mono font-bold tracking-wide text-slate-600">
                           <span>{lang === "en" ? "EST. RETAIL:" : "VALEUR ESTIMÉE :"}</span>
                           <span className="line-through">${estValue} CAD</span>
                         </div>
                         <div className="flex items-baseline">
-                          <span className="text-[11px] font-mono uppercase bg-white/5 border border-white/8 px-1.5 py-0.5 rounded text-white/70 inline-block align-middle mr-2 mt-0.5">DEP.</span>
-                          <span className="text-5xl lg:text-6xl font-display font-black text-white tracking-tighter align-middle" id={`price-label-${tier.id}`}>
+                          <span className="text-[10px] font-mono uppercase bg-slate-50 border border-slate-200 px-2 py-0.5 rounded text-slate-600 inline-block align-middle mr-2 mt-0.5 font-bold">DEP.</span>
+                          <span className="text-5xl lg:text-6xl font-sans font-extrabold text-slate-900 tracking-tighter align-middle" id={`price-label-${tier.id}`}>
                             ${tier.deposit}
                           </span>
-                          <span className="text-sm font-mono text-white/75 ml-2 uppercase tracking-wider">CAD</span>
+                          <span className="text-xs font-mono text-slate-600 ml-2 uppercase tracking-widest font-bold">CAD</span>
                         </div>
                       </div>
 
-                      {/* Scarcity / Urgency indicator bar */}
-                      <div className="bg-white/3 border border-white/5 rounded-2xl p-4.5 space-y-3">
+                      <div className="bg-slate-50 border border-slate-150 rounded-2xl p-4.5 space-y-3">
                         <div className="flex justify-between items-center text-xs font-mono">
-                          <span className="text-white/70 font-bold">
+                          <span className="text-slate-700 font-bold">
                             {lang === "en" 
                               ? `Only ${urgency.spots} spots left in Batch 01` 
                               : `Plus que ${urgency.spots} places restantes`}
                           </span>
-                          <span className={`font-extrabold ${
-                            isFounding ? "text-[#00D4FF]" : isGuardian ? "text-indigo-400" : "text-cyan-400"
-                          }`}>{urgency.pct}% {lang === "en" ? "Claimed" : "Réclamé"}</span>
+                          <span className="font-black text-[#005A9E]">{urgency.pct}% {lang === "en" ? "Claimed" : "Réclamé"}</span>
                         </div>
-                        <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                        <div className="w-full h-1.5 bg-slate-200/60 rounded-full overflow-hidden">
                           <motion.div 
                             initial={{ width: 0 }}
                             whileInView={{ width: `${urgency.pct}%` }}
@@ -1476,13 +1482,11 @@ export default function ReservationPage() {
                         </div>
                       </div>
 
-                      <div className="border-t border-white/5 pt-6 mt-4 animate-fade-in">
+                      <div className="border-t border-slate-100 pt-6 mt-4">
                         <ul className="space-y-4">
                           {tier.benefits[lang].map((benefit, bIdx) => (
-                            <li key={bIdx} className="flex items-start text-sm text-white/70 leading-relaxed font-sans group-hover:text-white/85 transition-colors duration-250">
-                              <span className={`mr-3 mt-0.5 shrink-0 p-0.5 rounded-full ${
-                                isFounding ? "text-[#00D4FF] bg-[#00D4FF]/15" : isGuardian ? "text-indigo-400 bg-indigo-400/15" : "text-cyan-400 bg-cyan-400/15"
-                              }`}>
+                            <li key={bIdx} className="flex items-start text-xs text-slate-600 leading-relaxed font-sans group-hover:text-slate-800 transition-colors duration-250">
+                              <span className="mr-3 mt-0.5 shrink-0 p-0.5 rounded-full text-[#005A9E] bg-sky-50 border border-sky-100/40">
                                 <Check className="w-3.5 h-3.5 stroke-[3]" />
                               </span>
                               <span>{benefit}</span>
@@ -1494,23 +1498,20 @@ export default function ReservationPage() {
 
                     <div className="pt-8 space-y-4">
                       <motion.button 
-                        whileHover={{ scale: 1.02, y: -1 }}
-                        whileTap={{ scale: 0.98 }}
+                        whileHover={{ scale: 1.01, y: -0.5 }}
+                        whileTap={{ scale: 0.99 }}
                         onClick={() => handleOpenCheckout(tier)}
-                        className={`w-full py-4.5 px-6 rounded-xl font-mono text-xs font-black uppercase tracking-[0.2em] text-center transition-all duration-300 border cursor-pointer ${
+                        className={`w-full py-4.5 px-6 rounded-xl font-mono text-xs font-bold uppercase tracking-wider text-center transition-all duration-300 border cursor-pointer ${
                           isFounding 
-                            ? "bg-[#00D4FF] text-black hover:bg-cyan-300 hover:shadow-lg hover:shadow-cyan-400/20 border-none" 
-                            : isGuardian
-                              ? "bg-indigo-500 text-white hover:bg-indigo-400 hover:shadow-lg hover:shadow-indigo-500/20 border-none"
-                              : "bg-white text-black hover:bg-gray-100 border-none"
+                            ? "bg-[#005A9E] text-white hover:bg-sky-700 shadow-sm border-none" 
+                            : "bg-slate-100 text-slate-800 hover:bg-slate-200 border-none"
                         }`}
                         id={`pricing-booking-${tier.id}`}
                       >
                         {t.pricingCta}
                       </motion.button>
                       
-                      {/* Mandatory refund guarantee under every single pricing CTA */}
-                      <p className="text-xs font-mono text-center text-white/70 uppercase tracking-widest leading-none font-bold">
+                      <p className="text-xs font-mono text-center text-slate-600 uppercase tracking-widest leading-none font-extrabold">
                         {lang === "en" ? "✓ 100% Refundable Deposit" : "✓ Dépôt 100% remboursable"}
                       </p>
                     </div>
@@ -1521,7 +1522,7 @@ export default function ReservationPage() {
           </div>
 
           <div className="text-center mt-12">
-            <p className="text-xs text-white/70 font-mono select-none">
+            <p className="text-xs text-slate-700 font-mono select-none font-bold">
               ⚠️ {t.pricingGuarantee}
             </p>
           </div>
@@ -1532,51 +1533,51 @@ export default function ReservationPage() {
       {/* 4.6 Canadian Trust, Compliance & Security */}
       <section className="py-20 max-w-[1400px] mx-auto px-6 lg:px-16" id="compliance">
         {/* Strict Canadian Data Declaration */}
-        <div className="bg-navy-card/40 backdrop-blur-md rounded-3xl p-8 lg:p-12 border border-white/10 shadow-2xl flex flex-col relative overflow-hidden animate-fade-in" id="canadian-compliance-banner">
+        <div className="bg-white rounded-3xl p-8 lg:p-12 border border-slate-205 shadow-sm flex flex-col relative overflow-hidden animate-fade-in" id="canadian-compliance-banner">
           {/* Top subtle glow banner border */}
-          <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#00D4FF]/30 to-transparent"></div>
+          <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#005A9E]/20 to-transparent"></div>
           {/* Accent vertical line */}
-          <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#00D4FF] to-blue-600"></div>
+          <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#005A9E] to-blue-600"></div>
           
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="flex items-center space-x-5 shrink-0">
-              <div className="p-4 bg-[#00D4FF]/10 border border-[#00D4FF]/25 rounded-2xl text-[#00D4FF] shadow-[0_0_20px_rgba(0,212,255,0.08)]">
-                <ShieldCheck className="w-8 h-8 stroke-[1.8]" />
+              <div className="p-4 bg-sky-50 border border-sky-100/70 rounded-2xl text-[#005A9E]">
+                <ShieldCheck className="w-8 h-8 stroke-[2]" />
               </div>
               <div>
-                <span className="text-[10px] tracking-[0.2em] font-mono font-bold block text-[#00D4FF] uppercase">{t.secTrustLabel}</span>
-                <h3 className="text-2xl font-display font-black text-white mt-1">PIPEDA Conformity</h3>
+                <span className="text-xs tracking-wider font-mono font-black block text-[#005A9E] uppercase">{t.secTrustLabel}</span>
+                <h3 className="text-2xl font-display font-medium text-slate-900 mt-1">PIPEDA Conformity</h3>
               </div>
             </div>
-            <p className="text-sm text-white/70 leading-relaxed max-w-[760px] lg:border-l lg:border-white/10 lg:pl-8 font-sans">
+            <p className="text-sm text-slate-650 leading-relaxed max-w-[760px] lg:border-l lg:border-slate-100 lg:pl-8 font-sans">
               {t.secTrustContent}
             </p>
           </div>
 
           {/* Critical Brand Certification Row (Page 6 of Brand document) */}
-          <div className="border-t border-white/10 pt-8 mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6" id="brand-certifications-row">
+          <div className="border-t border-slate-105 pt-8 mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6" id="brand-certifications-row">
             
-            <div className="flex items-center space-x-4 bg-white/[0.03] hover:bg-white/[0.05] p-4 rounded-xl border border-white/5 transition-all duration-300">
-              <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#00D4FF]"></div>
+            <div className="flex items-center space-x-4 bg-slate-50 hover:bg-slate-100 p-4 rounded-xl border border-slate-205 transition-all duration-300">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#005A9E]"></div>
               <div>
-                <span className="text-[9px] font-mono text-white/55 block uppercase tracking-wider">{lang === "en" ? "FEDERAL REGISTRY" : "REGISTRE FÉDÉRAL"}</span>
-                <span className="text-xs sm:text-sm font-semibold text-white font-mono mt-0.5 block">{t.certTransportCanada}</span>
+                <span className="text-[9px] font-mono text-slate-600 block uppercase tracking-wider font-bold">{lang === "en" ? "FEDERAL REGISTRY" : "REGISTRE FÉDÉRAL"}</span>
+                <span className="text-xs sm:text-sm font-semibold text-slate-900 font-mono mt-0.5 block">{t.certTransportCanada}</span>
               </div>
             </div>
 
-            <div className="flex items-center space-x-4 bg-white/[0.03] hover:bg-white/[0.05] p-4 rounded-xl border border-white/5 transition-all duration-300">
-              <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#00D4FF]"></div>
+            <div className="flex items-center space-x-4 bg-slate-50 hover:bg-slate-100 p-4 rounded-xl border border-slate-205 transition-all duration-300">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#005A9E]"></div>
               <div>
-                <span className="text-[9px] font-mono text-white/55 block uppercase tracking-wider">{lang === "en" ? "RADIO SPECTRUM" : "SPECTRUM RADIO"}</span>
-                <span className="text-xs sm:text-sm font-semibold text-white font-mono mt-0.5 block">{t.certIsed}</span>
+                <span className="text-[9px] font-mono text-slate-600 block uppercase tracking-wider font-bold">{lang === "en" ? "RADIO SPECTRUM" : "SPECTRUM RADIO"}</span>
+                <span className="text-xs sm:text-sm font-semibold text-slate-900 font-mono mt-0.5 block">{t.certIsed}</span>
               </div>
             </div>
 
-            <div className="flex items-center space-x-4 bg-white/[0.03] hover:bg-white/[0.05] p-4 rounded-xl border border-white/5 transition-all duration-300">
-              <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#00D4FF]"></div>
+            <div className="flex items-center space-x-4 bg-slate-50 hover:bg-slate-100 p-4 rounded-xl border border-slate-205 transition-all duration-300">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#005A9E]"></div>
               <div>
-                <span className="text-[9px] font-mono text-white/55 block uppercase tracking-wider">{lang === "en" ? "FUNCTIONAL SAFETY" : "SÉCURITÉ FONCTIONNELLE"}</span>
-                <span className="text-xs sm:text-sm font-semibold text-white font-mono mt-0.5 block">{t.certIso}</span>
+                <span className="text-[9px] font-mono text-slate-600 block uppercase tracking-wider font-bold">{lang === "en" ? "FUNCTIONAL SAFETY" : "SÉCURITÉ FONCTIONNELLE"}</span>
+                <span className="text-xs sm:text-sm font-semibold text-slate-900 font-mono mt-0.5 block">{t.certIso}</span>
               </div>
             </div>
 
@@ -1585,32 +1586,32 @@ export default function ReservationPage() {
       </section>
 
       {/* 4.7 Frequently Asked Questions Section */}
-      <section className="py-24 max-w-[1400px] mx-auto px-6 lg:px-16 border-t border-white/10" id="faq">
+      <section className="py-24 max-w-[1400px] mx-auto px-6 lg:px-16 border-t border-slate-205" id="faq">
         
         {/* FAQ grid addressing precise mandates */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-4 lg:sticky lg:top-28 space-y-6">
             <div className="space-y-3">
-              <span className="text-[10px] tracking-[0.25em] font-mono font-bold text-[#00D4FF] uppercase bg-[#00D4FF]/10 px-3 py-1.5 rounded-full inline-block border border-[#00D4FF]/25">
+              <span className="text-[10px] tracking-wider font-mono font-black text-[#005A9E] uppercase bg-sky-50 px-3.5 py-1.5 rounded-full inline-block border border-[#005A9E]/20">
                 {lang === "en" ? "FAQ PORTAL" : "SECTION FAQ"}
               </span>
-              <h2 className="text-3xl lg:text-4xl font-display font-extrabold tracking-tight text-white leading-tight" id="faq-heading-text">
+              <h2 className="text-3.5xl lg:text-4.5xl font-display font-medium tracking-tight text-slate-900 leading-tight" id="faq-heading-text">
                 {t.faqHeading}
               </h2>
             </div>
             
-            <p className="text-sm text-white/60 leading-relaxed font-sans">
+            <p className="text-sm text-slate-600 leading-relaxed font-sans">
               {t.faqSub}
             </p>
             
             {/* Direct Phone Assistance Info for Canadian sandwich generation */}
-            <div className="bg-navy-card/40 border border-white/10 p-5 rounded-2xl flex items-center space-x-4 shadow-xl">
-              <div className="p-3 bg-[#00D4FF]/10 text-[#00D4FF] rounded-xl font-medium">
+            <div className="bg-slate-50 border border-slate-205 p-5 rounded-2xl flex items-center space-x-4 shadow-sm">
+              <div className="p-3 bg-sky-50 text-[#005A9E] rounded-xl font-medium border border-sky-100">
                 <PhoneCall className="w-5 h-5 shrink-0" />
               </div>
               <div className="text-xs">
-                <span className="font-semibold block text-white text-sm mb-0.5">{lang === "en" ? "Need help placing deposit?" : "Besoin d'aide pour réserver ?"}</span>
-                <span className="text-[#00D4FF] font-mono font-bold text-sm">1-800-555-ASTRA</span>
+                <span className="font-bold block text-slate-800 text-sm mb-0.5">{lang === "en" ? "Need help placing deposit?" : "Besoin d'aide pour réserver ?"}</span>
+                <span className="text-[#005A9E] font-mono font-black text-sm">1-800-555-ASTRA</span>
               </div>
             </div>
           </div>
@@ -1619,18 +1620,18 @@ export default function ReservationPage() {
           <div className="lg:col-span-8 space-y-4">
             
             {/* FAQ 1 */}
-            <div className="border border-white/10 rounded-2xl overflow-hidden hover:border-[#00D4FF]/35 hover:scale-[1.002] bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300">
+            <div className="border border-slate-205 rounded-xl overflow-hidden hover:border-[#005A9E]/30 hover:shadow-sm bg-white transition-all duration-300">
               <button 
                 onClick={() => setActiveFaq(activeFaq === 0 ? null : 0)}
                 className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none cursor-pointer"
                 aria-expanded={activeFaq === 0}
                 id="faq-accordion-trigger-0"
               >
-                <span className="text-sm sm:text-base font-semibold text-white font-sans flex items-start space-x-3 pr-4">
-                  <HelpCircle className="w-5 h-5 text-[#00D4FF] shrink-0 mt-0.5" />
+                <span className="text-sm sm:text-base font-bold text-slate-900 font-sans flex items-start space-x-3 pr-4">
+                  <HelpCircle className="w-5 h-5 text-[#005A9E] shrink-0 mt-0.5" />
                   <span>{t.faqQ1}</span>
                 </span>
-                <ChevronDown className={`w-4 h-4 text-white/50 shrink-0 transition-transform duration-300 ${activeFaq === 0 ? "rotate-180 text-[#00D4FF]" : ""}`} />
+                <ChevronDown className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-300 ${activeFaq === 0 ? "rotate-180 text-[#005A9E]" : ""}`} />
               </button>
               <AnimatePresence initial={false}>
                 {activeFaq === 0 && (
@@ -1641,7 +1642,7 @@ export default function ReservationPage() {
                     transition={{ duration: 0.25, cubicBezier: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 pt-2 bg-[#050505]/40 border-t border-white/5 text-xs sm:text-sm text-white/60 leading-relaxed font-sans">
+                    <div className="px-6 pb-6 pt-2 bg-slate-50/60 border-t border-slate-100 text-xs sm:text-sm text-slate-750 leading-relaxed font-sans">
                       {t.faqA1}
                     </div>
                   </motion.div>
@@ -1650,18 +1651,18 @@ export default function ReservationPage() {
             </div>
 
             {/* FAQ 2 */}
-            <div className="border border-white/10 rounded-2xl overflow-hidden hover:border-[#00D4FF]/35 hover:scale-[1.002] bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300">
+            <div className="border border-slate-205 rounded-xl overflow-hidden hover:border-[#005A9E]/30 hover:shadow-sm bg-white transition-all duration-300">
               <button 
                 onClick={() => setActiveFaq(activeFaq === 1 ? null : 1)}
                 className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none cursor-pointer"
                 aria-expanded={activeFaq === 1}
                 id="faq-accordion-trigger-1"
               >
-                <span className="text-sm sm:text-base font-semibold text-white font-sans flex items-start space-x-3 pr-4">
-                  <HelpCircle className="w-5 h-5 text-[#00D4FF] shrink-0 mt-0.5" />
+                <span className="text-sm sm:text-base font-bold text-slate-900 font-sans flex items-start space-x-3 pr-4">
+                  <HelpCircle className="w-5 h-5 text-[#005A9E] shrink-0 mt-0.5" />
                   <span>{t.faqQ2}</span>
                 </span>
-                <ChevronDown className={`w-4 h-4 text-white/50 shrink-0 transition-transform duration-300 ${activeFaq === 1 ? "rotate-180 text-[#00D4FF]" : ""}`} />
+                <ChevronDown className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-300 ${activeFaq === 1 ? "rotate-180 text-[#005A9E]" : ""}`} />
               </button>
               <AnimatePresence initial={false}>
                 {activeFaq === 1 && (
@@ -1672,7 +1673,7 @@ export default function ReservationPage() {
                     transition={{ duration: 0.25, cubicBezier: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 pt-2 bg-[#050505]/40 border-t border-white/5 text-xs sm:text-sm text-white/60 leading-relaxed font-sans">
+                    <div className="px-6 pb-6 pt-2 bg-slate-50/60 border-t border-slate-100 text-xs sm:text-sm text-slate-750 leading-relaxed font-sans">
                       {t.faqA2}
                     </div>
                   </motion.div>
@@ -1681,18 +1682,18 @@ export default function ReservationPage() {
             </div>
 
             {/* FAQ 3 */}
-            <div className="border border-white/10 rounded-2xl overflow-hidden hover:border-[#00D4FF]/35 hover:scale-[1.002] bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300">
+            <div className="border border-slate-205 rounded-xl overflow-hidden hover:border-[#005A9E]/30 hover:shadow-sm bg-white transition-all duration-300">
               <button 
                 onClick={() => setActiveFaq(activeFaq === 2 ? null : 2)}
                 className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none cursor-pointer"
                 aria-expanded={activeFaq === 2}
                 id="faq-accordion-trigger-2"
               >
-                <span className="text-sm sm:text-base font-semibold text-white font-sans flex items-start space-x-3 pr-4">
-                  <HelpCircle className="w-5 h-5 text-[#00D4FF] shrink-0 mt-0.5" />
+                <span className="text-sm sm:text-base font-bold text-slate-900 font-sans flex items-start space-x-3 pr-4">
+                  <HelpCircle className="w-5 h-5 text-[#005A9E] shrink-0 mt-0.5" />
                   <span>{t.faqQ3}</span>
                 </span>
-                <ChevronDown className={`w-4 h-4 text-white/50 shrink-0 transition-transform duration-300 ${activeFaq === 2 ? "rotate-180 text-[#00D4FF]" : ""}`} />
+                <ChevronDown className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-300 ${activeFaq === 2 ? "rotate-180 text-[#005A9E]" : ""}`} />
               </button>
               <AnimatePresence initial={false}>
                 {activeFaq === 2 && (
@@ -1703,7 +1704,7 @@ export default function ReservationPage() {
                     transition={{ duration: 0.25, cubicBezier: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 pt-2 bg-[#050505]/40 border-t border-white/5 text-xs sm:text-sm text-white/60 leading-relaxed font-sans">
+                    <div className="px-6 pb-6 pt-2 bg-slate-50/60 border-t border-slate-100 text-xs sm:text-sm text-slate-750 leading-relaxed font-sans">
                       {t.faqA3}
                     </div>
                   </motion.div>
@@ -1712,18 +1713,18 @@ export default function ReservationPage() {
             </div>
 
             {/* FAQ 4 */}
-            <div className="border border-white/10 rounded-2xl overflow-hidden hover:border-[#00D4FF]/35 hover:scale-[1.002] bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300">
+            <div className="border border-slate-205 rounded-xl overflow-hidden hover:border-[#005A9E]/30 hover:shadow-sm bg-white transition-all duration-300">
               <button 
                 onClick={() => setActiveFaq(activeFaq === 3 ? null : 3)}
                 className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none cursor-pointer"
                 aria-expanded={activeFaq === 3}
                 id="faq-accordion-trigger-3"
               >
-                <span className="text-sm sm:text-base font-semibold text-white font-sans flex items-start space-x-3 pr-4">
-                  <HelpCircle className="w-5 h-5 text-[#00D4FF] shrink-0 mt-0.5" />
+                <span className="text-sm sm:text-base font-bold text-slate-900 font-sans flex items-start space-x-3 pr-4">
+                  <HelpCircle className="w-5 h-5 text-[#005A9E] shrink-0 mt-0.5" />
                   <span>{t.faqQ4}</span>
                 </span>
-                <ChevronDown className={`w-4 h-4 text-white/50 shrink-0 transition-transform duration-300 ${activeFaq === 3 ? "rotate-180 text-[#00D4FF]" : ""}`} />
+                <ChevronDown className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-300 ${activeFaq === 3 ? "rotate-180 text-[#005A9E]" : ""}`} />
               </button>
               <AnimatePresence initial={false}>
                 {activeFaq === 3 && (
@@ -1734,7 +1735,7 @@ export default function ReservationPage() {
                     transition={{ duration: 0.25, cubicBezier: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 pt-2 bg-[#050505]/40 border-t border-white/5 text-xs sm:text-sm text-white/60 leading-relaxed font-sans">
+                    <div className="px-6 pb-6 pt-2 bg-slate-50/60 border-t border-slate-100 text-xs sm:text-sm text-slate-755 leading-relaxed font-sans">
                       {t.faqA4}
                     </div>
                   </motion.div>
@@ -1743,18 +1744,18 @@ export default function ReservationPage() {
             </div>
 
             {/* FAQ 5 */}
-            <div className="border border-white/10 rounded-2xl overflow-hidden hover:border-[#00D4FF]/35 hover:scale-[1.002] bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300">
+            <div className="border border-slate-205 rounded-xl overflow-hidden hover:border-[#005A9E]/30 hover:shadow-sm bg-white transition-all duration-300">
               <button 
                 onClick={() => setActiveFaq(activeFaq === 4 ? null : 4)}
                 className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none cursor-pointer"
                 aria-expanded={activeFaq === 4}
                 id="faq-accordion-trigger-4"
               >
-                <span className="text-sm sm:text-base font-semibold text-white font-sans flex items-start space-x-3 pr-4">
-                  <HelpCircle className="w-5 h-5 text-[#00D4FF] shrink-0 mt-0.5" />
+                <span className="text-sm sm:text-base font-bold text-slate-900 font-sans flex items-start space-x-3 pr-4">
+                  <HelpCircle className="w-5 h-5 text-[#005A9E] shrink-0 mt-0.5" />
                   <span>{t.faqQ5}</span>
                 </span>
-                <ChevronDown className={`w-4 h-4 text-white/50 shrink-0 transition-transform duration-300 ${activeFaq === 4 ? "rotate-180 text-[#00D4FF]" : ""}`} />
+                <ChevronDown className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-300 ${activeFaq === 4 ? "rotate-180 text-[#005A9E]" : ""}`} />
               </button>
               <AnimatePresence initial={false}>
                 {activeFaq === 4 && (
@@ -1765,7 +1766,7 @@ export default function ReservationPage() {
                     transition={{ duration: 0.25, cubicBezier: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 pt-2 bg-[#050505]/40 border-t border-white/5 text-xs sm:text-sm text-white/60 leading-relaxed font-sans">
+                    <div className="px-6 pb-6 pt-2 bg-slate-50/60 border-t border-slate-100 text-xs sm:text-sm text-slate-750 leading-relaxed font-sans">
                       {t.faqA5}
                     </div>
                   </motion.div>
@@ -1774,18 +1775,18 @@ export default function ReservationPage() {
             </div>
 
             {/* FAQ 6 */}
-            <div className="border border-white/10 rounded-2xl overflow-hidden hover:border-[#00D4FF]/35 hover:scale-[1.002] bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300">
+            <div className="border border-slate-205 rounded-xl overflow-hidden hover:border-[#005A9E]/30 hover:shadow-sm bg-white transition-all duration-300">
               <button 
                 onClick={() => setActiveFaq(activeFaq === 5 ? null : 5)}
                 className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none cursor-pointer"
                 aria-expanded={activeFaq === 5}
                 id="faq-accordion-trigger-5"
               >
-                <span className="text-sm sm:text-base font-semibold text-white font-sans flex items-start space-x-3 pr-4">
-                  <HelpCircle className="w-5 h-5 text-[#00D4FF] shrink-0 mt-0.5" />
+                <span className="text-sm sm:text-base font-bold text-slate-900 font-sans flex items-start space-x-3 pr-4">
+                  <HelpCircle className="w-5 h-5 text-[#005A9E] shrink-0 mt-0.5" />
                   <span>{t.faqQ6}</span>
                 </span>
-                <ChevronDown className={`w-4 h-4 text-white/50 shrink-0 transition-transform duration-300 ${activeFaq === 5 ? "rotate-180 text-[#00D4FF]" : ""}`} />
+                <ChevronDown className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-300 ${activeFaq === 5 ? "rotate-180 text-[#005A9E]" : ""}`} />
               </button>
               <AnimatePresence initial={false}>
                 {activeFaq === 5 && (
@@ -1796,7 +1797,7 @@ export default function ReservationPage() {
                     transition={{ duration: 0.25, cubicBezier: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 pt-2 bg-[#050505]/40 border-t border-white/5 text-xs sm:text-sm text-white/60 leading-relaxed font-sans">
+                    <div className="px-6 pb-6 pt-2 bg-slate-50/60 border-t border-slate-100 text-xs sm:text-sm text-slate-750 leading-relaxed font-sans">
                       {t.faqA6}
                     </div>
                   </motion.div>
@@ -1810,20 +1811,18 @@ export default function ReservationPage() {
       </section>
 
       {/* 4.6 Brand Co-Sharing & Viral Growth Section */}
-      <section className="py-20 bg-gradient-to-b from-navy-secondary to-navy-deeper border-t border-white/10 relative overflow-hidden" id="viral-share">
-        {/* Subtle decorative elements for a high-end designer visual feel */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#00D4FF]/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <section className="py-20 bg-slate-50 border-t border-slate-205 relative overflow-hidden" id="viral-share">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#005A9E]/5 rounded-full blur-[120px] pointer-events-none"></div>
 
         <div className="max-w-[1400px] mx-auto px-6 lg:px-16 text-center space-y-10 relative z-10">
           <div className="space-y-3 max-w-xl mx-auto">
-            <span className="text-[10px] font-mono tracking-[0.3em] font-semibold text-[#00D4FF] uppercase bg-[#00D4FF]/10 border border-[#00D4FF]/20 px-3 py-1.5 rounded-full inline-block">
+            <span className="text-[10px] font-mono tracking-wider font-bold text-[#005A9E] uppercase bg-sky-50 border border-sky-100/60 px-3.5 py-1.5 rounded-full inline-block">
               {t.shareBadge}
             </span>
-            <h2 className="text-3xl lg:text-4xl font-display font-medium tracking-tight text-white mb-2 leading-none">
+            <h2 className="text-3xl lg:text-4xl font-display font-medium tracking-tight text-slate-900 mb-2 leading-none">
               {t.shareTitle}
             </h2>
-            <p className="text-sm font-sans text-white/60 leading-relaxed">
+            <p className="text-sm font-sans text-slate-600 leading-relaxed">
               {t.shareSubtitle}
             </p>
           </div>
@@ -1836,10 +1835,10 @@ export default function ReservationPage() {
               href={twitterShareUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto flex items-center justify-center space-x-2.5 bg-white/5 hover:bg-[#1DA1F2]/10 border border-white/10 hover:border-[#1DA1F2]/30 px-6 py-3.5 rounded-xl text-xs uppercase font-mono tracking-wider text-white hover:text-[#1DA1F2] font-semibold transition-all duration-350 shadow-md transform hover:-translate-y-0.5 select-none"
+              className="w-full sm:w-auto flex items-center justify-center space-x-2.5 bg-white hover:bg-slate-50 border border-slate-205 hover:border-slate-350 px-6 py-3.5 rounded-xl text-xs uppercase font-mono tracking-wider text-slate-800 font-bold transition-all duration-300 shadow-sm transform hover:-translate-y-0.5 select-none"
               id="share-btn-twitter"
             >
-              <Twitter className="w-4 h-4 shrink-0 transition-transform duration-200" />
+              <Twitter className="w-4 h-4 shrink-0 text-[#1DA1F2]" />
               <span>Twitter / X</span>
             </a>
 
@@ -1848,10 +1847,10 @@ export default function ReservationPage() {
               href={facebookShareUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto flex items-center justify-center space-x-2.5 bg-white/5 hover:bg-[#1877F2]/10 border border-white/10 hover:border-[#1877F2]/30 px-6 py-3.5 rounded-xl text-xs uppercase font-mono tracking-wider text-white hover:text-[#1877F2] font-semibold transition-all duration-350 shadow-md transform hover:-translate-y-0.5 select-none"
+              className="w-full sm:w-auto flex items-center justify-center space-x-2.5 bg-white hover:bg-slate-50 border border-slate-205 hover:border-slate-350 px-6 py-3.5 rounded-xl text-xs uppercase font-mono tracking-wider text-slate-800 font-bold transition-all duration-300 shadow-sm transform hover:-translate-y-0.5 select-none"
               id="share-btn-facebook"
             >
-              <Facebook className="w-4 h-4 shrink-0 transition-transform duration-200" />
+              <Facebook className="w-4 h-4 shrink-0 text-[#1877F2]" />
               <span>Facebook</span>
             </a>
 
@@ -1860,23 +1859,23 @@ export default function ReservationPage() {
               href={linkedinShareUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto flex items-center justify-center space-x-2.5 bg-white/5 hover:bg-[#0077B5]/10 border border-white/10 hover:border-[#0077B5]/30 px-6 py-3.5 rounded-xl text-xs uppercase font-mono tracking-wider text-white hover:text-[#0077B5] font-semibold transition-all duration-350 shadow-md transform hover:-translate-y-0.5 select-none"
+              className="w-full sm:w-auto flex items-center justify-center space-x-2.5 bg-white hover:bg-slate-50 border border-slate-205 hover:border-slate-350 px-6 py-3.5 rounded-xl text-xs uppercase font-mono tracking-wider text-slate-800 font-bold transition-all duration-300 shadow-sm transform hover:-translate-y-0.5 select-none"
               id="share-btn-linkedin"
             >
-              <Linkedin className="w-4 h-4 shrink-0 transition-transform duration-200" />
+              <Linkedin className="w-4 h-4 shrink-0 text-[#0077B5]" />
               <span>LinkedIn</span>
             </a>
 
           </div>
 
           {/* Quick Copy Link Bar */}
-          <div className="max-w-md mx-auto p-1.5 bg-white/4 border border-white/8 rounded-2xl flex items-center shadow-inner relative justify-between gap-2 overflow-hidden">
-            <span className="text-xs font-mono text-white/55 px-4 truncate select-all">
+          <div className="max-w-md mx-auto p-1.5 bg-slate-100 border border-slate-205 rounded-2xl flex items-center shadow-inner relative justify-between gap-2 overflow-hidden">
+            <span className="text-xs font-mono text-slate-600 px-4 truncate select-all">
               {shareUrl}
             </span>
             <button 
               onClick={handleCopyLink}
-              className="bg-white text-black hover:bg-gray-100 flex items-center gap-2 px-5 py-3 rounded-xl font-mono text-xs font-bold uppercase tracking-wider relative transition-all shadow-inner border border-white/10 whitespace-nowrap overflow-hidden shrink-0 select-none cursor-pointer"
+              className="bg-[#005A9E] text-white hover:bg-sky-700 flex items-center gap-2 px-5 py-3 rounded-xl font-mono text-xs font-bold uppercase tracking-wider relative transition-all shadow-md border-none whitespace-nowrap overflow-hidden shrink-0 select-none cursor-pointer"
               id="share-btn-copy"
             >
               <AnimatePresence mode="wait">
@@ -1886,7 +1885,7 @@ export default function ReservationPage() {
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -20, opacity: 0 }}
-                    className="flex items-center gap-1.5 text-emerald-600"
+                    className="flex items-center gap-1.5 text-white"
                   >
                     <Check className="w-4.5 h-4.5 stroke-[2.5]" />
                     <span>{t.shareCopied}</span>
@@ -1911,41 +1910,36 @@ export default function ReservationPage() {
       </main>
 
       {/* Footer copyright, billing context and legal attribution */}
-      <footer className="border-t border-white/10 bg-[#0A192F] py-20 text-xs text-[#E2E8F0] relative z-10 select-none font-['Segoe_UI',_-apple-system,_sans-serif]">
+      <footer className="border-t border-slate-205 bg-slate-100 py-20 text-xs text-slate-700 relative z-10 select-none font-sans">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-16 space-y-12">
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12" id="toronto-market-tech-footer">
             
-            {/* Column 1: Corporate HQ & Profile */}
+            {/* Column 1: Brand Profile */}
             <div className="space-y-4">
               <div className="flex flex-col space-y-1">
-                <span className="font-display font-black text-base text-white tracking-tight uppercase">ASTRATEQ CANADA</span>
-                <span className="text-[10px] uppercase font-['Consolas',_monospace] tracking-widest text-[#00D4FF]">{t.brandTagline}</span>
+                <span className="font-display font-medium text-base text-slate-900 tracking-tight uppercase">ASTRATEQ CANADA</span>
+                <span className="text-[10px] uppercase font-mono tracking-widest text-[#005A9E]">{t.brandTagline}</span>
               </div>
-              <p className="text-[#E2E8F0]/90 leading-relaxed text-xs">
+              <p className="text-slate-600 leading-relaxed text-xs">
                 Pioneering regional predictive driver safety systems. Our advanced machine-vision models are tuned and validated specifically for cold weather, low visibility, and sudden traction loss.
               </p>
-              <div className="pt-2 flex flex-col space-y-1 border-t border-white/10 font-['Consolas',_monospace] text-[10px] text-[#E2E8F0]/80">
-                <span className="font-bold text-[#00D4FF]">Toronto HQ & AI Labs:</span>
-                <span className="text-white">MaRS Discovery District, 101 College St</span>
-                <span className="text-white/80">Toronto, ON, Canada · 43.6532° N, 79.3832° W</span>
-              </div>
             </div>
 
             {/* Column 2: Active Road-Testing & Telemetry */}
             <div className="space-y-4">
-              <span className="font-display font-bold text-xs uppercase text-white tracking-wider block">GTA Validation & Telemetry</span>
-              <ul className="space-y-3 text-xs text-[#E2E8F0]/90">
+              <span className="font-display font-medium text-xs uppercase text-slate-900 tracking-wider block">GTA Validation & Telemetry</span>
+              <ul className="space-y-3 text-xs text-slate-600">
                 <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00D4FF] mt-1.5 shrink-0 shadow-[0_0_6px_#00D4FF]"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#005A9E] mt-1.5 shrink-0 shadow-sm"></span>
                   <span>Active telemetry testing loops across Highway 401, DVP, and Gardiner Expressway.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00D4FF] mt-1.5 shrink-0 shadow-[0_0_6px_#00D4FF]"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#005A9E] mt-1.5 shrink-0 shadow-sm"></span>
                   <span>Safety alignment inspired by the Vector Institute's standards for trustworthy AI.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00D4FF] mt-1.5 shrink-0 shadow-[0_0_6px_#00D4FF]"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#005A9E] mt-1.5 shrink-0 shadow-sm"></span>
                   <span>Transport Canada compliant advisory driver-assist classification.</span>
                 </li>
               </ul>
@@ -1953,18 +1947,18 @@ export default function ReservationPage() {
 
             {/* Column 3: Compliance & Privacy */}
             <div className="space-y-4">
-              <span className="font-display font-bold text-xs uppercase text-white tracking-wider block">Sovereign Data & Privacy</span>
-              <ul className="space-y-3 text-xs text-[#E2E8F0]/90">
+              <span className="font-display font-medium text-xs uppercase text-slate-900 tracking-wider block">Sovereign Data & Privacy</span>
+              <ul className="space-y-3 text-xs text-slate-600">
                 <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00D4FF] mt-1.5 shrink-0 shadow-[0_0_6px_#00D4FF]"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#005A9E] mt-1.5 shrink-0 shadow-sm"></span>
                   <span>100% sovereign Canadian data residency hosted natively on encrypted Toronto server nodes.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00D4FF] mt-1.5 shrink-0 shadow-[0_0_6px_#00D4FF]"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#005A9E] mt-1.5 shrink-0 shadow-sm"></span>
                   <span>Strict PIPEDA conformity prevents data commercialization or off-border exports.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00D4FF] mt-1.5 shrink-0 shadow-[0_0_6px_#00D4FF]"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#005A9E] mt-1.5 shrink-0 shadow-sm"></span>
                   <span>Full AES-256 local storage encryption with localized OTA safety updates.</span>
                 </li>
               </ul>
@@ -1972,13 +1966,13 @@ export default function ReservationPage() {
 
             {/* Column 4: Contact & Social Sharing */}
             <div className="space-y-4">
-              <span className="font-display font-bold text-xs uppercase text-white tracking-wider block">Inquiries & Community</span>
-              <p className="text-[#E2E8F0]/90 text-xs">
+              <span className="font-display font-medium text-xs uppercase text-slate-900 tracking-wider block">Inquiries & Community</span>
+              <p className="text-slate-600 text-xs">
                 Have questions regarding fleet pre-orders, corporate pilot tests, or elder-safety vehicle retrofits?
               </p>
-              <div className="bg-white/[0.06] border border-white/10 p-3 rounded-lg flex flex-col space-y-1 font-['Consolas',_monospace]">
-                <span className="text-[10px] text-[#E2E8F0]/70 uppercase font-bold tracking-wider">Toronto Direct Hub:</span>
-                <a href="tel:+14165550192" className="text-[#00D4FF] hover:text-white font-bold text-sm block transition-colors">
+              <div className="bg-slate-200 border border-slate-300/40 p-3 rounded-lg flex flex-col space-y-1 font-mono">
+                <span className="text-[10px] text-[#005A9E] uppercase font-bold tracking-wider">Toronto Direct Hub:</span>
+                <a href="tel:+14165550192" className="text-[#005A9E] hover:text-[#106ebe] font-bold text-sm block transition-colors">
                   +1 (416) 555-0192
                 </a>
               </div>
@@ -1989,7 +1983,7 @@ export default function ReservationPage() {
                   href={twitterShareUrl} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#1DA1F2]/20 border border-white/10 hover:border-[#1DA1F2]/30 flex items-center justify-center text-white/90 hover:text-[#1DA1F2] transition-colors shadow-sm"
+                  className="w-8 h-8 rounded-lg bg-white hover:bg-slate-200/50 border border-slate-250 flex items-center justify-center text-slate-700 hover:text-[#1DA1F2] transition-colors shadow-sm"
                   aria-label="Share on Twitter / X"
                   title="Twitter / X"
                 >
@@ -1999,7 +1993,7 @@ export default function ReservationPage() {
                   href={facebookShareUrl} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#1877F2]/20 border border-white/10 hover:border-[#1877F2]/30 flex items-center justify-center text-white/90 hover:text-[#1877F2] transition-colors shadow-sm"
+                  className="w-8 h-8 rounded-lg bg-white hover:bg-slate-200/50 border border-slate-250 flex items-center justify-center text-slate-700 hover:text-[#1877F2] transition-colors shadow-sm"
                   aria-label="Share on Facebook"
                   title="Facebook"
                 >
@@ -2009,7 +2003,7 @@ export default function ReservationPage() {
                   href={linkedinShareUrl} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#0077B5]/20 border border-white/10 hover:border-[#0077B5]/30 flex items-center justify-center text-white/90 hover:text-[#0077B5] transition-colors shadow-sm"
+                  className="w-8 h-8 rounded-lg bg-white hover:bg-slate-200/50 border border-slate-250 flex items-center justify-center text-slate-700 hover:text-[#0077B5] transition-colors shadow-sm"
                   aria-label="Share on LinkedIn"
                   title="LinkedIn"
                 >
@@ -2017,14 +2011,14 @@ export default function ReservationPage() {
                 </a>
                 <button 
                   onClick={handleCopyLink} 
-                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white/90 hover:text-white relative transition-colors cursor-pointer shadow-sm"
+                  className="w-8 h-8 rounded-lg bg-white hover:bg-slate-200/50 border border-slate-250 flex items-center justify-center text-slate-700 hover:text-slate-900 relative transition-colors cursor-pointer shadow-sm"
                   aria-label="Copy Page Link"
                   title="Copy Link"
                 >
                   {isCopied ? (
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    <Check className="w-3.5 h-3.5 text-emerald-600" />
                   ) : (
-                    <Copy className="w-3.5 h-3.5 text-slate-100" />
+                    <Copy className="w-3.5 h-3.5 text-slate-700" />
                   )}
                   
                   <AnimatePresence>
@@ -2033,7 +2027,7 @@ export default function ReservationPage() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-emerald-500 text-black font-['Consolas',_monospace] font-bold text-[8px] uppercase px-1.5 py-0.5 rounded shadow-lg whitespace-nowrap pointer-events-none z-20"
+                        className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white font-mono font-bold text-[8px] uppercase px-1.5 py-0.5 rounded shadow-lg whitespace-nowrap pointer-events-none z-20"
                       >
                         {t.shareCopied}
                       </motion.span>
@@ -2045,27 +2039,27 @@ export default function ReservationPage() {
 
           </div>
 
-          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-[11px] text-[#E2E8F0]/90">
+          <div className="border-t border-slate-250 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-[11px] text-slate-650">
             <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2">
-              <span className="font-semibold text-white">© 2026 Astrateq Gadgets Inc. All rights reserved.</span>
-              <span className="hidden md:inline-block text-white/20">|</span>
-              <span className="text-[#E2E8F0]">Proudly engineered in Toronto, Ontario, Canada.</span>
-              <span className="hidden md:inline-block text-white/20">|</span>
-              <span className="font-['Consolas',_monospace] text-[10px] text-[#E2E8F0]/80">Version française disponible sur commande.</span>
+              <span className="font-bold text-slate-900">© 2026 Astrateq Canada. All rights reserved.</span>
+              <span className="hidden md:inline-block text-slate-300">|</span>
+              <span className="text-slate-600">Proudly engineered in Toronto, Ontario, Canada.</span>
+              <span className="hidden md:inline-block text-slate-300">|</span>
+              <span className="font-mono text-[10px] text-slate-600">Version française disponible sur commande.</span>
             </div>
             
-            <div className="flex items-center gap-2 text-[#E2E8F0] font-medium">
+            <div className="flex items-center gap-2 text-slate-600 font-medium">
               <span>{t.heroRefundSnippet}</span>
             </div>
           </div>
 
           {/* Legal Limitations & PIPEDA Disclaimer */}
-          <div className="pt-6 border-t border-white/10 text-[10px] sm:text-[11px] text-[#E2E8F0]/80 leading-relaxed font-['Consolas',_monospace] space-y-2">
-            <div className="flex items-center space-x-2 text-white font-bold uppercase tracking-wider text-[10px]">
-              <Lock className="w-3.5 h-3.5 text-[#00D4FF]" />
+          <div className="pt-6 border-t border-slate-250 text-[10px] sm:text-[11px] text-slate-600 leading-relaxed font-mono space-y-2">
+            <div className="flex items-center space-x-2 text-slate-800 font-bold uppercase tracking-wider text-[10px]">
+              <Lock className="w-3.5 h-3.5 text-[#005A9E]" />
               <span>{lang === "en" ? "LEGAL DISCLAIMERS & RESPONSIBILITY CHARTER" : "AVERTISSEMENTS LÉGAUX ET CHARTE DE RESPONSABILITÉ"}</span>
             </div>
-            <p className="max-w-6xl text-[#E2E8F0]/90 leading-normal">
+            <p className="max-w-6xl text-slate-600 leading-normal">
               {t.legalDisclaimer}
             </p>
           </div>
@@ -2086,7 +2080,7 @@ export default function ReservationPage() {
             id="sticky-mobile-drawer"
           >
             <div className="hidden sm:flex flex-col">
-              <span className="text-[9px] font-mono text-[#0078D4] tracking-[0.2em] uppercase font-bold leading-none mb-1">FOUNDER BATCH 01</span>
+              <span className="text-[9px] font-mono text-[#005A9E] tracking-[0.2em] uppercase font-bold leading-none mb-1">FOUNDER BATCH 01</span>
               <span className="text-sm font-display font-black text-slate-900 leading-tight">ASTRA-AI Pre-order Bundle</span>
             </div>
             
@@ -2094,13 +2088,13 @@ export default function ReservationPage() {
               {/* Scalable flexible grid list selection indicators with high-contrast light colors */}
               <div className="flex -space-x-1 border border-slate-300/50 p-1.5 rounded-lg bg-slate-100 mr-4 shrink-0 hidden sm:flex">
                 <span className="text-xs font-mono font-extrabold text-slate-800 px-2">$25</span>
-                <span className="text-xs font-mono font-extrabold text-[#0078D4] border-l border-slate-300/50 px-2">$85</span>
+                <span className="text-xs font-mono font-extrabold text-[#005A9E] border-l border-slate-300/50 px-2">$85</span>
                 <span className="text-xs font-mono font-extrabold text-slate-800 border-l border-slate-300/50 px-2">$150</span>
               </div>
               
               <button 
                 onClick={() => scrollToSection(pricingSectionRef)}
-                className="w-full sm:w-auto bg-[#0078D4] hover:bg-[#106ebe] text-white font-mono font-bold uppercase tracking-wider text-xs py-3 px-6 rounded-xl transition-all duration-300 text-center shrink-0 flex items-center justify-center space-x-2 cursor-pointer shadow-lg shadow-sky-500/10 active:scale-[0.98]"
+                className="w-full sm:w-auto bg-[#005A9E] hover:bg-[#106ebe] text-white font-mono font-bold uppercase tracking-wider text-xs py-3 px-6 rounded-xl transition-all duration-300 text-center shrink-0 flex items-center justify-center space-x-2 cursor-pointer shadow-lg shadow-sky-500/10 active:scale-[0.98]"
                 id="sticky-reservation-btn"
               >
                 <span>{t.stickyMobileBtn}</span>
