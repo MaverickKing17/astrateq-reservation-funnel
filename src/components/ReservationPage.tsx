@@ -91,6 +91,12 @@ interface TranslationSchema {
   faqA2: string;
   faqQ3: string;
   faqA3: string;
+  faqQ4: string;
+  faqA4: string;
+  faqQ5: string;
+  faqA5: string;
+  faqQ6: string;
+  faqA6: string;
   stickyMobileBtn: string;
   modalCheckoutTitle: string;
   modalCheckoutSubtitle: string;
@@ -188,6 +194,12 @@ const translations: Record<Language, TranslationSchema> = {
     faqA2: "Yes, easily. The smart OBD-II dongle plugs right under the steering column with a simple click, and the camera locks securely into its premium magnetic dashboard cradle. We provide seamless digital guides and live video assistance to get you online in under two minutes, with no specialized tools.",
     faqQ3: "Are there monthly subscription fees?",
     faqA3: "No hidden subscription rules apply to active driving monitoring. All core prediction metrics, safety profiles, and vehicle computer translations reside natively on the offline ASTRA-AI edge processors, meaning you will always look after your family without mandatory ongoing service fees.",
+    faqQ4: "Will this drain my parents' car battery?",
+    faqA4: "No, our system features smart power regulation. It automatically transitions to an ultra-low-power sleep state (drawing less than 5mA) when the engine is turned off or if it senses vehicle battery voltage drops below 11.8V, protecting the starter.",
+    faqQ5: "Is there a backup system if cellular networks are weak?",
+    faqA5: "Yes. Essential alert calculations and collision prediction run fully locally on our device's dedicated edge processor. If cellular signal is temporarily lost on rural roads, critical driver notifications operate offline, and non-urgent vehicle health data is queued to sync as soon as cellular service is restored.",
+    faqQ6: "Can I share the vehicle health status with my siblings?",
+    faqA6: "Absolutely. In your secure Astrateq dashboard, you can authorize multiple family members (such as siblings or co-guardians) to receive the silent vehicle health reports or emergency trigger notifications, keeping your whole support circle connected.",
     stickyMobileBtn: "Reserve ASTRA-AI Now",
     modalCheckoutTitle: "Pre-Launch Spot Security",
     modalCheckoutSubtitle: "Locking spot in the limited Founder Batch 01",
@@ -282,6 +294,12 @@ const translations: Record<Language, TranslationSchema> = {
     faqA2: "Absolument pas. Le dongle OBD-II s'encliquette sous le tableau de bord, et la caméra se pose magnétiquement sur son socle. Nous fournissons des tutoriels vidéo intuitifs et un soutien en ligne pour installer le tout en moins de deux minutes, sans aucun outil.",
     faqQ3: "Faut-il payer des frais mensuels ?",
     faqA3: "Non, les fonctions fondamentales d'analyse prédictive s'exécutent localement grâce aux puces IA embarquées de l'appareil. Ainsi, aucun abonnement obligatoire n'est imposé pour garantir la tranquillité de votre foyer.",
+    faqQ4: "L'appareil risque-t-il de décharger la batterie du véhicule ?",
+    faqA4: "Aucunement. L'appareil est doté d'une régulation intelligente. Il se met en veille ultra-basse consommation (moins de 5mA) dès que le moteur est coupé ou si la tension de la batterie du véhicule descend sous 11,8V.",
+    faqQ5: "Comment cela fonctionne-t-il si le réseau cellulaire est faible ?",
+    faqA5: "Les calculs prédictifs essentiels s'exécutent entièrement localement. En cas de perte de signal cellulaire sur les routes de campagne, les fonctions vitales d'assistance continuent de fonctionner hors ligne, tandis que les données d'entretien non-urgentes se synchronisent dès le retour du réseau.",
+    faqQ6: "Puis-je partager l'état du véhicule avec d'autres membres de la famille ?",
+    faqA6: "Oui, tout à fait. Votre tableau de bord sécurisé vous permet d'autoriser plusieurs proches (comme vos frères et sœurs ou tuteurs) à recevoir les rapports d'état mécanique du véhicule ainsi que les alertes d'urgence, maintenant l'ensemble de votre cercle familial connecté.",
     stickyMobileBtn: "Réserver Astra-AI maintenant",
     modalCheckoutTitle: "Sécurisation de Place",
     modalCheckoutSubtitle: "Réservation de rang dans le Lot de Sélection 01",
@@ -527,11 +545,20 @@ export default function ReservationPage() {
     const handleScroll = () => {
       if (heroRef.current) {
         const heroBottom = heroRef.current.getBoundingClientRect().bottom + window.scrollY;
-        // Show after scrolling 100px past hero bottom or similar
-        setIsStickyCtaVisible(window.scrollY > heroBottom - 200);
+        const currentScroll = window.scrollY;
+        
+        // Hide sticky bottom CTA when we reach the footer region
+        const docHeight = document.documentElement.scrollHeight;
+        const viewHeight = window.innerHeight;
+        const distFromBottom = docHeight - (currentScroll + viewHeight);
+        
+        // We hide the sticky bar when within 550px of the bottom so it doesn't overlap the footer
+        const isNearFooter = distFromBottom < 550;
+        
+        setIsStickyCtaVisible((currentScroll > heroBottom - 200) && !isNearFooter);
       }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -653,64 +680,6 @@ export default function ReservationPage() {
   return (
     <div className="min-h-screen bg-navy-bg text-white font-sans antialiased selection:bg-navy-brand selection:text-white overflow-x-hidden" id="funnel-container">
       
-      {/* Floating Premium Social Sharing Bar - Desktop only (hidden on mobile/tablet) */}
-      <aside className="fixed left-6 top-1/2 -translate-y-1/2 z-30 hidden xl:flex flex-col items-center space-y-4 bg-navy-card/85 backdrop-blur-md border border-white/10 px-3 py-6 rounded-2xl shadow-xl hover:border-white/20 hover:shadow-[#00D4FF]/10 hover:shadow-lg transition-all duration-300 select-none" id="floating-share-dock" aria-label="Social sharing dock">
-        <div className="w-8 h-8 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-white/50 mb-1" title="Share and Invite">
-          <Share2 className="w-4 h-4" />
-        </div>
-        <a 
-          href={twitterShareUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="w-10 h-10 rounded-xl bg-white/5 hover:bg-[#1DA1F2]/20 border border-white/5 hover:border-[#1DA1F2]/30 flex items-center justify-center text-white hover:text-[#1DA1F2] transition-all duration-200 group"
-          aria-label="Share on Twitter / X"
-        >
-          <Twitter className="w-4 h-4 group-hover:scale-110 transition-transform" />
-        </a>
-        <a 
-          href={facebookShareUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="w-10 h-10 rounded-xl bg-white/5 hover:bg-[#1877F2]/20 border border-white/5 hover:border-[#1877F2]/30 flex items-center justify-center text-white hover:text-[#1877F2] transition-all duration-200 group"
-          aria-label="Share on Facebook"
-        >
-          <Facebook className="w-4 h-4 group-hover:scale-110 transition-transform" />
-        </a>
-        <a 
-          href={linkedinShareUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="w-10 h-10 rounded-xl bg-white/5 hover:bg-[#0077B5]/20 border border-white/5 hover:border-[#0077B5]/30 flex items-center justify-center text-white hover:text-[#0077B5] transition-all duration-200 group"
-          aria-label="Share on LinkedIn"
-        >
-          <Linkedin className="w-4 h-4 group-hover:scale-110 transition-transform" />
-        </a>
-        <button 
-          onClick={handleCopyLink} 
-          className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 flex items-center justify-center text-white relative transition-all duration-200 cursor-pointer group"
-          aria-label="Copy Page Link"
-        >
-          {isCopied ? (
-            <Check className="w-4 h-4 text-emerald-400" />
-          ) : (
-            <Copy className="w-4 h-4 text-white/70 group-hover:text-white group-hover:scale-110 transition-transform" />
-          )}
-          
-          <AnimatePresence>
-            {isCopied && (
-              <motion.span 
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
-                className="absolute left-14 bg-emerald-500 text-black font-mono font-bold text-[9px] uppercase px-2.5 py-1 rounded shadow-lg whitespace-nowrap pointer-events-none"
-              >
-                {t.shareCopied}
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </button>
-      </aside>
-
       {/* 4.1 Global Navigation Header */}
       <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-navy-bg/85 backdrop-blur-md transition-colors duration-200">
         <nav className="max-w-[1400px] mx-auto px-6 lg:px-16 h-20 flex items-center justify-between" aria-label="Main Navigation">
@@ -1560,74 +1529,88 @@ export default function ReservationPage() {
         </div>
       </section>
 
-      {/* 4.6 Canadian Trust, Compliance & FAQ */}
-      <section className="py-20 lg:py-32 max-w-[1400px] mx-auto px-6 lg:px-16" id="faq">
-        
+      {/* 4.6 Canadian Trust, Compliance & Security */}
+      <section className="py-20 max-w-[1400px] mx-auto px-6 lg:px-16" id="compliance">
         {/* Strict Canadian Data Declaration */}
-        <div className="bg-white/2 rounded-3xl p-8 lg:p-12 border border-white/10 shadow-sm flex flex-col relative overflow-hidden animate-fade-in" id="canadian-compliance-banner">
-          <div className="absolute left-0 top-0 bottom-0 w-2 bg-[#00D4FF]"></div>
+        <div className="bg-navy-card/40 backdrop-blur-md rounded-3xl p-8 lg:p-12 border border-white/10 shadow-2xl flex flex-col relative overflow-hidden animate-fade-in" id="canadian-compliance-banner">
+          {/* Top subtle glow banner border */}
+          <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#00D4FF]/30 to-transparent"></div>
+          {/* Accent vertical line */}
+          <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#00D4FF] to-blue-600"></div>
           
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-            <div className="flex items-center space-x-4 shrink-0">
-              <div className="p-4 bg-white/5 border border-white/10 rounded-2xl text-[#00D4FF]">
+            <div className="flex items-center space-x-5 shrink-0">
+              <div className="p-4 bg-[#00D4FF]/10 border border-[#00D4FF]/25 rounded-2xl text-[#00D4FF] shadow-[0_0_20px_rgba(0,212,255,0.08)]">
                 <ShieldCheck className="w-8 h-8 stroke-[1.8]" />
               </div>
               <div>
                 <span className="text-[10px] tracking-[0.2em] font-mono font-bold block text-[#00D4FF] uppercase">{t.secTrustLabel}</span>
-                <h3 className="text-xl font-display font-black text-white">PIPEDA Conformity</h3>
+                <h3 className="text-2xl font-display font-black text-white mt-1">PIPEDA Conformity</h3>
               </div>
             </div>
-            <p className="text-xs sm:text-sm text-white/60 leading-relaxed max-w-[720px] lg:border-l lg:border-white/10 lg:pl-8">
+            <p className="text-sm text-white/70 leading-relaxed max-w-[760px] lg:border-l lg:border-white/10 lg:pl-8 font-sans">
               {t.secTrustContent}
             </p>
           </div>
 
           {/* Critical Brand Certification Row (Page 6 of Brand document) */}
-          <div className="border-t border-white/5 pt-8 mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6" id="brand-certifications-row">
+          <div className="border-t border-white/10 pt-8 mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6" id="brand-certifications-row">
             
-            <div className="flex items-center space-x-3.5 bg-white/2 p-3.5 rounded-xl border border-white/5">
-              <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></div>
+            <div className="flex items-center space-x-4 bg-white/[0.03] hover:bg-white/[0.05] p-4 rounded-xl border border-white/5 transition-all duration-300">
+              <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#00D4FF]"></div>
               <div>
-                <span className="text-[9px] font-mono text-white/70 block uppercase tracking-wider">{lang === "en" ? "FEDERAL REGISTRY" : "REGISTRE FÉDÉRAL"}</span>
-                <span className="text-xs font-semibold text-white font-mono">{t.certTransportCanada}</span>
+                <span className="text-[9px] font-mono text-white/55 block uppercase tracking-wider">{lang === "en" ? "FEDERAL REGISTRY" : "REGISTRE FÉDÉRAL"}</span>
+                <span className="text-xs sm:text-sm font-semibold text-white font-mono mt-0.5 block">{t.certTransportCanada}</span>
               </div>
             </div>
 
-            <div className="flex items-center space-x-3.5 bg-white/2 p-3.5 rounded-xl border border-white/5">
-              <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></div>
+            <div className="flex items-center space-x-4 bg-white/[0.03] hover:bg-white/[0.05] p-4 rounded-xl border border-white/5 transition-all duration-300">
+              <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#00D4FF]"></div>
               <div>
-                <span className="text-[9px] font-mono text-white/70 block uppercase tracking-wider">{lang === "en" ? "RADIO SPECTRUM" : "SPECTRUM RADIO"}</span>
-                <span className="text-xs font-semibold text-white font-mono">{t.certIsed}</span>
+                <span className="text-[9px] font-mono text-white/55 block uppercase tracking-wider">{lang === "en" ? "RADIO SPECTRUM" : "SPECTRUM RADIO"}</span>
+                <span className="text-xs sm:text-sm font-semibold text-white font-mono mt-0.5 block">{t.certIsed}</span>
               </div>
             </div>
 
-            <div className="flex items-center space-x-3.5 bg-white/2 p-3.5 rounded-xl border border-white/5">
-              <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></div>
+            <div className="flex items-center space-x-4 bg-white/[0.03] hover:bg-white/[0.05] p-4 rounded-xl border border-white/5 transition-all duration-300">
+              <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#00D4FF]"></div>
               <div>
-                <span className="text-[9px] font-mono text-white/70 block uppercase tracking-wider">{lang === "en" ? "FUNCTIONAL SAFETY" : "SÉCURITÉ FONCTIONNELLE"}</span>
-                <span className="text-xs font-semibold text-white font-mono">{t.certIso}</span>
+                <span className="text-[9px] font-mono text-white/55 block uppercase tracking-wider">{lang === "en" ? "FUNCTIONAL SAFETY" : "SÉCURITÉ FONCTIONNELLE"}</span>
+                <span className="text-xs sm:text-sm font-semibold text-white font-mono mt-0.5 block">{t.certIso}</span>
               </div>
             </div>
 
           </div>
         </div>
+      </section>
 
+      {/* 4.7 Frequently Asked Questions Section */}
+      <section className="py-24 max-w-[1400px] mx-auto px-6 lg:px-16 border-t border-white/10" id="faq">
+        
         {/* FAQ grid addressing precise mandates */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          <div className="lg:col-span-4 space-y-4">
-            <h2 className="text-3xl font-display font-extrabold tracking-tight text-white" id="faq-heading-text">
-              {t.faqHeading}
-            </h2>
-            <p className="text-xs sm:text-sm text-white/70 leading-relaxed">
+          <div className="lg:col-span-4 lg:sticky lg:top-28 space-y-6">
+            <div className="space-y-3">
+              <span className="text-[10px] tracking-[0.25em] font-mono font-bold text-[#00D4FF] uppercase bg-[#00D4FF]/10 px-3 py-1.5 rounded-full inline-block border border-[#00D4FF]/25">
+                {lang === "en" ? "FAQ PORTAL" : "SECTION FAQ"}
+              </span>
+              <h2 className="text-3xl lg:text-4xl font-display font-extrabold tracking-tight text-white leading-tight" id="faq-heading-text">
+                {t.faqHeading}
+              </h2>
+            </div>
+            
+            <p className="text-sm text-white/60 leading-relaxed font-sans">
               {t.faqSub}
             </p>
             
             {/* Direct Phone Assistance Info for Canadian sandwich generation */}
-            <div className="bg-white/5 border border-white/10 p-4 rounded-xl flex items-center space-x-3.5">
-              <PhoneCall className="w-5 h-5 text-[#00D4FF] shrink-0" />
+            <div className="bg-navy-card/40 border border-white/10 p-5 rounded-2xl flex items-center space-x-4 shadow-xl">
+              <div className="p-3 bg-[#00D4FF]/10 text-[#00D4FF] rounded-xl font-medium">
+                <PhoneCall className="w-5 h-5 shrink-0" />
+              </div>
               <div className="text-xs">
-                <span className="font-semibold block text-white">{lang === "en" ? "Need help placing deposit?" : "Besoin d'aide pour réserver ?"}</span>
-                <span className="text-[#00D4FF] font-mono">1-800-555-ASTRA</span>
+                <span className="font-semibold block text-white text-sm mb-0.5">{lang === "en" ? "Need help placing deposit?" : "Besoin d'aide pour réserver ?"}</span>
+                <span className="text-[#00D4FF] font-mono font-bold text-sm">1-800-555-ASTRA</span>
               </div>
             </div>
           </div>
@@ -1636,18 +1619,18 @@ export default function ReservationPage() {
           <div className="lg:col-span-8 space-y-4">
             
             {/* FAQ 1 */}
-            <div className="border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-colors">
+            <div className="border border-white/10 rounded-2xl overflow-hidden hover:border-[#00D4FF]/35 hover:scale-[1.002] bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300">
               <button 
                 onClick={() => setActiveFaq(activeFaq === 0 ? null : 0)}
-                className="w-full text-left px-6 py-4.5 bg-white/2 flex justify-between items-center focus:outline-none cursor-pointer"
+                className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none cursor-pointer"
                 aria-expanded={activeFaq === 0}
                 id="faq-accordion-trigger-0"
               >
-                <span className="text-sm font-semibold text-white font-mono flex items-center space-x-2">
-                  <HelpCircle className="w-4 h-4 text-[#00D4FF]" />
+                <span className="text-sm sm:text-base font-semibold text-white font-sans flex items-start space-x-3 pr-4">
+                  <HelpCircle className="w-5 h-5 text-[#00D4FF] shrink-0 mt-0.5" />
                   <span>{t.faqQ1}</span>
                 </span>
-                <ChevronDown className={`w-4 h-4 text-white/50 transition-transform ${activeFaq === 0 ? "rotate-180" : ""}`} />
+                <ChevronDown className={`w-4 h-4 text-white/50 shrink-0 transition-transform duration-300 ${activeFaq === 0 ? "rotate-180 text-[#00D4FF]" : ""}`} />
               </button>
               <AnimatePresence initial={false}>
                 {activeFaq === 0 && (
@@ -1655,10 +1638,10 @@ export default function ReservationPage() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25 }}
+                    transition={{ duration: 0.25, cubicBezier: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 py-4 bg-[#0a0a0a] border-t border-white/5 text-xs sm:text-sm text-white/70 leading-relaxed">
+                    <div className="px-6 pb-6 pt-2 bg-[#050505]/40 border-t border-white/5 text-xs sm:text-sm text-white/60 leading-relaxed font-sans">
                       {t.faqA1}
                     </div>
                   </motion.div>
@@ -1667,18 +1650,18 @@ export default function ReservationPage() {
             </div>
 
             {/* FAQ 2 */}
-            <div className="border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-colors">
+            <div className="border border-white/10 rounded-2xl overflow-hidden hover:border-[#00D4FF]/35 hover:scale-[1.002] bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300">
               <button 
                 onClick={() => setActiveFaq(activeFaq === 1 ? null : 1)}
-                className="w-full text-left px-6 py-4.5 bg-white/2 flex justify-between items-center focus:outline-none cursor-pointer"
+                className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none cursor-pointer"
                 aria-expanded={activeFaq === 1}
                 id="faq-accordion-trigger-1"
               >
-                <span className="text-sm font-semibold text-white font-mono flex items-center space-x-2">
-                  <HelpCircle className="w-4 h-4 text-[#00D4FF]" />
+                <span className="text-sm sm:text-base font-semibold text-white font-sans flex items-start space-x-3 pr-4">
+                  <HelpCircle className="w-5 h-5 text-[#00D4FF] shrink-0 mt-0.5" />
                   <span>{t.faqQ2}</span>
                 </span>
-                <ChevronDown className={`w-4 h-4 text-white/50 transition-transform ${activeFaq === 1 ? "rotate-180" : ""}`} />
+                <ChevronDown className={`w-4 h-4 text-white/50 shrink-0 transition-transform duration-300 ${activeFaq === 1 ? "rotate-180 text-[#00D4FF]" : ""}`} />
               </button>
               <AnimatePresence initial={false}>
                 {activeFaq === 1 && (
@@ -1686,10 +1669,10 @@ export default function ReservationPage() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25 }}
+                    transition={{ duration: 0.25, cubicBezier: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 py-4 bg-[#0a0a0a] border-t border-white/5 text-xs sm:text-sm text-white/70 leading-relaxed">
+                    <div className="px-6 pb-6 pt-2 bg-[#050505]/40 border-t border-white/5 text-xs sm:text-sm text-white/60 leading-relaxed font-sans">
                       {t.faqA2}
                     </div>
                   </motion.div>
@@ -1698,18 +1681,18 @@ export default function ReservationPage() {
             </div>
 
             {/* FAQ 3 */}
-            <div className="border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-colors">
+            <div className="border border-white/10 rounded-2xl overflow-hidden hover:border-[#00D4FF]/35 hover:scale-[1.002] bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300">
               <button 
                 onClick={() => setActiveFaq(activeFaq === 2 ? null : 2)}
-                className="w-full text-left px-6 py-4.5 bg-white/2 flex justify-between items-center focus:outline-none cursor-pointer"
+                className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none cursor-pointer"
                 aria-expanded={activeFaq === 2}
                 id="faq-accordion-trigger-2"
               >
-                <span className="text-sm font-semibold text-white font-mono flex items-center space-x-2">
-                  <HelpCircle className="w-4 h-4 text-[#00D4FF]" />
+                <span className="text-sm sm:text-base font-semibold text-white font-sans flex items-start space-x-3 pr-4">
+                  <HelpCircle className="w-5 h-5 text-[#00D4FF] shrink-0 mt-0.5" />
                   <span>{t.faqQ3}</span>
                 </span>
-                <ChevronDown className={`w-4 h-4 text-white/50 transition-transform ${activeFaq === 2 ? "rotate-180" : ""}`} />
+                <ChevronDown className={`w-4 h-4 text-white/50 shrink-0 transition-transform duration-300 ${activeFaq === 2 ? "rotate-180 text-[#00D4FF]" : ""}`} />
               </button>
               <AnimatePresence initial={false}>
                 {activeFaq === 2 && (
@@ -1717,11 +1700,104 @@ export default function ReservationPage() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25 }}
+                    transition={{ duration: 0.25, cubicBezier: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 py-4 bg-[#0a0a0a] border-t border-white/5 text-xs sm:text-sm text-white/70 leading-relaxed">
+                    <div className="px-6 pb-6 pt-2 bg-[#050505]/40 border-t border-white/5 text-xs sm:text-sm text-white/60 leading-relaxed font-sans">
                       {t.faqA3}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* FAQ 4 */}
+            <div className="border border-white/10 rounded-2xl overflow-hidden hover:border-[#00D4FF]/35 hover:scale-[1.002] bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300">
+              <button 
+                onClick={() => setActiveFaq(activeFaq === 3 ? null : 3)}
+                className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none cursor-pointer"
+                aria-expanded={activeFaq === 3}
+                id="faq-accordion-trigger-3"
+              >
+                <span className="text-sm sm:text-base font-semibold text-white font-sans flex items-start space-x-3 pr-4">
+                  <HelpCircle className="w-5 h-5 text-[#00D4FF] shrink-0 mt-0.5" />
+                  <span>{t.faqQ4}</span>
+                </span>
+                <ChevronDown className={`w-4 h-4 text-white/50 shrink-0 transition-transform duration-300 ${activeFaq === 3 ? "rotate-180 text-[#00D4FF]" : ""}`} />
+              </button>
+              <AnimatePresence initial={false}>
+                {activeFaq === 3 && (
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.25, cubicBezier: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-6 pt-2 bg-[#050505]/40 border-t border-white/5 text-xs sm:text-sm text-white/60 leading-relaxed font-sans">
+                      {t.faqA4}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* FAQ 5 */}
+            <div className="border border-white/10 rounded-2xl overflow-hidden hover:border-[#00D4FF]/35 hover:scale-[1.002] bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300">
+              <button 
+                onClick={() => setActiveFaq(activeFaq === 4 ? null : 4)}
+                className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none cursor-pointer"
+                aria-expanded={activeFaq === 4}
+                id="faq-accordion-trigger-4"
+              >
+                <span className="text-sm sm:text-base font-semibold text-white font-sans flex items-start space-x-3 pr-4">
+                  <HelpCircle className="w-5 h-5 text-[#00D4FF] shrink-0 mt-0.5" />
+                  <span>{t.faqQ5}</span>
+                </span>
+                <ChevronDown className={`w-4 h-4 text-white/50 shrink-0 transition-transform duration-300 ${activeFaq === 4 ? "rotate-180 text-[#00D4FF]" : ""}`} />
+              </button>
+              <AnimatePresence initial={false}>
+                {activeFaq === 4 && (
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.25, cubicBezier: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-6 pt-2 bg-[#050505]/40 border-t border-white/5 text-xs sm:text-sm text-white/60 leading-relaxed font-sans">
+                      {t.faqA5}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* FAQ 6 */}
+            <div className="border border-white/10 rounded-2xl overflow-hidden hover:border-[#00D4FF]/35 hover:scale-[1.002] bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300">
+              <button 
+                onClick={() => setActiveFaq(activeFaq === 5 ? null : 5)}
+                className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none cursor-pointer"
+                aria-expanded={activeFaq === 5}
+                id="faq-accordion-trigger-5"
+              >
+                <span className="text-sm sm:text-base font-semibold text-white font-sans flex items-start space-x-3 pr-4">
+                  <HelpCircle className="w-5 h-5 text-[#00D4FF] shrink-0 mt-0.5" />
+                  <span>{t.faqQ6}</span>
+                </span>
+                <ChevronDown className={`w-4 h-4 text-white/50 shrink-0 transition-transform duration-300 ${activeFaq === 5 ? "rotate-180 text-[#00D4FF]" : ""}`} />
+              </button>
+              <AnimatePresence initial={false}>
+                {activeFaq === 5 && (
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.25, cubicBezier: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-6 pt-2 bg-[#050505]/40 border-t border-white/5 text-xs sm:text-sm text-white/60 leading-relaxed font-sans">
+                      {t.faqA6}
                     </div>
                   </motion.div>
                 )}
@@ -1835,29 +1911,161 @@ export default function ReservationPage() {
       </main>
 
       {/* Footer copyright, billing context and legal attribution */}
-      <footer className="border-t border-white/10 bg-[#030303] py-16 text-xs text-white/70 relative z-10 select-none">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-16 space-y-8">
+      <footer className="border-t border-white/10 bg-[#0A192F] py-20 text-xs text-[#E2E8F0] relative z-10 select-none font-['Segoe_UI',_-apple-system,_sans-serif]">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-16 space-y-12">
           
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-6 text-center sm:text-left">
-            <div className="flex flex-col space-y-1.5 items-center sm:items-start">
-              <span className="font-display font-black text-sm text-white tracking-tight">© 2026 Astrateq Gadgets</span>
-              <span className="text-[10px] uppercase font-mono tracking-widest text-[#00D4FF]">{t.brandTagline}</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12" id="toronto-market-tech-footer">
+            
+            {/* Column 1: Corporate HQ & Profile */}
+            <div className="space-y-4">
+              <div className="flex flex-col space-y-1">
+                <span className="font-display font-black text-base text-white tracking-tight uppercase">ASTRATEQ CANADA</span>
+                <span className="text-[10px] uppercase font-['Consolas',_monospace] tracking-widest text-[#00D4FF]">{t.brandTagline}</span>
+              </div>
+              <p className="text-[#E2E8F0]/90 leading-relaxed text-xs">
+                Pioneering regional predictive driver safety systems. Our advanced machine-vision models are tuned and validated specifically for cold weather, low visibility, and sudden traction loss.
+              </p>
+              <div className="pt-2 flex flex-col space-y-1 border-t border-white/10 font-['Consolas',_monospace] text-[10px] text-[#E2E8F0]/80">
+                <span className="font-bold text-[#00D4FF]">Toronto HQ & AI Labs:</span>
+                <span className="text-white">MaRS Discovery District, 101 College St</span>
+                <span className="text-white/80">Toronto, ON, Canada · 43.6532° N, 79.3832° W</span>
+              </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:space-x-8 items-center gap-2 font-mono text-[10px]">
+            {/* Column 2: Active Road-Testing & Telemetry */}
+            <div className="space-y-4">
+              <span className="font-display font-bold text-xs uppercase text-white tracking-wider block">GTA Validation & Telemetry</span>
+              <ul className="space-y-3 text-xs text-[#E2E8F0]/90">
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00D4FF] mt-1.5 shrink-0 shadow-[0_0_6px_#00D4FF]"></span>
+                  <span>Active telemetry testing loops across Highway 401, DVP, and Gardiner Expressway.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00D4FF] mt-1.5 shrink-0 shadow-[0_0_6px_#00D4FF]"></span>
+                  <span>Safety alignment inspired by the Vector Institute's standards for trustworthy AI.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00D4FF] mt-1.5 shrink-0 shadow-[0_0_6px_#00D4FF]"></span>
+                  <span>Transport Canada compliant advisory driver-assist classification.</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3: Compliance & Privacy */}
+            <div className="space-y-4">
+              <span className="font-display font-bold text-xs uppercase text-white tracking-wider block">Sovereign Data & Privacy</span>
+              <ul className="space-y-3 text-xs text-[#E2E8F0]/90">
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00D4FF] mt-1.5 shrink-0 shadow-[0_0_6px_#00D4FF]"></span>
+                  <span>100% sovereign Canadian data residency hosted natively on encrypted Toronto server nodes.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00D4FF] mt-1.5 shrink-0 shadow-[0_0_6px_#00D4FF]"></span>
+                  <span>Strict PIPEDA conformity prevents data commercialization or off-border exports.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00D4FF] mt-1.5 shrink-0 shadow-[0_0_6px_#00D4FF]"></span>
+                  <span>Full AES-256 local storage encryption with localized OTA safety updates.</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 4: Contact & Social Sharing */}
+            <div className="space-y-4">
+              <span className="font-display font-bold text-xs uppercase text-white tracking-wider block">Inquiries & Community</span>
+              <p className="text-[#E2E8F0]/90 text-xs">
+                Have questions regarding fleet pre-orders, corporate pilot tests, or elder-safety vehicle retrofits?
+              </p>
+              <div className="bg-white/[0.06] border border-white/10 p-3 rounded-lg flex flex-col space-y-1 font-['Consolas',_monospace]">
+                <span className="text-[10px] text-[#E2E8F0]/70 uppercase font-bold tracking-wider">Toronto Direct Hub:</span>
+                <a href="tel:+14165550192" className="text-[#00D4FF] hover:text-white font-bold text-sm block transition-colors">
+                  +1 (416) 555-0192
+                </a>
+              </div>
+              
+              {/* Social media connections */}
+              <div className="flex items-center gap-2 pt-2" id="footer-social-dock">
+                <a 
+                  href={twitterShareUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#1DA1F2]/20 border border-white/10 hover:border-[#1DA1F2]/30 flex items-center justify-center text-white/90 hover:text-[#1DA1F2] transition-colors shadow-sm"
+                  aria-label="Share on Twitter / X"
+                  title="Twitter / X"
+                >
+                  <Twitter className="w-3.5 h-3.5" />
+                </a>
+                <a 
+                  href={facebookShareUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#1877F2]/20 border border-white/10 hover:border-[#1877F2]/30 flex items-center justify-center text-white/90 hover:text-[#1877F2] transition-colors shadow-sm"
+                  aria-label="Share on Facebook"
+                  title="Facebook"
+                >
+                  <Facebook className="w-3.5 h-3.5" />
+                </a>
+                <a 
+                  href={linkedinShareUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#0077B5]/20 border border-white/10 hover:border-[#0077B5]/30 flex items-center justify-center text-white/90 hover:text-[#0077B5] transition-colors shadow-sm"
+                  aria-label="Share on LinkedIn"
+                  title="LinkedIn"
+                >
+                  <Linkedin className="w-3.5 h-3.5" />
+                </a>
+                <button 
+                  onClick={handleCopyLink} 
+                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white/90 hover:text-white relative transition-colors cursor-pointer shadow-sm"
+                  aria-label="Copy Page Link"
+                  title="Copy Link"
+                >
+                  {isCopied ? (
+                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  ) : (
+                    <Copy className="w-3.5 h-3.5 text-slate-100" />
+                  )}
+                  
+                  <AnimatePresence>
+                    {isCopied && (
+                      <motion.span 
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-emerald-500 text-black font-['Consolas',_monospace] font-bold text-[8px] uppercase px-1.5 py-0.5 rounded shadow-lg whitespace-nowrap pointer-events-none z-20"
+                      >
+                        {t.shareCopied}
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-[11px] text-[#E2E8F0]/90">
+            <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2">
+              <span className="font-semibold text-white">© 2026 Astrateq Gadgets Inc. All rights reserved.</span>
+              <span className="hidden md:inline-block text-white/20">|</span>
+              <span className="text-[#E2E8F0]">Proudly engineered in Toronto, Ontario, Canada.</span>
+              <span className="hidden md:inline-block text-white/20">|</span>
+              <span className="font-['Consolas',_monospace] text-[10px] text-[#E2E8F0]/80">Version française disponible sur commande.</span>
+            </div>
+            
+            <div className="flex items-center gap-2 text-[#E2E8F0] font-medium">
               <span>{t.heroRefundSnippet}</span>
-              <span className="hidden sm:inline-block">|</span>
-              <span>Version française disponible sur commande.</span>
             </div>
           </div>
 
           {/* Legal Limitations & PIPEDA Disclaimer */}
-          <div className="pt-8 border-t border-white/5 text-[10px] text-white/65 leading-relaxed font-mono space-y-2">
-            <div className="flex items-center space-x-2 text-white/80 font-bold uppercase tracking-wider text-[9px]">
+          <div className="pt-6 border-t border-white/10 text-[10px] sm:text-[11px] text-[#E2E8F0]/80 leading-relaxed font-['Consolas',_monospace] space-y-2">
+            <div className="flex items-center space-x-2 text-white font-bold uppercase tracking-wider text-[10px]">
               <Lock className="w-3.5 h-3.5 text-[#00D4FF]" />
               <span>{lang === "en" ? "LEGAL DISCLAIMERS & RESPONSIBILITY CHARTER" : "AVERTISSEMENTS LÉGAUX ET CHARTE DE RESPONSABILITÉ"}</span>
             </div>
-            <p className="max-w-5xl">
+            <p className="max-w-6xl text-[#E2E8F0]/90 leading-normal">
               {t.legalDisclaimer}
             </p>
           </div>
@@ -1865,7 +2073,7 @@ export default function ReservationPage() {
         </div>
       </footer>
 
-      {/* 5. Sticky Mobile & Floating Bottom CTA Drawer (appears when scrolling down past Hero) */}
+      {/* 5. Sticky Mobile & Floating Bottom CTA Drawer with Lighter Complementary Background */}
       <AnimatePresence>
         {isStickyCtaVisible && (
           <motion.aside 
@@ -1874,25 +2082,25 @@ export default function ReservationPage() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="fixed bottom-0 left-0 right-0 z-30 bg-navy-bg/95 backdrop-blur-md border-t border-white/10 px-6 py-4 shadow-2xl flex items-center justify-between max-w-[1400px] mx-auto rounded-t-2xl"
+            className="fixed bottom-0 left-0 right-0 z-30 bg-slate-50/95 backdrop-blur-xl border-t border-slate-300/60 px-6 py-4 shadow-[0_-15px_30px_rgba(0,0,0,0.1)] flex items-center justify-between max-w-[1400px] mx-auto rounded-t-2xl font-sans"
             id="sticky-mobile-drawer"
           >
             <div className="hidden sm:flex flex-col">
-              <span className="text-[9px] font-mono text-[#00D4FF] tracking-[0.2em] uppercase font-bold leading-none mb-1">FOUNDER BATCH 01</span>
-              <span className="text-sm font-display font-black text-white leading-tight">ASTRA-AI Pre-order Bundle</span>
+              <span className="text-[9px] font-mono text-[#0078D4] tracking-[0.2em] uppercase font-bold leading-none mb-1">FOUNDER BATCH 01</span>
+              <span className="text-sm font-display font-black text-slate-900 leading-tight">ASTRA-AI Pre-order Bundle</span>
             </div>
             
-            <div className="flex items-center space-x-3 w-full sm:w-auto">
-              {/* Scalable flexible grid list selection indicators */}
-              <div className="flex -space-x-1 border border-white/10 p-1.5 rounded-lg bg-white/5 mr-4 shrink-0 hidden sm:flex">
-                <span className="text-xs font-mono font-extrabold text-white/90 px-2">$25</span>
-                <span className="text-xs font-mono font-extrabold text-white/90 border-l border-white/10 px-2">$85</span>
-                <span className="text-xs font-mono font-extrabold text-white/90 border-l border-white/10 px-2">$150</span>
+            <div className="flex items-center space-x-3 w-full sm:w-auto text-slate-800">
+              {/* Scalable flexible grid list selection indicators with high-contrast light colors */}
+              <div className="flex -space-x-1 border border-slate-300/50 p-1.5 rounded-lg bg-slate-100 mr-4 shrink-0 hidden sm:flex">
+                <span className="text-xs font-mono font-extrabold text-slate-800 px-2">$25</span>
+                <span className="text-xs font-mono font-extrabold text-[#0078D4] border-l border-slate-300/50 px-2">$85</span>
+                <span className="text-xs font-mono font-extrabold text-slate-800 border-l border-slate-300/50 px-2">$150</span>
               </div>
               
               <button 
                 onClick={() => scrollToSection(pricingSectionRef)}
-                className="w-full sm:w-auto bg-[#00D4FF] hover:bg-cyan-400 text-black font-mono font-bold uppercase tracking-wider text-xs py-3 px-6 rounded-xl transition-all duration-300 text-center shrink-0 flex items-center justify-center space-x-2 cursor-pointer animate-pulse-cyan"
+                className="w-full sm:w-auto bg-[#0078D4] hover:bg-[#106ebe] text-white font-mono font-bold uppercase tracking-wider text-xs py-3 px-6 rounded-xl transition-all duration-300 text-center shrink-0 flex items-center justify-center space-x-2 cursor-pointer shadow-lg shadow-sky-500/10 active:scale-[0.98]"
                 id="sticky-reservation-btn"
               >
                 <span>{t.stickyMobileBtn}</span>
